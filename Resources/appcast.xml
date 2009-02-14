@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss
+	xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	version="2.0">
+
+	<channel>
+		<title>XML Viewer Plugin changelog</title>
+		<link>http://www.entropy.ch/software/macosx/xmlviewplugin/appcast.xml</link>
+		<description>Most recent changes with links to updates.</description>
+		<language>en</language>
+
+		<item>
+			<title>Version 1.2</title>
+			<sparkle:releaseNotesLink>http://www.entropy.ch/software/macosx/xmlviewplugin/release-notes.html#version-1.2</sparkle:releaseNotesLink>
+			<pubDate>Wed, 11 Feb 2009 23:12:59 +0100</pubDate>
+			<enclosure
+				url="http://www2.entropy.ch/download/xmlviewplugin-1.2.zip"
+				sparkle:version="1.2"
+				type="application/octet-stream"
+				length="1478286"
+				sparkle:dsaSignature="MC0CFQCTlJ8RT7DkacDOOuoEJ89eYwIXWwIUEug8DuNj2lIB11qP3h8+w305yhQ="
+			/>
+		</item>
+
+		<item>
+			<title>Version 1.1</title>
+			<sparkle:releaseNotesLink>http://www.entropy.ch/software/macosx/xmlviewplugin/release-notes.html#version-1.1</sparkle:releaseNotesLink>
+			<pubDate>Tue, 10 Feb 2009 01:09:32 +0100</pubDate>
+			<enclosure
+				url="http://www2.entropy.ch/download/xmlviewplugin-1.1.zip"
+				sparkle:version="1.1"
+				type="application/octet-stream"
+				length="1387354"
+				sparkle:dsaSignature="MCwCFHDykuzKAxNtzu4+hr02b3HHqx42AhQ9O4A++3erwImIeR5PWlhKiXalPA=="
+			/>
+		</item>
+
+		<item>
+			<title>Version 1.0</title>
+			<sparkle:releaseNotesLink>http://www.entropy.ch/software/macosx/xmlviewplugin/release-notes.html#version-1.0</sparkle:releaseNotesLink>
+			<pubDate>Tue, 13 Jan 2009 01:38:57 +0100</pubDate>
+			<enclosure
+				url="http://www2.entropy.ch/download/xmlviewplugin-1.0.zip"
+				sparkle:version="1.0"
+				type="application/octet-stream"
+				length="3808276"
+				sparkle:dsaSignature="MC0CFQCLuU+czQ5USP3RuAuJ4VB1fsY+PQIUN75pl0esv5g+G7gmlSKu92clV4s="
+			/>
+		</item>
+
+	</channel>
+</rss>

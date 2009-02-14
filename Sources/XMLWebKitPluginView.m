@@ -1,0 +1,433 @@
+//
+//  XMLWebKitPluginView.m
+//  XMLWebKitPlugin
+//
+//  Created by Marc Liyanage on 06.02.09.
+//  Copyright Marc Liyanage <http://www.entropy.ch> 2009. All rights reserved.
+//
+
+#import "XMLWebKitPluginView.h"
+#import "XmlDataFormatter.h";
+
+@implementation XMLWebKitPluginView
+
+@synthesize softwareUpdater;
+@synthesize xmlContentView;
+@synthesize notificationMessage;
+@synthesize notificationMessageDetail;
+@synthesize textView;
+@synthesize aboutPanel;
+@synthesize aboutPanelVersionLabel;
+@synthesize documentURL;
+@synthesize documentData;
+@synthesize parentFrame;
+@synthesize domElement;
+
+
+#pragma mark WebPlugInViewFactory protocol
+
+// The principal class of the plug-in bundle must implement this protocol.
++ (NSView *)plugInViewWithArguments:(NSDictionary *)newArguments {
+//	return nil;
+
+    XMLWebKitPluginView *view = [[[self alloc] initWithArguments:newArguments] autorelease];
+	return view;
+}
+
+
+#pragma mark lifecycle methods
+
+- (id)initWithArguments:(NSDictionary *)newArguments {
+
+	NSLog(@"arguments: %@", newArguments);
+
+    if (!(self = [super initWithFrame:NSZeroRect])) return nil;
+	[NSBundle loadNibNamed:@"XMLWebKitUI" owner:self];
+
+	DOMHTMLElement *element = [newArguments objectForKey:@"WebPlugInContainingElementKey"];
+	self.domElement = element;
+
+/*
+typedef enum {
+    WebPlugInModeEmbed = 0,
+    WebPlugInModeFull  = 1
+} WebPlugInMode;
+*/
+	
+    [self setupDefaults];
+	[self setupSubviews];
+	[self setupUpdateCheck];
+	[self applyTextViewWrapping:self];
+
+	NSString *bundleVersion = [[NSBundle bundleForClass:[self class]] objectForInfoDictionaryKey:@"CFBundleVersion"];
+	[aboutPanelVersionLabel setStringValue:[NSString stringWithFormat:@"Version %@", bundleVersion]];
+
+	hasAcquiredFirstResponder = NO;
+	[self loadDataWithArguments:newArguments];
+
+    return self;
+}
+
+
+- (void)setupUpdateCheck {
+	self.softwareUpdater = [SUUpdater updaterForBundle:[NSBundle bundleForClass:[self class]]];
+	[softwareUpdater resetUpdateCycle];
+}
+
+
+- (IBAction)checkForUpdates:(id)sender {
+	[softwareUpdater checkForUpdates:sender];
+	[self refreshLayout];
+}
+
+- (void)dealloc {
+	// NIB toplevel objects
+	self.xmlContentView = nil;
+	self.aboutPanel = nil;
+
+	self.softwareUpdater = nil;
+	self.notificationMessage = nil;
+	self.notificationMessageDetail = nil;
+	self.textView = nil;
+	self.documentURL = nil;
+	self.aboutPanelVersionLabel = nil;
+	self.documentData = nil;
+	self.parentFrame = nil;
+	self.domElement = nil;
+
+	[super dealloc];
+}
+
+
+# pragma mark setup methods
+
+- (void)setupDefaults {
+	NSDictionary *defaults = [NSDictionary dictionaryWithObjectsAndKeys:
+		[NSNumber numberWithBool:YES], @"ch_entropy_xmlViewPlugin_WrapLines",
+		[NSNumber numberWithBool:YES], @"ch_entropy_xmlViewPlugin_PrettyPrintXml",
+		nil];
+	[[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
+}
+
+
+- (void)setupSubviews {
+
+	// toplevel NIB objects start with retain count of 1 so we release them here
+	[xmlContentView release];
+	[self addSubview:xmlContentView];
+
+	// TODO: crashes if the do the release on this one,
+	// check for leaks here
+//	[aboutPanel release];
+
+}
+
+
+- (void)drawRect:(NSRect)aRect {
+	if (!hasAcquiredFirstResponder) {
+		// FIXME: there should be a better way/time/place to get first reponder status
+		[[self window] makeFirstResponder:textView];
+		hasAcquiredFirstResponder = YES;
+	}
+	[super drawRect:aRect];
+}
+
+
+
+# pragma mark IBActions
+
+- (IBAction)visitWebsite:(id)sender {
+	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.entropy.ch/software/macosx/#xmlviewplugin"]];
+}
+
+
+- (IBAction)applyTextViewWrapping:(id)sender {
+	BOOL shouldWrap = [[NSUserDefaults standardUserDefaults] boolForKey:@"ch_entropy_xmlViewPlugin_WrapLines"];
+	if ([sender isKindOfClass:[NSMenuItem class]]) {
+		shouldWrap = ![sender state]; // the state isn't yet updated at the time of action method invocation
+	}
+
+	// This is harder than it should be
+	// http://lists.apple.com/archives/Cocoa-dev/2003/Dec/msg01352.html
+	NSSize layoutSize = [textView maxSize];
+	layoutSize.width = shouldWrap ? [self bounds].size.width : layoutSize.height;
+	[textView setMaxSize:layoutSize];
+	NSTextContainer *tc = [textView textContainer];
+	[tc setWidthTracksTextView:shouldWrap];
+	[tc setContainerSize:layoutSize];
+
+	[self refreshLayout];
+}
+
+
+- (IBAction)showAboutPanel:(id)sender {
+	[aboutPanel makeKeyAndOrderFront:sender];
+	[self refreshLayout];
+}
+
+
+- (IBAction)updateDataDisplay:(id)sender {
+/*
+	if ([[documentURL description] rangeOfString:@"test.xml"].location != NSNotFound) {
+			
+		DOMHTMLEmbedElement *element = (DOMHTMLEmbedElement *)self.domElement;
+		DOMHTMLEmbedElement *clone = [element cloneNode:YES];
+		[clone setAttribute:@"type"	value:@"text/html"];
+		[clone setAttribute:@"src" value:@"http://localhost/test2.xml"];
+
+		NSLog(@"redirecting");
+
+		[[self retain] autorelease];
+
+		[[element parentNode] appendChild:clone];
+	//	[element setAttribute:@"style" value:@"display: none;"];
+		[[element parentNode] removeChild:element];
+	//	replaceChild:clone oldChild:element];
+	//	[clone setAttribute:@"src" value:@"http://localhost/test.xml"];
+		return;
+
+	//	DOMHTMLObjectElement *element = (DOMHTMLObjectElement *)self.domElement;
+
+	//	[element setAttribute:@"type" value:@"text/html"];
+	//	[element setAttribute:@"data" value:@"http://www.sun.com"];
+		
+	//	DOMHTMLEmbedElement *element = (DOMHTMLEmbedElement *)self.domElement;
+
+	//	return;
+
+	}
+	NSLog(@"not redirecting");
+*/
+
+	if (!documentData) return;
+
+	BOOL shouldPrettyPrint = [[NSUserDefaults standardUserDefaults] boolForKey:@"ch_entropy_xmlViewPlugin_PrettyPrintXml"];
+	if ([sender isKindOfClass:[NSMenuItem class]]) {
+		shouldPrettyPrint = ![sender state]; // the state isn't yet updated at the time of action method invocation
+	}
+
+	XmlDataFormatter *xdf = [[[XmlDataFormatter alloc] initWithData:documentData] autorelease];
+	xdf.prettyPrint = shouldPrettyPrint;
+	NSString *xmlText = [xdf formattedString];
+
+	self.notificationMessage = xdf.errorMessage ? xdf.errorMessage : nil;
+	self.notificationMessageDetail = xdf.errorMessageDetail ? xdf.errorMessageDetail : nil;
+
+	NSTextView *tv = [self valueForKey:@"textView"];
+
+	NSAttributedString *xmlAttributedString = [[[NSAttributedString alloc] initWithString:xmlText] autorelease];
+	[[tv textStorage] setAttributedString:xmlAttributedString];
+
+	[self setupTextViewFont:tv];
+
+	[self refreshLayout];
+	
+}
+
+
+- (void)setupTextViewFont:(NSTextView *)tv {
+	NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+	CGFloat fixedWidthFontSize = [ud floatForKey:@"WebKitDefaultFixedFontSize"];
+	if (!fixedWidthFontSize) fixedWidthFontSize = 12;
+	NSString *fixedWidthFontName = [ud stringForKey:@"WebKitFixedFont"];
+
+	NSFont *fixedWidthFont = nil;
+	if (fixedWidthFontName) {
+		fixedWidthFont = [NSFont fontWithName:fixedWidthFontName size:fixedWidthFontSize];
+	}
+	if (!fixedWidthFont) fixedWidthFont = [NSFont fontWithName:@"Courier" size:12];
+	if (fixedWidthFont) [tv setFont:fixedWidthFont];
+}
+
+
+//takeFindStringFromSelection
+
+
+// FIXME: this one doesn't work
+- (IBAction)takeFindStringFromSelection:(id)sender {
+	NSLog(@"find string action");
+	tag = NSFindPanelActionSetFindString;
+	[textView performFindPanelAction:self];
+}
+
+- (IBAction)showFindPanel:(id)sender {
+	tag = NSFindPanelActionShowFindPanel;
+	[textView performFindPanelAction:self];
+}
+
+- (IBAction)findNext:(id)sender {
+	tag = NSFindPanelActionNext;
+	[textView performFindPanelAction:self];
+}
+
+- (IBAction)findPrevious:(id)sender {
+	tag = NSFindPanelActionPrevious;
+	[textView performFindPanelAction:self];
+}
+
+- (NSInteger)tag {
+	return tag;
+}
+
+
+/*
+- (BOOL)respondsToSelector:(SEL)aSelector {
+	NSLog(@"selector: %@", NSStringFromSelector(aSelector));
+	return [super respondsToSelector:aSelector];
+}
+*/
+
+
+
+# pragma mark display / interaction methods
+
+- (void)refreshLayout {
+	// A bit of voodoo coding.
+	// If I don't do this, part of the text view blacks out in some
+	// cases when it's wider than the longest line of text.
+	// Resizing the window fixes it so I'm forcing a redraw like this
+	// until I find out what the proper solution is. setNeedsDisplay alone doesn't do it...
+	[self setFrameOrigin:NSMakePoint(1, 1)];
+	[self setFrameOrigin:NSMakePoint(0, 0)];
+}
+
+
+// propagate frame change to the NIB based content view
+- (void)setFrame:(NSRect)frameRect {
+	[super setFrame:frameRect];
+	[xmlContentView setFrame:[self bounds]];
+}
+
+
+- (void)loadDataWithArguments:(NSDictionary *)arguments {
+
+	self.documentURL = [NSURL URLWithString:[arguments valueForKeyPath:@"WebPlugInAttributesKey.src"]];
+
+	id pluginShouldLoad = [arguments objectForKey:@"WebPlugInShouldLoadMainResourceKey"];
+	if (![pluginShouldLoad boolValue]) {
+		// if the key is present and tells us not to load the data, this
+		// method should not continue. Instead, the webPlugInMainResourceDidReceiveData:
+		// method gets the data already loaded.
+//		NSLog(@"plugin should not load data");
+		return;
+	}
+
+	if (!documentURL) {
+		self.notificationMessage = @"Unable to load XML data, no URL";
+		NSLog(notificationMessage);
+		return;
+	}
+
+	self.documentData = [NSData dataWithContentsOfURL:documentURL];
+	if (!documentData) {
+		self.notificationMessage = [NSString stringWithFormat:@"Unable to load XML data from %@", documentURL];
+		NSLog(notificationMessage);
+		return;
+	}
+
+/*
+	NSURL *baseUrl = [arguments valueForKey:@"WebPlugInBaseURLKey"];
+	NSLog(@"baseurl: %@", baseUrl);
+	self.parentFrame = [[arguments valueForKey:@"WebPlugInContainerKey"] webFrame];
+	NSLog(@"parentframe: %@, %@", parentFrame, [parentFrame name]);
+*/
+
+//	[parentFrame loadData:[@"test" dataUsingEncoding:NSUTF8StringEncoding] MIMEType:@"text/plain" textEncodingName:@"utf-8" baseURL:baseUrl];
+//	[parentFrame loadData:self.documentData MIMEType:@"text/plain" textEncodingName:@"utf-8" baseURL:baseUrl];
+
+	[self updateDataDisplay:self];
+
+}
+
+
+# pragma mark save methods
+
+- (IBAction)saveDocumentTo:(id)sender {
+	if (!documentData) return;
+	savePanel = [[NSSavePanel savePanel] retain];
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString *documentPath =  [paths objectAtIndex:0];
+	NSString *fileName = [[documentURL path] lastPathComponent];
+	[savePanel beginSheetForDirectory:documentPath file:fileName modalForWindow:[self window] modalDelegate:self didEndSelector:@selector(savePanelDidEnd:returnCode:contextInfo:) contextInfo:nil];
+	[self refreshLayout];
+}
+
+
+- (void)savePanelDidEnd:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo {
+	if (returnCode == NSOKButton) {
+		[documentData writeToFile:[savePanel filename] atomically:YES];
+	}
+	[savePanel release];
+	savePanel = nil;
+}
+
+
+/*
+- (BOOL)respondsToSelector:(SEL)sel {
+	NSLog(@"selector query: %@", NSStringFromSelector(sel));
+	return [super respondsToSelector:sel];
+}
+*/
+
+
+#pragma mark WebPlugIn informal protocol
+
+//- (void)webPlugInMainResourceDidReceiveResponse:(NSURLResponse *)response {
+- (void)webPlugInMainResourceDidReceiveData:(NSData *)data {
+//	return;
+//	NSLog(@"webPlugInMainResourceDidReceiveData: %@", data);
+//	[super webPlugInMainResourceDidReceiveData:data];
+	self.documentData = data;
+	[self updateDataDisplay:self];
+
+}
+
+
+
+/*
+- (void)webPlugInInitialize
+{
+    // This method will be only called once per instance of the plug-in object, and will be called
+    // before any other methods in the WebPlugIn protocol.
+    // You are not required to implement this method.  It may safely be removed.
+}
+
+- (void)webPlugInStart
+{
+    // The plug-in usually begins drawing, playing sounds and/or animation in this method.
+    // You are not required to implement this method.  It may safely be removed.
+//	NSLog(@"webPlugInStart: %@", NSStringFromRect([self frame]));
+
+}
+
+- (void)webPlugInStop
+{
+    // The plug-in normally stop animations/sounds in this method.
+    // You are not required to implement this method.  It may safely be removed.
+	NSLog(@"webPlugInStop");
+}
+
+- (void)webPlugInDestroy
+{
+    // Perform cleanup and prepare to be deallocated.
+    // You are not required to implement this method.  It may safely be removed.
+	NSLog(@"webPlugInDestroy");
+}
+
+- (void)webPlugInSetIsSelected:(BOOL)isSelected
+{
+    // This is typically used to allow the plug-in to alter its appearance when selected.
+    // You are not required to implement this method.  It may safely be removed.
+}
+
+- (id)objectForWebScript
+{
+    // Returns the object that exposes the plug-in's interface.  The class of this object can implement
+    // methods from the WebScripting informal protocol.
+    // You are not required to implement this method.  It may safely be removed.
+    return self;
+}
+*/
+
+@end
+

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>${EXECUTABLE_NAME}</string>
+	<key>CFBundleIconFile</key>
+	<string>xmlviewplugin_icon</string>
+	<key>CFBundleIdentifier</key>
+	<string>ch.entropy.${PRODUCT_NAME:identifier}</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>${PRODUCT_NAME}</string>
+	<key>CFBundlePackageType</key>
+	<string>WBPL</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>${PRODUCT_VERSION}</string>
+	<key>CFBundleGetInfoString</key>
+	<string>${PRODUCT_VERSION}, © 2009 Marc Liyanage</string>
+	<key>CFBundleShortVersionString</key>
+	<string>${PRODUCT_VERSION}</string>
+	<key>NSPrincipalClass</key>
+	<string>XMLWebKitPluginView</string>
+	<key>WebPluginName</key>
+	<string>XML View Plugin ${PRODUCT_VERSION}</string>
+	<key>WebPluginDescription</key>
+	<string>Displays raw XML data in a more useful way. For more information, visit the &lt;a href="http://www.entropy.ch/software/macosx/xmlviewplugin/">plugin’s website&lt;/a></string>
+	<key>WebPluginMIMETypes</key>
+	<dict>
+		<key>application/xml</key>
+		<dict>
+			<key>WebPluginExtensions</key>
+			<array>
+				<string>xml</string>
+			</array>
+			<key>WebPluginTypeDescription</key>
+			<string>XML data</string>
+		</dict>
+		<key>text/xml</key>
+		<dict>
+			<key>WebPluginExtensions</key>
+			<array>
+				<string>xml</string>
+			</array>
+			<key>WebPluginTypeDescription</key>
+			<string>XML data</string>
+		</dict>
+	</dict>
+	<key>SUFeedURL</key>
+	<string>http://www.entropy.ch/software/macosx/${PRODUCT_SHORTNAME}/appcast.xml</string>
+	<key>SUPublicDSAKeyFile</key>
+	<string>dsa_pub.pem</string>
+	<key>SUEnableAutomaticChecks</key>
+	<true/>
+</dict>
+</plist>

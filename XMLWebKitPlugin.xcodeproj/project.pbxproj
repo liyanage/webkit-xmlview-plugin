@@ -1,0 +1,766 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		1B5F69460F4374810083FB97 /* Build Sparkle */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 1B5F69490F43749F0083FB97 /* Build configuration list for PBXAggregateTarget "Build Sparkle" */;
+			buildPhases = (
+				1B5F69450F4374810083FB97 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = "Build Sparkle";
+			productName = "Build Sparkle";
+		};
+		1B62459F0F40BAA900B3F002 /* Distribution */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 1B6245D30F40BAC700B3F002 /* Build configuration list for PBXAggregateTarget "Distribution" */;
+			buildPhases = (
+				1B62459E0F40BAA900B3F002 /* ShellScript */,
+			);
+			dependencies = (
+				1B6245E50F40BC4200B3F002 /* PBXTargetDependency */,
+			);
+			name = Distribution;
+			productName = Distribution;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		1B2183340F3F963300D8940E /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B2183330F3F963300D8940E /* Sparkle.framework */; };
+		1B2183430F3F965900D8940E /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1B2183330F3F963300D8940E /* Sparkle.framework */; };
+		1B2183A90F3F99F400D8940E /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1B2183A80F3F99F400D8940E /* dsa_pub.pem */; };
+		1B2184160F3FA19000D8940E /* xmlviewplugin_icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 1B2184150F3FA19000D8940E /* xmlviewplugin_icon.icns */; };
+		1B39A2AE0F3C8F5100A3E427 /* XMLWebKitPluginContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B39A2AC0F3C8F5100A3E427 /* XMLWebKitPluginContentView.m */; };
+		1B39A3000F3C93C800A3E427 /* XMLWebKitUI.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B39A2FF0F3C93C800A3E427 /* XMLWebKitUI.xib */; };
+		1B39A30C0F3C94E600A3E427 /* Caution.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 1B39A3090F3C94E600A3E427 /* Caution.tiff */; };
+		1B39A30D0F3C94E600A3E427 /* Action.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 1B39A30A0F3C94E600A3E427 /* Action.tiff */; };
+		1B39A30E0F3C94E600A3E427 /* Action_Pressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 1B39A30B0F3C94E600A3E427 /* Action_Pressed.tiff */; };
+		1BA5F7820F3E376200D70A22 /* libtidy.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BA5F7810F3E376200D70A22 /* libtidy.dylib */; };
+		1BA5F7AC0F3E4B2A00D70A22 /* XmlEncodingSniffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BA5F7AB0F3E4B2A00D70A22 /* XmlEncodingSniffer.m */; };
+		1BA5F7E10F3E4EA500D70A22 /* TestXmlEncodingSniffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BA5F7C50F3E4DAB00D70A22 /* TestXmlEncodingSniffer.m */; };
+		1BA5F7FF0F3E500700D70A22 /* XmlEncodingSniffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BA5F7AB0F3E4B2A00D70A22 /* XmlEncodingSniffer.m */; };
+		1BA5F9310F3EEF8300D70A22 /* XmlDataFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BA5F9300F3EEF8300D70A22 /* XmlDataFormatter.m */; };
+		1BA5F9630F3EF0B900D70A22 /* TestXmlDataFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BA5F9610F3EF0B900D70A22 /* TestXmlDataFormatter.m */; };
+		1BA5F9640F3EF0D100D70A22 /* XmlDataFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BA5F9300F3EEF8300D70A22 /* XmlDataFormatter.m */; };
+		1BA5F9E90F3F010D00D70A22 /* XmlEncodingSniffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BA5F7AB0F3E4B2A00D70A22 /* XmlEncodingSniffer.m */; };
+		1BA5FB400F3F222700D70A22 /* libtidy.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BA5F7810F3E376200D70A22 /* libtidy.dylib */; };
+		224339580A6F05F3000348D4 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 224339570A6F05F3000348D4 /* WebKit.framework */; };
+		8D1AC96B0486D14A00FE50C9 /* XMLWebKitPluginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0259C576FE90428111CA0C5A /* XMLWebKitPluginView.m */; settings = {ATTRIBUTES = (); }; };
+		8D1AC9700486D14A00FE50C9 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD92D38A0106425D02CA0E72 /* Cocoa.framework */; };
+		8D1AC9800486D23B00FE50C9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D1AC97F0486D23B00FE50C9 /* InfoPlist.strings */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1B5F69840F4378280083FB97 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0259C573FE90428111CA0C5A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1B5F69460F4374810083FB97;
+			remoteInfo = "Build Sparkle";
+		};
+		1B6245E40F40BC4200B3F002 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0259C573FE90428111CA0C5A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D1AC9600486D14A00FE50C9;
+			remoteInfo = XMLWebKitPlugin;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		1B2183480F3F966800D8940E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1B2183430F3F965900D8940E /* Sparkle.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		0259C576FE90428111CA0C5A /* XMLWebKitPluginView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = XMLWebKitPluginView.m; path = Sources/XMLWebKitPluginView.m; sourceTree = "<group>"; };
+		0259C57AFE90428111CA0C5A /* XMLWebKitPluginView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = XMLWebKitPluginView.h; path = Sources/XMLWebKitPluginView.h; sourceTree = "<group>"; };
+		1B2183330F3F963300D8940E /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = build/Sparkle.framework; sourceTree = SOURCE_ROOT; };
+		1B21836C0F3F96CF00D8940E /* notes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = notes.txt; sourceTree = "<group>"; };
+		1B2183A80F3F99F400D8940E /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dsa_pub.pem; path = Resources/dsa_pub.pem; sourceTree = "<group>"; };
+		1B2184150F3FA19000D8940E /* xmlviewplugin_icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = xmlviewplugin_icon.icns; path = Resources/xmlviewplugin_icon.icns; sourceTree = "<group>"; };
+		1B39A2AC0F3C8F5100A3E427 /* XMLWebKitPluginContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XMLWebKitPluginContentView.m; path = Sources/XMLWebKitPluginContentView.m; sourceTree = "<group>"; };
+		1B39A2AD0F3C8F5100A3E427 /* XMLWebKitPluginContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMLWebKitPluginContentView.h; path = Sources/XMLWebKitPluginContentView.h; sourceTree = "<group>"; };
+		1B39A2FF0F3C93C800A3E427 /* XMLWebKitUI.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = XMLWebKitUI.xib; path = Resources/XMLWebKitUI.xib; sourceTree = "<group>"; };
+		1B39A3090F3C94E600A3E427 /* Caution.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = Caution.tiff; path = Resources/Caution.tiff; sourceTree = "<group>"; };
+		1B39A30A0F3C94E600A3E427 /* Action.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = Action.tiff; path = Resources/Action.tiff; sourceTree = "<group>"; };
+		1B39A30B0F3C94E600A3E427 /* Action_Pressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = Action_Pressed.tiff; path = Resources/Action_Pressed.tiff; sourceTree = "<group>"; };
+		1B6246330F40F73000B3F002 /* release-notes.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = "release-notes.html"; path = "Resources/release-notes.html"; sourceTree = "<group>"; };
+		1B6246340F40F73000B3F002 /* appcast.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = appcast.xml; path = Resources/appcast.xml; sourceTree = "<group>"; };
+		1BA5F6CF0F3DF05C00D70A22 /* libtidy.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtidy.a; path = "src-external/tidy/libtidy.a"; sourceTree = "<group>"; };
+		1BA5F7810F3E376200D70A22 /* libtidy.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libtidy.dylib; path = usr/lib/libtidy.dylib; sourceTree = SDKROOT; };
+		1BA5F7AA0F3E4B2A00D70A22 /* XmlEncodingSniffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XmlEncodingSniffer.h; path = Sources/XmlEncodingSniffer.h; sourceTree = "<group>"; };
+		1BA5F7AB0F3E4B2A00D70A22 /* XmlEncodingSniffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XmlEncodingSniffer.m; path = Sources/XmlEncodingSniffer.m; sourceTree = "<group>"; };
+		1BA5F7C40F3E4DAB00D70A22 /* TestXmlEncodingSniffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestXmlEncodingSniffer.h; path = Sources/TestXmlEncodingSniffer.h; sourceTree = "<group>"; };
+		1BA5F7C50F3E4DAB00D70A22 /* TestXmlEncodingSniffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TestXmlEncodingSniffer.m; path = Sources/TestXmlEncodingSniffer.m; sourceTree = "<group>"; };
+		1BA5F7D60F3E4E0200D70A22 /* Test_XmlEncodingSniffer.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Test_XmlEncodingSniffer.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1BA5F7D70F3E4E0200D70A22 /* Test_XmlEncodingSniffer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Test_XmlEncodingSniffer-Info.plist"; sourceTree = "<group>"; };
+		1BA5F92F0F3EEF8300D70A22 /* XmlDataFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XmlDataFormatter.h; path = Sources/XmlDataFormatter.h; sourceTree = "<group>"; };
+		1BA5F9300F3EEF8300D70A22 /* XmlDataFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XmlDataFormatter.m; path = Sources/XmlDataFormatter.m; sourceTree = "<group>"; };
+		1BA5F93D0F3EF00100D70A22 /* TestXmlDataFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestXmlDataFormatter.h; path = Sources/TestXmlDataFormatter.h; sourceTree = "<group>"; };
+		1BA5F93E0F3EF00100D70A22 /* TestXmlDataFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TestXmlDataFormatter.m; path = Sources/TestXmlDataFormatter.m; sourceTree = "<group>"; };
+		1BA5F95C0F3EF0A400D70A22 /* Test_XmlDataFormatter.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Test_XmlDataFormatter.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1BA5F95D0F3EF0A400D70A22 /* Test_XmlDataFormatter-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Test_XmlDataFormatter-Info.plist"; sourceTree = "<group>"; };
+		1BA5F9610F3EF0B900D70A22 /* TestXmlDataFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TestXmlDataFormatter.m; path = Sources/TestXmlDataFormatter.m; sourceTree = "<group>"; };
+		1BA5F9620F3EF0B900D70A22 /* TestXmlDataFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestXmlDataFormatter.h; path = Sources/TestXmlDataFormatter.h; sourceTree = "<group>"; };
+		224339570A6F05F3000348D4 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = /System/Library/Frameworks/WebKit.framework; sourceTree = "<absolute>"; };
+		32DBCF980370C29C00C91783 /* XMLWebKitPlugin_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLWebKitPlugin_Prefix.pch; sourceTree = "<group>"; };
+		8D1AC9730486D14A00FE50C9 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8D1AC9740486D14A00FE50C9 /* XML View Plugin.webplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "XML View Plugin.webplugin"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D1AC97B0486D23100FE50C9 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		DD92D38A0106425D02CA0E72 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1BA5F7D30F3E4E0200D70A22 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1BA5F9590F3EF0A400D70A22 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1BA5FB400F3F222700D70A22 /* libtidy.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D1AC96E0486D14A00FE50C9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D1AC9700486D14A00FE50C9 /* Cocoa.framework in Frameworks */,
+				224339580A6F05F3000348D4 /* WebKit.framework in Frameworks */,
+				1BA5F7820F3E376200D70A22 /* libtidy.dylib in Frameworks */,
+				1B2183340F3F963300D8940E /* Sparkle.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0259C574FE90428111CA0C5A /* XMLWebKitPlugin */ = {
+			isa = PBXGroup;
+			children = (
+				1B21836C0F3F96CF00D8940E /* notes.txt */,
+				1B6246330F40F73000B3F002 /* release-notes.html */,
+				1B6246340F40F73000B3F002 /* appcast.xml */,
+				32DBCF9E0370C38000C91783 /* Classes */,
+				1BA5F8040F3E502100D70A22 /* Test */,
+				32DBCF9F0370C38200C91783 /* Other Sources */,
+				0259C582FE90428111CA0C5A /* Resources */,
+				2E58F364FFB232C311CA0CBA /* Frameworks */,
+				1ED78706FE9D4A0611CA0C5A /* Products */,
+				1B39A2FF0F3C93C800A3E427 /* XMLWebKitUI.xib */,
+				1BA5F7810F3E376200D70A22 /* libtidy.dylib */,
+				1BA5F7D70F3E4E0200D70A22 /* Test_XmlEncodingSniffer-Info.plist */,
+				1BA5F95D0F3EF0A400D70A22 /* Test_XmlDataFormatter-Info.plist */,
+			);
+			name = XMLWebKitPlugin;
+			sourceTree = "<group>";
+		};
+		0259C582FE90428111CA0C5A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				1B2184150F3FA19000D8940E /* xmlviewplugin_icon.icns */,
+				1B2183A80F3F99F400D8940E /* dsa_pub.pem */,
+				1B39A3090F3C94E600A3E427 /* Caution.tiff */,
+				1B39A30A0F3C94E600A3E427 /* Action.tiff */,
+				1B39A30B0F3C94E600A3E427 /* Action_Pressed.tiff */,
+				8D1AC9730486D14A00FE50C9 /* Info.plist */,
+				8D1AC97F0486D23B00FE50C9 /* InfoPlist.strings */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		1BA5F8040F3E502100D70A22 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				1BA5F9620F3EF0B900D70A22 /* TestXmlDataFormatter.h */,
+				1BA5F9610F3EF0B900D70A22 /* TestXmlDataFormatter.m */,
+				1BA5F7C40F3E4DAB00D70A22 /* TestXmlEncodingSniffer.h */,
+				1BA5F7C50F3E4DAB00D70A22 /* TestXmlEncodingSniffer.m */,
+			);
+			name = Test;
+			sourceTree = "<group>";
+		};
+		1ED78706FE9D4A0611CA0C5A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D1AC9740486D14A00FE50C9 /* XML View Plugin.webplugin */,
+				1BA5F93D0F3EF00100D70A22 /* TestXmlDataFormatter.h */,
+				1BA5F93E0F3EF00100D70A22 /* TestXmlDataFormatter.m */,
+				1BA5F7D60F3E4E0200D70A22 /* Test_XmlEncodingSniffer.octest */,
+				1BA5F95C0F3EF0A400D70A22 /* Test_XmlDataFormatter.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2E58F364FFB232C311CA0CBA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1B2183330F3F963300D8940E /* Sparkle.framework */,
+				1BA5F6CF0F3DF05C00D70A22 /* libtidy.a */,
+				DD92D38A0106425D02CA0E72 /* Cocoa.framework */,
+				224339570A6F05F3000348D4 /* WebKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		32DBCF9E0370C38000C91783 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				1B39A2AD0F3C8F5100A3E427 /* XMLWebKitPluginContentView.h */,
+				1B39A2AC0F3C8F5100A3E427 /* XMLWebKitPluginContentView.m */,
+				0259C57AFE90428111CA0C5A /* XMLWebKitPluginView.h */,
+				0259C576FE90428111CA0C5A /* XMLWebKitPluginView.m */,
+				1BA5F7AA0F3E4B2A00D70A22 /* XmlEncodingSniffer.h */,
+				1BA5F7AB0F3E4B2A00D70A22 /* XmlEncodingSniffer.m */,
+				1BA5F92F0F3EEF8300D70A22 /* XmlDataFormatter.h */,
+				1BA5F9300F3EEF8300D70A22 /* XmlDataFormatter.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		32DBCF9F0370C38200C91783 /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				32DBCF980370C29C00C91783 /* XMLWebKitPlugin_Prefix.pch */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1BA5F7D50F3E4E0200D70A22 /* Test_XmlEncodingSniffer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1BA5F7DA0F3E4E0300D70A22 /* Build configuration list for PBXNativeTarget "Test_XmlEncodingSniffer" */;
+			buildPhases = (
+				1BA5F7D10F3E4E0200D70A22 /* Resources */,
+				1BA5F7D20F3E4E0200D70A22 /* Sources */,
+				1BA5F7D30F3E4E0200D70A22 /* Frameworks */,
+				1BA5F7D40F3E4E0200D70A22 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Test_XmlEncodingSniffer;
+			productName = "Test XmlEncodingSniffer";
+			productReference = 1BA5F7D60F3E4E0200D70A22 /* Test_XmlEncodingSniffer.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+		1BA5F95B0F3EF0A400D70A22 /* Test_XmlDataFormatter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1BA5F9600F3EF0A500D70A22 /* Build configuration list for PBXNativeTarget "Test_XmlDataFormatter" */;
+			buildPhases = (
+				1BA5F9570F3EF0A400D70A22 /* Resources */,
+				1BA5F9580F3EF0A400D70A22 /* Sources */,
+				1BA5F9590F3EF0A400D70A22 /* Frameworks */,
+				1BA5F95A0F3EF0A400D70A22 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Test_XmlDataFormatter;
+			productName = "Test XmlDataFormatter";
+			productReference = 1BA5F95C0F3EF0A400D70A22 /* Test_XmlDataFormatter.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+		8D1AC9600486D14A00FE50C9 /* XMLWebKitPlugin */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C027D11908A954E7001699E2 /* Build configuration list for PBXNativeTarget "XMLWebKitPlugin" */;
+			buildPhases = (
+				8D1AC9660486D14A00FE50C9 /* Resources */,
+				1B2183480F3F966800D8940E /* CopyFiles */,
+				8D1AC96A0486D14A00FE50C9 /* Sources */,
+				8D1AC96E0486D14A00FE50C9 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1B5F69850F4378280083FB97 /* PBXTargetDependency */,
+			);
+			name = XMLWebKitPlugin;
+			productInstallPath = "$(HOME)/Developer/Palettes";
+			productName = XMLWebKitPlugin;
+			productReference = 8D1AC9740486D14A00FE50C9 /* XML View Plugin.webplugin */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0259C573FE90428111CA0C5A /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C027D11D08A954E7001699E2 /* Build configuration list for PBXProject "XMLWebKitPlugin" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 0259C574FE90428111CA0C5A /* XMLWebKitPlugin */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1B5F69460F4374810083FB97 /* Build Sparkle */,
+				8D1AC9600486D14A00FE50C9 /* XMLWebKitPlugin */,
+				1BA5F7D50F3E4E0200D70A22 /* Test_XmlEncodingSniffer */,
+				1BA5F95B0F3EF0A400D70A22 /* Test_XmlDataFormatter */,
+				1B62459F0F40BAA900B3F002 /* Distribution */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1BA5F7D10F3E4E0200D70A22 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1BA5F9570F3EF0A400D70A22 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D1AC9660486D14A00FE50C9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D1AC9800486D23B00FE50C9 /* InfoPlist.strings in Resources */,
+				1B39A3000F3C93C800A3E427 /* XMLWebKitUI.xib in Resources */,
+				1B39A30C0F3C94E600A3E427 /* Caution.tiff in Resources */,
+				1B39A30D0F3C94E600A3E427 /* Action.tiff in Resources */,
+				1B39A30E0F3C94E600A3E427 /* Action_Pressed.tiff in Resources */,
+				1B2183A90F3F99F400D8940E /* dsa_pub.pem in Resources */,
+				1B2184160F3FA19000D8940E /* xmlviewplugin_icon.icns in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1B5F69450F4374810083FB97 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+				"$(BUILD_ROOT)/Sparkle.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\ncd \"$PROJECT_TEMP_DIR\"\n[ -d sparkle ] || /opt/local/bin/bzr branch -r 337 lp:sparkle\ncd sparkle\nxcodebuild -target Sparkle -configuration 'Release (GC dual-mode; 10.5-only)'\nrm -rf \"$BUILD_ROOT/Sparkle.framework\"\ncp -pR \"build/Release (GC dual-mode; 10.5-only)/Sparkle.framework\" \"$BUILD_ROOT/\"";
+		};
+		1B62459E0F40BAA900B3F002 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "\nset -o errexit\n\nbash distribution.sh\n\n";
+			showEnvVarsInLog = 0;
+		};
+		1BA5F7D40F3E4E0200D70A22 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+		1BA5F95A0F3EF0A400D70A22 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1BA5F7D20F3E4E0200D70A22 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1BA5F7FF0F3E500700D70A22 /* XmlEncodingSniffer.m in Sources */,
+				1BA5F7E10F3E4EA500D70A22 /* TestXmlEncodingSniffer.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1BA5F9580F3EF0A400D70A22 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1BA5F9E90F3F010D00D70A22 /* XmlEncodingSniffer.m in Sources */,
+				1BA5F9640F3EF0D100D70A22 /* XmlDataFormatter.m in Sources */,
+				1BA5F9630F3EF0B900D70A22 /* TestXmlDataFormatter.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D1AC96A0486D14A00FE50C9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D1AC96B0486D14A00FE50C9 /* XMLWebKitPluginView.m in Sources */,
+				1B39A2AE0F3C8F5100A3E427 /* XMLWebKitPluginContentView.m in Sources */,
+				1BA5F7AC0F3E4B2A00D70A22 /* XmlEncodingSniffer.m in Sources */,
+				1BA5F9310F3EEF8300D70A22 /* XmlDataFormatter.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1B5F69850F4378280083FB97 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1B5F69460F4374810083FB97 /* Build Sparkle */;
+			targetProxy = 1B5F69840F4378280083FB97 /* PBXContainerItemProxy */;
+		};
+		1B6245E50F40BC4200B3F002 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8D1AC9600486D14A00FE50C9 /* XMLWebKitPlugin */;
+			targetProxy = 1B6245E40F40BC4200B3F002 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		8D1AC97F0486D23B00FE50C9 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8D1AC97B0486D23100FE50C9 /* English */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1B5F69470F4374810083FB97 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PRODUCT_NAME = "Build Sparkle";
+			};
+			name = Debug;
+		};
+		1B5F69480F4374810083FB97 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				PRODUCT_NAME = "Build Sparkle";
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		1B6245A00F40BAA900B3F002 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PRODUCT_NAME = "XML View Plugin";
+			};
+			name = Debug;
+		};
+		1B6245A10F40BAA900B3F002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				PRODUCT_NAME = "XML View Plugin";
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		1BA5F7D80F3E4E0300D70A22 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Cocoa.framework/Headers/Cocoa.h";
+				INFOPLIST_FILE = "Test_XmlEncodingSniffer-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Cocoa,
+					"-framework",
+					SenTestingKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = Test_XmlEncodingSniffer;
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		1BA5F7D90F3E4E0300D70A22 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Cocoa.framework/Headers/Cocoa.h";
+				INFOPLIST_FILE = "Test_XmlEncodingSniffer-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Cocoa,
+					"-framework",
+					SenTestingKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = Test_XmlEncodingSniffer;
+				WRAPPER_EXTENSION = octest;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		1BA5F95E0F3EF0A500D70A22 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Cocoa.framework/Headers/Cocoa.h";
+				INFOPLIST_FILE = "Test_XmlDataFormatter-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Cocoa,
+					"-framework",
+					SenTestingKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = Test_XmlDataFormatter;
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		1BA5F95F0F3EF0A500D70A22 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Cocoa.framework/Headers/Cocoa.h";
+				INFOPLIST_FILE = "Test_XmlDataFormatter-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Cocoa,
+					"-framework",
+					SenTestingKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = Test_XmlDataFormatter;
+				WRAPPER_EXTENSION = octest;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		C027D11A08A954E7001699E2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(BUILD_ROOT)\"",
+				);
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				HEADER_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/src-external/tidy\"",
+				);
+				PRODUCT_NAME = "XML View Plugin";
+			};
+			name = Debug;
+		};
+		C027D11B08A954E7001699E2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(BUILD_ROOT)\"",
+				);
+				HEADER_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/src-external/tidy\"",
+				);
+				PRODUCT_NAME = "XML View Plugin";
+				VALID_ARCHS = "i386 ppc ppc7400 ppc970 x86_64";
+			};
+			name = Release;
+		};
+		C027D11E08A954E7001699E2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_ENABLE_OBJC_GC = supported;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = XMLWebKitPlugin_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Library/Internet Plug-Ins";
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "XML View Plugin";
+				PRODUCT_SHORTNAME = xmlviewplugin;
+				PRODUCT_VERSION = "$(PRODUCT_VERSION_BASE)-dev";
+				PRODUCT_VERSION_BASE = 1.2;
+				SDKROOT = macosx10.5;
+				WARNING_CFLAGS = "-Wall";
+				WRAPPER_EXTENSION = webplugin;
+			};
+			name = Debug;
+		};
+		C027D11F08A954E7001699E2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_ENABLE_OBJC_GC = supported;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = XMLWebKitPlugin_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Library/Internet Plug-Ins";
+				PRODUCT_NAME = "XML View Plugin";
+				PRODUCT_SHORTNAME = xmlviewplugin;
+				PRODUCT_VERSION = "$(PRODUCT_VERSION_BASE)";
+				PRODUCT_VERSION_BASE = 1.2;
+				SDKROOT = macosx10.5;
+				WARNING_CFLAGS = "-Wall";
+				WRAPPER_EXTENSION = webplugin;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1B5F69490F43749F0083FB97 /* Build configuration list for PBXAggregateTarget "Build Sparkle" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1B5F69470F4374810083FB97 /* Debug */,
+				1B5F69480F4374810083FB97 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1B6245D30F40BAC700B3F002 /* Build configuration list for PBXAggregateTarget "Distribution" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1B6245A00F40BAA900B3F002 /* Debug */,
+				1B6245A10F40BAA900B3F002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1BA5F7DA0F3E4E0300D70A22 /* Build configuration list for PBXNativeTarget "Test_XmlEncodingSniffer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1BA5F7D80F3E4E0300D70A22 /* Debug */,
+				1BA5F7D90F3E4E0300D70A22 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1BA5F9600F3EF0A500D70A22 /* Build configuration list for PBXNativeTarget "Test_XmlDataFormatter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1BA5F95E0F3EF0A500D70A22 /* Debug */,
+				1BA5F95F0F3EF0A500D70A22 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C027D11908A954E7001699E2 /* Build configuration list for PBXNativeTarget "XMLWebKitPlugin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C027D11A08A954E7001699E2 /* Debug */,
+				C027D11B08A954E7001699E2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C027D11D08A954E7001699E2 /* Build configuration list for PBXProject "XMLWebKitPlugin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C027D11E08A954E7001699E2 /* Debug */,
+				C027D11F08A954E7001699E2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0259C573FE90428111CA0C5A /* Project object */;
+}
