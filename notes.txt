@@ -1,0 +1,15 @@
+
+Known Issues:
+
+- "Use Selection For Find" doesn't work. The takeFindStringFromSelection method never reaches the main view on the responder chain. The text view seems to handle it, but in a way that doesn't actually set the find clipboard.
+- doubled request. can't I use the data fetched by safari? is the new API for that private? WebPlugInShouldLoadMainResourceKey
+
+Todo:
+
+- Fallback to Safari in some cases, e.g. Google Calendar
+  - blacklist?
+
+
+Maybe look at:
+
+- http://www.stiefels.net/2008/01/22/syntax-highlighting-for-nstextview-with-flex/
