@@ -2,6 +2,8 @@
 Known Issues:
 
 - "Use Selection For Find" doesn't work. The takeFindStringFromSelection method never reaches the main view on the responder chain. The text view seems to handle it, but in a way that doesn't actually set the find clipboard.
+- gzipped content? 
+  http://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?pageNumber=0&type=Purple+Software&id=289985022&userReviewId=6081223
 
 
 Todo:

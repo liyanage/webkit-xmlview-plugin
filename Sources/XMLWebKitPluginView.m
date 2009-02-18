@@ -39,7 +39,9 @@
 
 - (id)initWithArguments:(NSDictionary *)newArguments {
 
+#ifdef CONFIGURATION_DEBUG
 	NSLog(@"arguments: %@", newArguments);
+#endif
 
     if (!(self = [super initWithFrame:NSZeroRect])) return nil;
 	[NSBundle loadNibNamed:@"XMLWebKitUI" owner:self];
@@ -111,14 +113,12 @@ typedef enum {
 
 
 - (void)setupSubviews {
-
 	// toplevel NIB objects start with retain count of 1 so we release them here
 	[xmlContentView release];
 	[self addSubview:xmlContentView];
 
-	// TODO: crashes if the do the release on this one,
-	// check for leaks here
-//	[aboutPanel release];
+	// TODO: crashes if we do the release on this one, check for leaks here
+	// [aboutPanel release];
 
 }
 
@@ -200,7 +200,7 @@ typedef enum {
 */
 
 	if (!documentData) return;
-
+	
 	BOOL shouldPrettyPrint = [[NSUserDefaults standardUserDefaults] boolForKey:@"ch_entropy_xmlViewPlugin_PrettyPrintXml"];
 	if ([sender isKindOfClass:[NSMenuItem class]]) {
 		shouldPrettyPrint = ![sender state]; // the state isn't yet updated at the time of action method invocation
@@ -219,9 +219,7 @@ typedef enum {
 	[[tv textStorage] setAttributedString:xmlAttributedString];
 
 	[self setupTextViewFont:tv];
-
 	[self refreshLayout];
-	
 }
 
 
@@ -240,14 +238,27 @@ typedef enum {
 }
 
 
-//takeFindStringFromSelection
+#pragma mark find panel actions
 
-
-// FIXME: this one doesn't work
+// This one doesn't work, somehow we never see this on the responder chain
+/*
 - (IBAction)takeFindStringFromSelection:(id)sender {
 	NSLog(@"find string action");
 	tag = NSFindPanelActionSetFindString;
 	[textView performFindPanelAction:self];
+}
+*/
+
+// Instead we do this. Because we invoke the superclass version in any case, the
+// selection string is used both for Safari's custom search bear as well as in 
+// our text view's find panel.
+- (BOOL)performKeyEquivalent:(NSEvent *)theEvent {
+	NSLog(@"event chars: %@", [theEvent charactersIgnoringModifiers]);
+	if ([[theEvent charactersIgnoringModifiers] isEqualToString:@"e"]) {
+		tag = NSFindPanelActionSetFindString;
+		[textView performFindPanelAction:self];
+	}
+	return [super performKeyEquivalent:theEvent];
 }
 
 - (IBAction)showFindPanel:(id)sender {
@@ -270,13 +281,13 @@ typedef enum {
 }
 
 
+
 /*
 - (BOOL)respondsToSelector:(SEL)aSelector {
 	NSLog(@"selector: %@", NSStringFromSelector(aSelector));
 	return [super respondsToSelector:aSelector];
 }
 */
-
 
 
 # pragma mark display / interaction methods
@@ -311,6 +322,8 @@ typedef enum {
 //		NSLog(@"plugin should not load data");
 		return;
 	}
+
+	NSLog(@"XML View Plugin: WebPlugInShouldLoadMainResourceKey is YES");
 
 	if (!documentURL) {
 		self.notificationMessage = @"Unable to load XML data, no URL";
@@ -372,16 +385,12 @@ typedef enum {
 
 #pragma mark WebPlugIn informal protocol
 
-//- (void)webPlugInMainResourceDidReceiveResponse:(NSURLResponse *)response {
 - (void)webPlugInMainResourceDidReceiveData:(NSData *)data {
-//	return;
-//	NSLog(@"webPlugInMainResourceDidReceiveData: %@", data);
-//	[super webPlugInMainResourceDidReceiveData:data];
-	self.documentData = data;
+//	self.documentData = data;
+//	self.documentData = [[data copy] autorelease];
+	self.documentData = [NSData dataWithData:data]; // if we don't create a copy but instead just retain, the data suddenly changes to garbage when we look at it again at a later time.
 	[self updateDataDisplay:self];
-
 }
-
 
 
 /*

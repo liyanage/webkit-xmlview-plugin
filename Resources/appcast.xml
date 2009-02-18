@@ -11,6 +11,19 @@
 		<language>en</language>
 
 		<item>
+			<title>Version 1.3</title>
+			<sparkle:releaseNotesLink>http://www.entropy.ch/software/macosx/xmlviewplugin/release-notes.html#version-1.3</sparkle:releaseNotesLink>
+			<pubDate>Wed, 18 Feb 2009 01:14:17 +0100</pubDate>
+			<enclosure
+				url="http://www2.entropy.ch/download/xmlviewplugin-1.3.zip"
+				sparkle:version="1.3"
+				type="application/octet-stream"
+				length="1480278"
+				sparkle:dsaSignature="MCwCFCwp3bVPhvEzg49ru3vbRX8Au9tsAhQjbnx1YXX9yPBCqmHugQZ2ZPyS+w=="
+			/>
+		</item>
+
+		<item>
 			<title>Version 1.2</title>
 			<sparkle:releaseNotesLink>http://www.entropy.ch/software/macosx/xmlviewplugin/release-notes.html#version-1.2</sparkle:releaseNotesLink>
 			<pubDate>Wed, 11 Feb 2009 23:12:59 +0100</pubDate>

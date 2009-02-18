@@ -36,7 +36,7 @@
 		}
 		
 		li {
-			margin-bottom: 4px;
+			margin-bottom: 6px;
 		}
 		
 		.flag {
@@ -51,6 +51,10 @@
 			font-size: 16px;
 
 		}
+		
+		li p {
+			margin: 0 0 10px 0;
+		}
 	
 	</style>
 </head>
@@ -61,10 +65,9 @@
 <h1>Version 1.3</h1>
 
 <ul>
-	<li>The plugin no longer loads the XML data a second time in a separate request.
-	It reuses the data already loaded by the browser. This is important if requesting the URL
-	a second time has side effects on the server (which an HTTP GET shouldn’t) or if the URL requires a POST instead of a GET request.</li>
-	<li>Improved the descriptions of the plugin and the registered MIME types in the list displayed by Help > Installed Plug-ins.</li>
+	<li>The plugin no longer loads the XML data a second time in a separate HTTP GET request. Instead, it reuses the data already loaded by the browser. This is important if requesting the URL a second time has undesired side effects on the server (which an HTTP GET shouldn’t) or if the URL can only be accessed via a POST instead of a GET request. I didn’t try it but I think the plugin did not handle POST responses before.</li>
+	<li>The ⌘-E keyboard shortcut for “Use Selection for Find” now works, it didn’t in previous versions. Unfortunately, picking the command form the menu bar with the mouse still doesn’t work because I can’t intercept that event. That is probably not a common use case anyway.</li>
+	<li>Improved the description of the plugin and its MIME types in the list displayed by Help > Installed Plug-ins.</li>
 </ul>
 
 <a name="version-1.2"></a>
