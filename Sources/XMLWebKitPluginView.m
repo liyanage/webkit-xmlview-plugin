@@ -253,7 +253,6 @@ typedef enum {
 // selection string is used both for Safari's custom search bear as well as in 
 // our text view's find panel.
 - (BOOL)performKeyEquivalent:(NSEvent *)theEvent {
-	NSLog(@"event chars: %@", [theEvent charactersIgnoringModifiers]);
 	if ([[theEvent charactersIgnoringModifiers] isEqualToString:@"e"]) {
 		tag = NSFindPanelActionSetFindString;
 		[textView performFindPanelAction:self];
