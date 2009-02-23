@@ -40,7 +40,7 @@
 - (id)initWithArguments:(NSDictionary *)newArguments {
 
 #ifdef CONFIGURATION_DEBUG
-	NSLog(@"arguments: %@", newArguments);
+	NSLog(@"XML View Plugin: arguments: %@", newArguments);
 #endif
 
     if (!(self = [super initWithFrame:NSZeroRect])) return nil;
@@ -175,7 +175,7 @@ typedef enum {
 		[clone setAttribute:@"type"	value:@"text/html"];
 		[clone setAttribute:@"src" value:@"http://localhost/test2.xml"];
 
-		NSLog(@"redirecting");
+		NSLog(@"XML View Plugin: redirecting");
 
 		[[self retain] autorelease];
 
@@ -196,7 +196,7 @@ typedef enum {
 	//	return;
 
 	}
-	NSLog(@"not redirecting");
+	NSLog(@"XML View Plugin: not redirecting");
 */
 
 	if (!documentData) return;
@@ -243,7 +243,7 @@ typedef enum {
 // This one doesn't work, somehow we never see this on the responder chain
 /*
 - (IBAction)takeFindStringFromSelection:(id)sender {
-	NSLog(@"find string action");
+	NSLog(@"XML View Plugin: find string action");
 	tag = NSFindPanelActionSetFindString;
 	[textView performFindPanelAction:self];
 }
@@ -283,7 +283,7 @@ typedef enum {
 
 /*
 - (BOOL)respondsToSelector:(SEL)aSelector {
-	NSLog(@"selector: %@", NSStringFromSelector(aSelector));
+	NSLog(@"XML View Plugin: selector: %@", NSStringFromSelector(aSelector));
 	return [super respondsToSelector:aSelector];
 }
 */
@@ -318,30 +318,32 @@ typedef enum {
 		// if the key is present and tells us not to load the data, this
 		// method should not continue. Instead, the webPlugInMainResourceDidReceiveData:
 		// method gets the data already loaded.
-//		NSLog(@"plugin should not load data");
+//		NSLog(@"XML View Plugin: plugin should not load data");
 		return;
 	}
 
+#ifdef CONFIGURATION_DEBUG
 	NSLog(@"XML View Plugin: WebPlugInShouldLoadMainResourceKey is YES");
+#endif
 
 	if (!documentURL) {
 		self.notificationMessage = @"Unable to load XML data, no URL";
-		NSLog(notificationMessage);
+		NSLog(@"XML View Plugin: %@", notificationMessage);
 		return;
 	}
 
 	self.documentData = [NSData dataWithContentsOfURL:documentURL];
 	if (!documentData) {
 		self.notificationMessage = [NSString stringWithFormat:@"Unable to load XML data from %@", documentURL];
-		NSLog(notificationMessage);
+		NSLog(@"XML View Plugin: %@", notificationMessage);
 		return;
 	}
 
 /*
 	NSURL *baseUrl = [arguments valueForKey:@"WebPlugInBaseURLKey"];
-	NSLog(@"baseurl: %@", baseUrl);
+	NSLog(@"XML View Plugin: baseurl: %@", baseUrl);
 	self.parentFrame = [[arguments valueForKey:@"WebPlugInContainerKey"] webFrame];
-	NSLog(@"parentframe: %@, %@", parentFrame, [parentFrame name]);
+	NSLog(@"XML View Plugin: parentframe: %@, %@", parentFrame, [parentFrame name]);
 */
 
 //	[parentFrame loadData:[@"test" dataUsingEncoding:NSUTF8StringEncoding] MIMEType:@"text/plain" textEncodingName:@"utf-8" baseURL:baseUrl];
@@ -376,7 +378,7 @@ typedef enum {
 
 /*
 - (BOOL)respondsToSelector:(SEL)sel {
-	NSLog(@"selector query: %@", NSStringFromSelector(sel));
+	NSLog(@"XML View Plugin: selector query: %@", NSStringFromSelector(sel));
 	return [super respondsToSelector:sel];
 }
 */
@@ -387,10 +389,40 @@ typedef enum {
 - (void)webPlugInMainResourceDidReceiveData:(NSData *)data {
 //	self.documentData = data;
 //	self.documentData = [[data copy] autorelease];
-	self.documentData = [NSData dataWithData:data]; // if we don't create a copy but instead just retain, the data suddenly changes to garbage when we look at it again at a later time.
+
+	if (self.documentData) {
+#ifdef CONFIGURATION_DEBUG
+		NSLog(@"XML View Plugin: additional data arrived, appending to existing data");
+#endif
+		[self.documentData appendData:data];
+	} else {
+#ifdef CONFIGURATION_DEBUG
+		NSLog(@"XML View Plugin: initial data arrived");
+#endif
+		self.documentData = [NSMutableData dataWithData:data]; // if we don't create a copy but instead just retain, the data suddenly changes to garbage when we look at it again at a later time.
+	}
+}
+
+
+/* It appears that this method from the protocol *must* be implemented, otherwise webPlugInMainResourceDidFailWithError is
+ * called with a "WebKitErrorDomain error 204" and webPlugInMainResourceDidReceiveData: is only called once for
+ * large responses, when it should be called several times (see the append logic there).
+ */
+- (void)webPlugInMainResourceDidReceiveResponse:(NSURLResponse *)response {
+}
+
+
+- (void)webPlugInMainResourceDidFinishLoading {
+#ifdef CONFIGURATION_DEBUG
+	NSLog(@"XML View Plugin: finish loading, data length %u", [self.documentData length]);
+#endif
 	[self updateDataDisplay:self];
 }
 
+
+- (void)webPlugInMainResourceDidFailWithError:(NSError *)error {
+	NSLog(@"XML View Plugin: Error: %@", error);
+}
 
 /*
 - (void)webPlugInInitialize
@@ -404,7 +436,7 @@ typedef enum {
 {
     // The plug-in usually begins drawing, playing sounds and/or animation in this method.
     // You are not required to implement this method.  It may safely be removed.
-//	NSLog(@"webPlugInStart: %@", NSStringFromRect([self frame]));
+//	NSLog(@"XML View Plugin: webPlugInStart: %@", NSStringFromRect([self frame]));
 
 }
 
@@ -412,14 +444,14 @@ typedef enum {
 {
     // The plug-in normally stop animations/sounds in this method.
     // You are not required to implement this method.  It may safely be removed.
-	NSLog(@"webPlugInStop");
+	NSLog(@"XML View Plugin: webPlugInStop");
 }
 
 - (void)webPlugInDestroy
 {
     // Perform cleanup and prepare to be deallocated.
     // You are not required to implement this method.  It may safely be removed.
-	NSLog(@"webPlugInDestroy");
+	NSLog(@"XML View Plugin: webPlugInDestroy");
 }
 
 - (void)webPlugInSetIsSelected:(BOOL)isSelected

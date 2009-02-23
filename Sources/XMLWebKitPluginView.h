@@ -16,7 +16,7 @@
 	IBOutlet NSTextView *textView;
 	IBOutlet NSWindow *aboutPanel;
 	IBOutlet NSTextField *aboutPanelVersionLabel;
-	NSData *documentData;
+	NSMutableData *documentData;
 	NSURL *documentURL;
 	NSSavePanel *savePanel;
 	NSXMLDocument *xmlDocument;
@@ -37,7 +37,7 @@
 @property(retain) IBOutlet NSWindow *aboutPanel;
 @property(retain) IBOutlet NSTextField *aboutPanelVersionLabel;
 @property(retain) NSURL *documentURL;
-@property(retain) NSData *documentData;
+@property(retain) NSMutableData *documentData;
 @property(retain) WebFrame *parentFrame;
 @property(retain) DOMHTMLElement *domElement;
 

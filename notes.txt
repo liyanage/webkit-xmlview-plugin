@@ -1,4 +1,8 @@
 
+setup git-svn configuration, cleanup svn sandbox, setup separate git sandbox,
+- fix large data load issue SF example
+- branch experimental webview / xslt
+
 Known Issues:
 
 - "Use Selection For Find" doesn't work. The takeFindStringFromSelection method never reaches the main view on the responder chain. The text view seems to handle it, but in a way that doesn't actually set the find clipboard.
