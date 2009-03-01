@@ -46,16 +46,19 @@ cat <<EOF
 		</item>
 EOF
 
-echo scp "'$HOME/svn/entropy/$PRODUCT_SHORTNAME/build/Release/$ARCHIVE_FILENAME'" www2.entropy.ch:download/
-echo scp "'$HOME/svn/entropy/$PRODUCT_SHORTNAME/build/Release/$ARCHIVE_FILENAME'" "\"www2.entropy.ch:'download/$ARCHIVE_FILENAME_UNVERSIONED'\""
+echo scp "'$HOME/git/entropy/$PRODUCT_SHORTNAME/build/Release/$ARCHIVE_FILENAME'" www2.entropy.ch:download/
+echo scp "'$HOME/git/entropy/$PRODUCT_SHORTNAME/build/Release/$ARCHIVE_FILENAME'" "\"www2.entropy.ch:'download/$ARCHIVE_FILENAME_UNVERSIONED'\""
 
-echo scp "'$HOME/svn/entropy/$PRODUCT_SHORTNAME/Resources/release-notes.html'" www.entropy.ch:web/software/macosx/$PRODUCT_SHORTNAME/release-notes.html
-echo scp "'$HOME/svn/entropy/$PRODUCT_SHORTNAME/Resources/appcast.xml'" www.entropy.ch:web/software/macosx/$PRODUCT_SHORTNAME/appcast.xml
+echo scp "'$HOME/git/entropy/$PRODUCT_SHORTNAME/Resources/release-notes.html'" www.entropy.ch:web/software/macosx/$PRODUCT_SHORTNAME/release-notes.html
+echo scp "'$HOME/git/entropy/$PRODUCT_SHORTNAME/Resources/appcast.xml'" www.entropy.ch:web/software/macosx/$PRODUCT_SHORTNAME/appcast.xml
 
-echo svn ci -m "'version $VERSION'"
-echo svn cp -m "'tagging version $VERSION'" "svn+ssh://www.entropy.ch/Users/liyanage/documents/svnroot/trunk/$PRODUCT_SHORTNAME" "svn+ssh://www.entropy.ch/Users/liyanage/documents/svnroot/tags/$PRODUCT_SHORTNAME/versions/$VERSION"
+echo git commit -a "'version $VERSION'"
+echo git tag -a "'v$VERSION'"
+echo git push
+echo git push github
 
-echo rm -rf "'$BUILT_PRODUCTS_DIR/$PRODUCT_SHORTNAME-src'*"\; svn export svn+ssh://www.entropy.ch/Users/liyanage/documents/svnroot/trunk/$PRODUCT_SHORTNAME "'$BUILT_PRODUCTS_DIR/$PRODUCT_SHORTNAME-src'"\; "(cd '$BUILT_PRODUCTS_DIR' && zip -qr '$PRODUCT_SHORTNAME-src.zip' '$PRODUCT_SHORTNAME-src')"
+echo git archive --format=zip --prefix="'$PRODUCT_SHORTNAME-src/'" HEAD \> "'$BUILT_PRODUCTS_DIR/$PRODUCT_SHORTNAME-src.zip'"
+
 echo scp "'$BUILT_PRODUCTS_DIR/$PRODUCT_SHORTNAME-src.zip'" www2.entropy.ch:download/
 
 
