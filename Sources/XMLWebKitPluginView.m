@@ -8,6 +8,7 @@
 
 #import "XMLWebKitPluginView.h"
 #import "XmlDataFormatterTidy.h";
+#import "XmlDataFormatterXslt.h";
 
 @implementation XMLWebKitPluginView
 
@@ -206,7 +207,7 @@ typedef enum {
 		shouldPrettyPrint = ![sender state]; // the state isn't yet updated at the time of action method invocation
 	}
 
-	XmlDataFormatterTidy *xdf = [[[XmlDataFormatterTidy alloc] initWithData:documentData] autorelease];
+	XmlDataFormatter *xdf = [[[XmlDataFormatterXslt alloc] initWithData:documentData] autorelease];
 	xdf.prettyPrint = shouldPrettyPrint;
 	NSString *xmlText = [xdf formattedString];
 

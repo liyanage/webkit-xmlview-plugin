@@ -42,6 +42,8 @@
 		1B39A30C0F3C94E600A3E427 /* Caution.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 1B39A3090F3C94E600A3E427 /* Caution.tiff */; };
 		1B39A30D0F3C94E600A3E427 /* Action.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 1B39A30A0F3C94E600A3E427 /* Action.tiff */; };
 		1B39A30E0F3C94E600A3E427 /* Action_Pressed.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 1B39A30B0F3C94E600A3E427 /* Action_Pressed.tiff */; };
+		1B6772820F5BE5C400F90C87 /* XmlDataFormatterXslt.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B6772810F5BE5C400F90C87 /* XmlDataFormatterXslt.m */; };
+		1B6772850F5BE66B00F90C87 /* XmlDataFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B6772840F5BE66B00F90C87 /* XmlDataFormatter.m */; };
 		1BA5F7820F3E376200D70A22 /* libtidy.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BA5F7810F3E376200D70A22 /* libtidy.dylib */; };
 		1BA5F7AC0F3E4B2A00D70A22 /* XmlEncodingSniffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BA5F7AB0F3E4B2A00D70A22 /* XmlEncodingSniffer.m */; };
 		1BA5F7E10F3E4EA500D70A22 /* TestXmlEncodingSniffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BA5F7C50F3E4DAB00D70A22 /* TestXmlEncodingSniffer.m */; };
@@ -102,6 +104,10 @@
 		1B39A30B0F3C94E600A3E427 /* Action_Pressed.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = Action_Pressed.tiff; path = Resources/Action_Pressed.tiff; sourceTree = "<group>"; };
 		1B6246330F40F73000B3F002 /* release-notes.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = "release-notes.html"; path = "Resources/release-notes.html"; sourceTree = "<group>"; };
 		1B6246340F40F73000B3F002 /* appcast.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = appcast.xml; path = Resources/appcast.xml; sourceTree = "<group>"; };
+		1B6772800F5BE5C400F90C87 /* XmlDataFormatterXslt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XmlDataFormatterXslt.h; path = Sources/XmlDataFormatterXslt.h; sourceTree = "<group>"; };
+		1B6772810F5BE5C400F90C87 /* XmlDataFormatterXslt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XmlDataFormatterXslt.m; path = Sources/XmlDataFormatterXslt.m; sourceTree = "<group>"; };
+		1B6772830F5BE66B00F90C87 /* XmlDataFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XmlDataFormatter.h; path = Sources/XmlDataFormatter.h; sourceTree = "<group>"; };
+		1B6772840F5BE66B00F90C87 /* XmlDataFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XmlDataFormatter.m; path = Sources/XmlDataFormatter.m; sourceTree = "<group>"; };
 		1BA5F6CF0F3DF05C00D70A22 /* libtidy.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtidy.a; path = "src-external/tidy/libtidy.a"; sourceTree = "<group>"; };
 		1BA5F7810F3E376200D70A22 /* libtidy.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libtidy.dylib; path = usr/lib/libtidy.dylib; sourceTree = SDKROOT; };
 		1BA5F7AA0F3E4B2A00D70A22 /* XmlEncodingSniffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XmlEncodingSniffer.h; path = Sources/XmlEncodingSniffer.h; sourceTree = "<group>"; };
@@ -235,8 +241,12 @@
 				0259C576FE90428111CA0C5A /* XMLWebKitPluginView.m */,
 				1BA5F7AA0F3E4B2A00D70A22 /* XmlEncodingSniffer.h */,
 				1BA5F7AB0F3E4B2A00D70A22 /* XmlEncodingSniffer.m */,
+				1B6772800F5BE5C400F90C87 /* XmlDataFormatterXslt.h */,
+				1B6772810F5BE5C400F90C87 /* XmlDataFormatterXslt.m */,
 				1BA5F92F0F3EEF8300D70A22 /* XmlDataFormatterTidy.h */,
 				1BA5F9300F3EEF8300D70A22 /* XmlDataFormatterTidy.m */,
+				1B6772830F5BE66B00F90C87 /* XmlDataFormatter.h */,
+				1B6772840F5BE66B00F90C87 /* XmlDataFormatter.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -445,6 +455,8 @@
 				1B39A2AE0F3C8F5100A3E427 /* XMLWebKitPluginContentView.m in Sources */,
 				1BA5F7AC0F3E4B2A00D70A22 /* XmlEncodingSniffer.m in Sources */,
 				1BA5F9310F3EEF8300D70A22 /* XmlDataFormatterTidy.m in Sources */,
+				1B6772820F5BE5C400F90C87 /* XmlDataFormatterXslt.m in Sources */,
+				1B6772850F5BE66B00F90C87 /* XmlDataFormatter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,48 +7,11 @@
 //
 
 #import "XmlDataFormatterTidy.h"
-#import "XmlEncodingSniffer.h"
 #include <tidy/tidy.h>
 #include <tidy/buffio.h>
 
 @implementation XmlDataFormatterTidy
 
-@synthesize data;
-@synthesize errorMessage;
-@synthesize errorMessageDetail;
-@synthesize status;
-@synthesize encoding;
-@synthesize prettyPrint;
-
-
-- (id)initWithData:(NSData *)xmlData {
-	if (!(self = [super init])) return nil;
-	if (!xmlData) {
-		NSLog(@"nil xml data");
-		[self release];
-		return nil;
-	}
-	self.data = xmlData;
-	[self sniffEncoding];
-	return self;
-}
-
-
-- (void)sniffEncoding {
-	encoding = [XmlEncodingSniffer encodingForXmlData:data];
-	if (!encoding) {
-		self.errorMessage = @"Unable to determine encoding, falling back to ISO-8859-1";
-		NSLog(errorMessage);
-		encoding = NSISOLatin1StringEncoding;
-	}
-}
-
-
-- (NSString *)formattedString {
-	if (!data) return nil;
-	if (prettyPrint) return [self prettyPrintedString];
-	return [self plainString];
-}
 
 
 - (NSString *)prettyPrintedString {
@@ -77,11 +40,10 @@
     rc = tidyCleanAndRepair(tdoc);
     rc = tidySaveBuffer(tdoc, &output);
 
-	NSString *result;
+	NSString *result = nil;
 	if (output.bp) {
 		result = [NSString stringWithUTF8String:(const char *)output.bp];
 	} else {
-		result = [self plainString];
 		NSString *longMessage = [NSString stringWithFormat:@"unable to pretty-print: %s", errbuf.bp ? (char *)errbuf.bp : "(unknown error)"];
 		NSArray *lines = [longMessage componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
 		self.errorMessage = [self firstErrorLineInTidyDiagnostics:lines];
@@ -126,32 +88,6 @@
 	self.errorMessage = [NSString stringWithFormat:@"unknown encoding (%d), falling back to ISO-8859-1", encoding];
 	NSLog(errorMessage);
 	return "latin1";
-}
-
-
-- (NSString *)plainString {
-	NSString *result = [[NSString alloc] initWithData:data encoding:encoding];
-	if (!result) {
-		self.errorMessage = @"Encoding mismatch, falling back to ISO-8859-1";
-		NSLog(self.errorMessage);
-		result = [[NSString alloc] initWithData:data encoding:NSISOLatin1StringEncoding];
-	}
-	return result;
-}
-
-
-- (void) dealloc {
-	[self reset];
-	[super dealloc];
-}
-
-
-- (void)reset {
-	self.errorMessage = nil;
-	self.errorMessageDetail = nil;
-	self.data = nil;
-	self.encoding = 0;
-	self.status = 0;
 }
 
 
