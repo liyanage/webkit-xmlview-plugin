@@ -44,16 +44,25 @@
 				}
 
 				span.attribute.value {
-					color: black;
+					color: #77e;
 				}
 				
 				span.namespace {
-					color: #88f;
+					color: #c55;
 				}
 				
+				/*
+				div.name_style span.text {
+					white-space: pre;
+				}
+				*/
+				
+				
+				/*
 				span.text {
 					white-space: pre;
 				}
+				*/
 			</style>
 			
 		</head>
@@ -76,28 +85,33 @@
 </xsl:template>
 
 
-<!-- elements that have mixed content -->
+<!-- elements with mixed content -->
 <xsl:template match="*[*|comment()|processing-instruction()]">
-	<div class='element'>
-	<span class='tag open'>&lt;<xsl:value-of select="name()"/><xsl:call-template name='namespaces'/><xsl:apply-templates select="@*"/>></span>
+	<xsl:variable name="lname" select="concat('name_', local-name())" />
+	<div class='element {$lname}'>
+	<span class='tag open {$lname}'>&lt;<xsl:value-of select="name()"/><xsl:call-template name='namespaces'/><xsl:apply-templates select="@*"/>></span>
 	<div class='mixedcontent'>
 		<xsl:apply-templates/>
 	</div>
-	<span class='tag close'>&lt;/<xsl:value-of select="name()"/>></span>
+	<span class='tag close {$lname}'>&lt;/<xsl:value-of select="name()"/>></span>
 	</div>
 </xsl:template>
 
 
-<!-- elements that have only text content -->
+<!-- elements without mixed content -->
 <xsl:template match="*">
-	<div class='element'>
-	<span class='tag open'>&lt;<xsl:value-of select="name()"/><xsl:call-template name='namespaces'/><xsl:apply-templates select="@*"/>></span><xsl:apply-templates/><span class='tag close'>&lt;/<xsl:value-of select="name()"/>></span>
+	<xsl:variable name="lname" select="concat('name_', local-name())" />
+	<div class='element {$lname}'>
+	<span class='tag open {$lname}'>&lt;<xsl:value-of select="name()"/><xsl:call-template name='namespaces'/><xsl:apply-templates select="@*"/>></span><xsl:apply-templates/><span class='tag close {$lname}'>&lt;/<xsl:value-of select="name()"/>></span>
 	</div>
 </xsl:template>
 
+
+<!-- empty elements -->
 <xsl:template match="*[not(node())]">
-	<div class='element'>
-	<span class='tag selfclosed'>&lt;<xsl:value-of select="name()"/><xsl:call-template name='namespaces'/><xsl:apply-templates select="@*"/>/></span>
+	<xsl:variable name="lname" select="concat('name_', local-name())" />
+	<div class='element {$lname}'>
+	<span class='tag selfclosed {$lname}'>&lt;<xsl:value-of select="name()"/><xsl:call-template name='namespaces'/><xsl:apply-templates select="@*"/>/></span>
 	</div>
 </xsl:template>
 
@@ -106,20 +120,51 @@
 	<xsl:text> </xsl:text><span class='attribute name'><xsl:value-of select="name()"/></span>=<xsl:apply-templates select="." mode="attrvalue"/>
 </xsl:template>
 
-<xsl:template match='@*[contains(., "&apos;")]' mode='attrvalue'>"<span class='attribute value'><xsl:value-of select="."/></span>"</xsl:template>
-
+<!-- Try to produce correct markup for all single/double quote combinations in attribute values -->
+<xsl:template match="@*[not(contains(., '&quot;'))]" mode='attrvalue'>"<span class='attribute value'><xsl:value-of select="."/></span>"</xsl:template>
 <xsl:template match='@*[not(contains(., "&apos;"))]' mode='attrvalue'>'<span class='attribute value'><xsl:value-of select="."/></span>'</xsl:template>
+<xsl:template match='@*[contains(., "&apos;") and contains(., &apos;"&apos;)]' mode='attrvalue'>"<span class='attribute value'>
+
+    <xsl:call-template name="replaceCharsInString">
+      <xsl:with-param name="stringIn" select="string(.)"/>
+      <xsl:with-param name="charsIn" select="'&quot;'"/>
+      <xsl:with-param name="charsOut" select="'&amp;quot;'"/>
+    </xsl:call-template>
+
+</span>"</xsl:template>
 
 
+<!-- Emit namespace declarations -->
 <xsl:template name="namespaces">
-	<xsl:if test="namespace-uri()">
-		<xsl:variable name="my_ns" select="namespace-uri()" />
-		<xsl:if test="not(ancestor::*[namespace-uri() = $my_ns])">
-			<xsl:variable name="prefix" select="substring-before(name(), local-name())" />
-		
+	<xsl:for-each select="@*|.">
+		<xsl:variable name="my_ns" select="namespace-uri()"/>
+		<!-- emit a namespace declaration if this element or attribute has a namespace and no ancestor defines it -->
+		<xsl:if test="$my_ns and not(ancestor::*[namespace-uri() = $my_ns])">
+			<xsl:variable name="prefix" select="substring-before(name(), local-name())"/>
 			<span class='namespace'> xmlns<xsl:if test="$prefix">:<xsl:value-of select="substring-before($prefix, ':')"/></xsl:if>='<xsl:value-of select="namespace-uri()"/>'</span>
 		</xsl:if>
-	</xsl:if>
+	</xsl:for-each>
+</xsl:template>
+
+
+<!-- string search/replace, from http://www.dpawson.co.uk/xsl/sect2/replace.html -->
+<xsl:template name="replaceCharsInString">
+  <xsl:param name="stringIn"/>
+  <xsl:param name="charsIn"/>
+  <xsl:param name="charsOut"/>
+  <xsl:choose>
+    <xsl:when test="contains($stringIn,$charsIn)">
+      <xsl:value-of select="concat(substring-before($stringIn,$charsIn),$charsOut)"/>
+      <xsl:call-template name="replaceCharsInString">
+        <xsl:with-param name="stringIn" select="substring-after($stringIn,$charsIn)"/>
+        <xsl:with-param name="charsIn" select="$charsIn"/>
+        <xsl:with-param name="charsOut" select="$charsOut"/>
+      </xsl:call-template>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:value-of select="$stringIn"/>
+    </xsl:otherwise>
+  </xsl:choose>
 </xsl:template>
 
 

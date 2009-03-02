@@ -10,6 +10,10 @@
 #import "XMLWebKitPluginContentView.h"
 #import "Sparkle/Sparkle.h"
 
+#define PRETTY_PRINT_OPTION_RAW 1
+#define PRETTY_PRINT_OPTION_SIMPLE 2
+#define PRETTY_PRINT_OPTION_FANCY 3
+
 
 @interface XMLWebKitPluginView : NSView <WebPlugInViewFactory> {
 	IBOutlet XMLWebKitPluginContentView *xmlContentView;
@@ -18,6 +22,7 @@
 	IBOutlet NSTextField *aboutPanelVersionLabel;
 	IBOutlet WebView *webView;
 	IBOutlet NSTabView *tabView;
+	IBOutlet NSMenu *actionMenu;
 	NSMutableData *documentData;
 	NSURL *documentURL;
 	NSSavePanel *savePanel;
@@ -38,12 +43,14 @@
 @property(retain) IBOutlet NSView *textView;
 @property(retain) IBOutlet NSView *webView;
 @property(retain) IBOutlet NSView *tabView;
+@property(retain) IBOutlet NSMenu *actionMenu;
 @property(retain) IBOutlet NSWindow *aboutPanel;
 @property(retain) IBOutlet NSTextField *aboutPanelVersionLabel;
 @property(retain) NSURL *documentURL;
 @property(retain) NSMutableData *documentData;
 @property(retain) WebFrame *parentFrame;
 @property(retain) DOMHTMLElement *domElement;
+
 
 - (id)initWithArguments:(NSDictionary *)arguments;
 - (IBAction)updateDataDisplay:(id)sender;
@@ -58,5 +65,6 @@
 - (void)loadDataWithArguments:(NSDictionary *)arguments;
 - (void)setupUpdateCheck;
 - (void)setupTextViewFont:(NSTextView *)tv;
+- (void)setupActionMenu;
 
 @end

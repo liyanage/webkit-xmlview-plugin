@@ -17,6 +17,7 @@
 @synthesize notificationMessage;
 @synthesize notificationMessageDetail;
 @synthesize textView;
+@synthesize actionMenu;
 @synthesize webView;
 @synthesize tabView;
 @synthesize aboutPanel;
@@ -61,6 +62,7 @@ typedef enum {
 	
     [self setupDefaults];
 	[self setupSubviews];
+	[self setupActionMenu];
 	[self setupUpdateCheck];
 	[self applyTextViewWrapping:self];
 
@@ -69,9 +71,19 @@ typedef enum {
 
 	hasAcquiredFirstResponder = NO;
 	[self loadDataWithArguments:newArguments];
-
+	
     return self;
 }
+
+
+
+- (void)setupActionMenu {
+	NSInteger selectedOptionTag = [[NSUserDefaults standardUserDefaults] integerForKey:@"ch_entropy_xmlViewPlugin_PrettyPrintOptionTag"];
+	for (NSMenuItem *item in [actionMenu itemArray]) {
+		if ([item tag] == selectedOptionTag) [item setState:NSOnState];
+	}
+}
+
 
 
 - (void)setupUpdateCheck {
@@ -94,6 +106,7 @@ typedef enum {
 	self.notificationMessage = nil;
 	self.notificationMessageDetail = nil;
 	self.textView = nil;
+	self.actionMenu = nil;
 	self.webView = nil;
 	self.tabView = nil;
 	self.documentURL = nil;
@@ -112,6 +125,7 @@ typedef enum {
 	NSDictionary *defaults = [NSDictionary dictionaryWithObjectsAndKeys:
 		[NSNumber numberWithBool:YES], @"ch_entropy_xmlViewPlugin_WrapLines",
 		[NSNumber numberWithBool:YES], @"ch_entropy_xmlViewPlugin_PrettyPrintXml",
+		[NSNumber numberWithInt:PRETTY_PRINT_OPTION_FANCY], @"ch_entropy_xmlViewPlugin_PrettyPrintOptionTag",
 		nil];
 	[[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
 }
@@ -173,20 +187,31 @@ typedef enum {
 
 - (IBAction)updateDataDisplay:(id)sender {
 
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+	if ([sender isKindOfClass:[NSPopUpButton class]]) {
+		NSMenuItem *item = [sender selectedItem];
+		for (id i in [[item menu] itemArray]) [i setState:NSOffState];
+		[item setState:NSOnState];
+		[defaults setInteger:[item tag] forKey:@"ch_entropy_xmlViewPlugin_PrettyPrintOptionTag"];
+	}
+
+	NSInteger prettyPrintOption = [defaults integerForKey:@"ch_entropy_xmlViewPlugin_PrettyPrintOptionTag"];
+
 	if (!documentData) return;
-	
-	BOOL shouldPrettyPrint = [[NSUserDefaults standardUserDefaults] boolForKey:@"ch_entropy_xmlViewPlugin_PrettyPrintXml"];
-	if ([sender isKindOfClass:[NSMenuItem class]]) {
-		shouldPrettyPrint = ![sender state]; // the state isn't yet updated at the time of action method invocation
-	}
 
-	XmlDataFormatterXslt *xdf = [[[XmlDataFormatterXslt alloc] initWithData:documentData] autorelease];
-	xdf.prettyPrint = shouldPrettyPrint;
 
+	XmlDataFormatter *xdf;
 	NSData *result = nil;
-	if (shouldPrettyPrint) {
-		result = [xdf prettyPrintedData];
+	if (prettyPrintOption == PRETTY_PRINT_OPTION_FANCY) {
+		xdf = [[[XmlDataFormatterXslt alloc] initWithData:documentData] autorelease];
+		xdf.prettyPrint = YES;
+		result = [(XmlDataFormatterXslt *)xdf prettyPrintedData];
+	} else {
+		xdf = [[[XmlDataFormatterTidy alloc] initWithData:documentData] autorelease];
+		xdf.prettyPrint = prettyPrintOption == PRETTY_PRINT_OPTION_SIMPLE;
 	}
+
 	
 	if (result) {
 		[[webView mainFrame] loadData:result MIMEType:@"text/html" textEncodingName:@"utf-8" baseURL:nil];
