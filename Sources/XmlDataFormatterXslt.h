@@ -13,4 +13,6 @@
 
 }
 
+- (NSString *)storeError:(NSError *)error forStage:(NSString *)stage;
+
 @end
