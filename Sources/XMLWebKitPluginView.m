@@ -216,6 +216,9 @@ typedef enum {
 	if (result) {
 		[[webView mainFrame] loadData:result MIMEType:@"text/html" textEncodingName:@"utf-8" baseURL:nil];
 		[tabView selectTabViewItemAtIndex:1];
+#ifdef CONFIGURATION_DEBUG
+		[result writeToFile:@"/tmp/xmlviewplugin-debug.html" atomically:YES];
+#endif
 	} else {
 		NSString *xmlText = [xdf formattedString];
 		NSTextView *tv = [self valueForKey:@"textView"];

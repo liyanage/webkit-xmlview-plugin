@@ -14,61 +14,61 @@
 <xsl:param name="resource_base"/>
 
 <xsl:template match="/">
-	<html>
-		<head>
-			
-			<style type='text/css'>
-				body {
-					font-family: monospace;
-				}
-				
-				div.comment {
-					color: #555;
-					white-space: pre;
-				}
-				
-				div.xmlpi {
-					color: red;
-				}
-				
-				div.mixedcontent {
-					margin-left: 10px;
-				}
-				
-				span.tag {
-					color: #11a;
-				}
-				
-				span.attribute.name {
-					color: #080;
-				}
-
-				span.attribute.value {
-					color: #77e;
-				}
-				
-				span.namespace {
-					color: #c55;
-				}
-				
-				/*
-				div.name_style span.text {
-					white-space: pre;
-				}
-				*/
-				
-				
-				/*
-				span.text {
-					white-space: pre;
-				}
-				*/
-			</style>
-			
-		</head>
-		<body><xsl:apply-templates/></body>
+<html xmlns="http://www.w3.org/1999/xhtml" version="XHTML 1.1">
+	<head>
 		
-	</html>
+		<style type='text/css'>
+			body {
+				font-family: monospace;
+			}
+			
+			div.comment {
+				color: #555;
+				white-space: pre;
+			}
+			
+			div.xmlpi {
+				color: red;
+			}
+			
+			div.mixedcontent {
+				margin-left: 10px;
+			}
+			
+			span.tag {
+				color: #11a;
+			}
+			
+			span.attribute.name {
+				color: #080;
+			}
+
+			span.attribute.value {
+				color: #77e;
+			}
+			
+			span.namespace {
+				color: #c55;
+			}
+			
+			/*
+			div.name_style span.text {
+				white-space: pre;
+			}
+			*/
+			
+			
+			/*
+			span.text {
+				white-space: pre;
+			}
+			*/
+		</style>
+		
+	</head>
+	<body><xsl:apply-templates/></body>
+	
+</html>
 </xsl:template>
 
 
@@ -120,17 +120,16 @@
 	<xsl:text> </xsl:text><span class='attribute name'><xsl:value-of select="name()"/></span>=<xsl:apply-templates select="." mode="attrvalue"/>
 </xsl:template>
 
-<!-- Try to produce correct markup for all single/double quote combinations in attribute values -->
+
+<!-- Try to emit well-formed markup for all single/double quote combinations in attribute values -->
 <xsl:template match="@*[not(contains(., '&quot;'))]" mode='attrvalue'>"<span class='attribute value'><xsl:value-of select="."/></span>"</xsl:template>
 <xsl:template match='@*[not(contains(., "&apos;"))]' mode='attrvalue'>'<span class='attribute value'><xsl:value-of select="."/></span>'</xsl:template>
 <xsl:template match='@*[contains(., "&apos;") and contains(., &apos;"&apos;)]' mode='attrvalue'>"<span class='attribute value'>
-
     <xsl:call-template name="replaceCharsInString">
       <xsl:with-param name="stringIn" select="string(.)"/>
       <xsl:with-param name="charsIn" select="'&quot;'"/>
       <xsl:with-param name="charsOut" select="'&amp;quot;'"/>
     </xsl:call-template>
-
 </span>"</xsl:template>
 
 
@@ -138,7 +137,8 @@
 <xsl:template name="namespaces">
 	<xsl:for-each select="@*|.">
 		<xsl:variable name="my_ns" select="namespace-uri()"/>
-		<!-- emit a namespace declaration if this element or attribute has a namespace and no ancestor defines it -->
+		<!-- Emit a namespace declaration if this element or attribute has a namespace and no ancestor already defines it.
+		     Currently this produces redundant declarations for namespaces used only on attributes. -->
 		<xsl:if test="$my_ns and not(ancestor::*[namespace-uri() = $my_ns])">
 			<xsl:variable name="prefix" select="substring-before(name(), local-name())"/>
 			<span class='namespace'> xmlns<xsl:if test="$prefix">:<xsl:value-of select="substring-before($prefix, ':')"/></xsl:if>='<xsl:value-of select="namespace-uri()"/>'</span>
@@ -147,7 +147,7 @@
 </xsl:template>
 
 
-<!-- string search/replace, from http://www.dpawson.co.uk/xsl/sect2/replace.html -->
+<!-- string search/replace used in the attribute quote templates above. From http://www.dpawson.co.uk/xsl/sect2/replace.html -->
 <xsl:template name="replaceCharsInString">
   <xsl:param name="stringIn"/>
   <xsl:param name="charsIn"/>
