@@ -12,28 +12,42 @@
 @implementation XmlDataFormatterXslt
 
 
-- (NSString *)prettyPrintedString {
+- (NSData *)prettyPrintedData {
 
 	NSError *error = nil;
 	NSXMLDocument *xmlDoc;
 	xmlDoc = [[[NSXMLDocument alloc] initWithData:self.data options:0 error:&error] autorelease];
-	if (error) return [self storeError:error forStage:@"xml parse"];
+	if (error) {
+		[self storeError:error forStage:@"xml parse"];
+		return nil;
+	}
 
 	NSString *xsltPath = [[NSBundle bundleForClass:[self class]] pathForResource:@"xml-pretty-print" ofType:@"xslt"];
-	NSLog(@"xsltUrl: %@", [NSURL fileURLWithPath:xsltPath]);
+//	NSLog(@"xsltUrl: %@", [NSURL fileURLWithPath:xsltPath]);
 	
 	NSXMLDocument *xsltResult = [xmlDoc objectByApplyingXSLTAtURL:[NSURL fileURLWithPath:xsltPath] arguments:nil error:&error];
-	if (error) return [self storeError:error forStage:@"xslt transform"];
+	if (error) {
+		[self storeError:error forStage:@"xslt transform"];
+		return nil;
+	}
+	
 	if (!xsltResult) {
 		self.errorMessage = @"Unable to run XSLT transformation";
 		NSLog(@"failed to pretty-print (%@): %@", @"xslt", self.errorMessage);
 		return nil;
 	}
 
-	NSLog(@"result %@", [xsltResult stringValue]);
-	return [[[NSString alloc] initWithData:[xsltResult XMLData] encoding:NSUTF8StringEncoding] autorelease];
-
+//	NSLog(@"result %@", [xsltResult stringValue]);
+	return [xsltResult XMLData];
 }
+
+- (NSString *)prettyPrintedString {
+	NSData *resultData = [self prettyPrintedData];
+	if (!resultData) return nil;
+	return [[[NSString alloc] initWithData:resultData encoding:NSUTF8StringEncoding] autorelease];
+}
+
+
 
 
 

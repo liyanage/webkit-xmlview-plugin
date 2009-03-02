@@ -177,7 +177,6 @@
 				0259C582FE90428111CA0C5A /* Resources */,
 				2E58F364FFB232C311CA0CBA /* Frameworks */,
 				1ED78706FE9D4A0611CA0C5A /* Products */,
-				1B39A2FF0F3C93C800A3E427 /* XMLWebKitUI.xib */,
 				1BA5F7810F3E376200D70A22 /* libtidy.dylib */,
 				1BA5F7D70F3E4E0200D70A22 /* Test_XmlEncodingSniffer-Info.plist */,
 				1BA5F95D0F3EF0A400D70A22 /* Test_XmlDataFormatter-Info.plist */,
@@ -189,6 +188,7 @@
 		0259C582FE90428111CA0C5A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1B39A2FF0F3C93C800A3E427 /* XMLWebKitUI.xib */,
 				1B2184150F3FA19000D8940E /* xmlviewplugin_icon.icns */,
 				1B2183A80F3F99F400D8940E /* dsa_pub.pem */,
 				1B39A3090F3C94E600A3E427 /* Caution.tiff */,

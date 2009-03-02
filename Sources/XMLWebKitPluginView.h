@@ -16,6 +16,8 @@
 	IBOutlet NSTextView *textView;
 	IBOutlet NSWindow *aboutPanel;
 	IBOutlet NSTextField *aboutPanelVersionLabel;
+	IBOutlet WebView *webView;
+	IBOutlet NSTabView *tabView;
 	NSMutableData *documentData;
 	NSURL *documentURL;
 	NSSavePanel *savePanel;
@@ -34,6 +36,8 @@
 @property(retain) NSString *notificationMessage;
 @property(retain) NSString *notificationMessageDetail;
 @property(retain) IBOutlet NSView *textView;
+@property(retain) IBOutlet NSView *webView;
+@property(retain) IBOutlet NSView *tabView;
 @property(retain) IBOutlet NSWindow *aboutPanel;
 @property(retain) IBOutlet NSTextField *aboutPanelVersionLabel;
 @property(retain) NSURL *documentURL;

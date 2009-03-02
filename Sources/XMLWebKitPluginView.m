@@ -17,6 +17,8 @@
 @synthesize notificationMessage;
 @synthesize notificationMessageDetail;
 @synthesize textView;
+@synthesize webView;
+@synthesize tabView;
 @synthesize aboutPanel;
 @synthesize aboutPanelVersionLabel;
 @synthesize documentURL;
@@ -92,6 +94,8 @@ typedef enum {
 	self.notificationMessage = nil;
 	self.notificationMessageDetail = nil;
 	self.textView = nil;
+	self.webView = nil;
+	self.tabView = nil;
 	self.documentURL = nil;
 	self.aboutPanelVersionLabel = nil;
 	self.documentData = nil;
@@ -168,37 +172,6 @@ typedef enum {
 
 
 - (IBAction)updateDataDisplay:(id)sender {
-/*
-	if ([[documentURL description] rangeOfString:@"test.xml"].location != NSNotFound) {
-			
-		DOMHTMLEmbedElement *element = (DOMHTMLEmbedElement *)self.domElement;
-		DOMHTMLEmbedElement *clone = [element cloneNode:YES];
-		[clone setAttribute:@"type"	value:@"text/html"];
-		[clone setAttribute:@"src" value:@"http://localhost/test2.xml"];
-
-		NSLog(@"XML View Plugin: redirecting");
-
-		[[self retain] autorelease];
-
-		[[element parentNode] appendChild:clone];
-	//	[element setAttribute:@"style" value:@"display: none;"];
-		[[element parentNode] removeChild:element];
-	//	replaceChild:clone oldChild:element];
-	//	[clone setAttribute:@"src" value:@"http://localhost/test.xml"];
-		return;
-
-	//	DOMHTMLObjectElement *element = (DOMHTMLObjectElement *)self.domElement;
-
-	//	[element setAttribute:@"type" value:@"text/html"];
-	//	[element setAttribute:@"data" value:@"http://www.sun.com"];
-		
-	//	DOMHTMLEmbedElement *element = (DOMHTMLEmbedElement *)self.domElement;
-
-	//	return;
-
-	}
-	NSLog(@"XML View Plugin: not redirecting");
-*/
 
 	if (!documentData) return;
 	
@@ -209,17 +182,28 @@ typedef enum {
 
 	XmlDataFormatter *xdf = [[[XmlDataFormatterXslt alloc] initWithData:documentData] autorelease];
 	xdf.prettyPrint = shouldPrettyPrint;
-	NSString *xmlText = [xdf formattedString];
+
+	NSData *result = nil;
+	if (shouldPrettyPrint) {
+		result = [xdf prettyPrintedData];
+	}
+	
+	if (result) {
+		[[webView mainFrame] loadData:result MIMEType:@"text/html" textEncodingName:@"utf-8" baseURL:nil];
+//		[[webView mainFrame] loadHTMLString:@"hi" baseURL:nil];
+		[tabView selectTabViewItemAtIndex:1];
+	} else {
+		NSString *xmlText = [xdf formattedString];
+		NSTextView *tv = [self valueForKey:@"textView"];
+		NSAttributedString *xmlAttributedString = [[[NSAttributedString alloc] initWithString:xmlText] autorelease];
+		[[tv textStorage] setAttributedString:xmlAttributedString];
+		[self setupTextViewFont:tv];
+		[tabView selectTabViewItemAtIndex:0];
+	}
 
 	self.notificationMessage = xdf.errorMessage ? xdf.errorMessage : nil;
 	self.notificationMessageDetail = xdf.errorMessageDetail ? xdf.errorMessageDetail : nil;
 
-	NSTextView *tv = [self valueForKey:@"textView"];
-
-	NSAttributedString *xmlAttributedString = [[[NSAttributedString alloc] initWithString:xmlText] autorelease];
-	[[tv textStorage] setAttributedString:xmlAttributedString];
-
-	[self setupTextViewFont:tv];
 	[self refreshLayout];
 }
 

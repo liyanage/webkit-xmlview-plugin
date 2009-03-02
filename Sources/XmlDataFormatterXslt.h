@@ -14,5 +14,6 @@
 }
 
 - (NSString *)storeError:(NSError *)error forStage:(NSString *)stage;
+- (NSData *)prettyPrintedData;
 
 @end
