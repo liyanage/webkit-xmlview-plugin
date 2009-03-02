@@ -180,7 +180,7 @@ typedef enum {
 		shouldPrettyPrint = ![sender state]; // the state isn't yet updated at the time of action method invocation
 	}
 
-	XmlDataFormatter *xdf = [[[XmlDataFormatterXslt alloc] initWithData:documentData] autorelease];
+	XmlDataFormatterXslt *xdf = [[[XmlDataFormatterXslt alloc] initWithData:documentData] autorelease];
 	xdf.prettyPrint = shouldPrettyPrint;
 
 	NSData *result = nil;
@@ -190,7 +190,6 @@ typedef enum {
 	
 	if (result) {
 		[[webView mainFrame] loadData:result MIMEType:@"text/html" textEncodingName:@"utf-8" baseURL:nil];
-//		[[webView mainFrame] loadHTMLString:@"hi" baseURL:nil];
 		[tabView selectTabViewItemAtIndex:1];
 	} else {
 		NSString *xmlText = [xdf formattedString];

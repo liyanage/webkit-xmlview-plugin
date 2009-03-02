@@ -50,6 +50,10 @@
 				span.namespace {
 					color: #88f;
 				}
+				
+				span.text {
+					white-space: pre;
+				}
 			</style>
 			
 		</head>
@@ -86,7 +90,15 @@
 
 <!-- elements that have only text content -->
 <xsl:template match="*">
+	<div class='element'>
 	<span class='tag open'>&lt;<xsl:value-of select="name()"/><xsl:call-template name='namespaces'/><xsl:apply-templates select="@*"/>></span><xsl:apply-templates/><span class='tag close'>&lt;/<xsl:value-of select="name()"/>></span>
+	</div>
+</xsl:template>
+
+<xsl:template match="*[not(node())]">
+	<div class='element'>
+	<span class='tag selfclosed'>&lt;<xsl:value-of select="name()"/><xsl:call-template name='namespaces'/><xsl:apply-templates select="@*"/>/></span>
+	</div>
 </xsl:template>
 
 
