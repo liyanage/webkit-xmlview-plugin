@@ -6,12 +6,12 @@
 //  Copyright 2009 Marc Liyanage <http://www.entropy.ch>. All rights reserved.
 //
 
-#import "XmlDataFormatter.h"
+#import "XmlDataFormatterTidy.h"
 #import "XmlEncodingSniffer.h"
 #include <tidy/tidy.h>
 #include <tidy/buffio.h>
 
-@implementation XmlDataFormatter
+@implementation XmlDataFormatterTidy
 
 @synthesize data;
 @synthesize errorMessage;

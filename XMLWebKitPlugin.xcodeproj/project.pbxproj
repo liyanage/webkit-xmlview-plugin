@@ -46,9 +46,9 @@
 		1BA5F7AC0F3E4B2A00D70A22 /* XmlEncodingSniffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BA5F7AB0F3E4B2A00D70A22 /* XmlEncodingSniffer.m */; };
 		1BA5F7E10F3E4EA500D70A22 /* TestXmlEncodingSniffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BA5F7C50F3E4DAB00D70A22 /* TestXmlEncodingSniffer.m */; };
 		1BA5F7FF0F3E500700D70A22 /* XmlEncodingSniffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BA5F7AB0F3E4B2A00D70A22 /* XmlEncodingSniffer.m */; };
-		1BA5F9310F3EEF8300D70A22 /* XmlDataFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BA5F9300F3EEF8300D70A22 /* XmlDataFormatter.m */; };
+		1BA5F9310F3EEF8300D70A22 /* XmlDataFormatterTidy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BA5F9300F3EEF8300D70A22 /* XmlDataFormatterTidy.m */; };
 		1BA5F9630F3EF0B900D70A22 /* TestXmlDataFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BA5F9610F3EF0B900D70A22 /* TestXmlDataFormatter.m */; };
-		1BA5F9640F3EF0D100D70A22 /* XmlDataFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BA5F9300F3EEF8300D70A22 /* XmlDataFormatter.m */; };
+		1BA5F9640F3EF0D100D70A22 /* XmlDataFormatterTidy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BA5F9300F3EEF8300D70A22 /* XmlDataFormatterTidy.m */; };
 		1BA5F9E90F3F010D00D70A22 /* XmlEncodingSniffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BA5F7AB0F3E4B2A00D70A22 /* XmlEncodingSniffer.m */; };
 		1BA5FB400F3F222700D70A22 /* libtidy.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BA5F7810F3E376200D70A22 /* libtidy.dylib */; };
 		224339580A6F05F3000348D4 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 224339570A6F05F3000348D4 /* WebKit.framework */; };
@@ -110,8 +110,8 @@
 		1BA5F7C50F3E4DAB00D70A22 /* TestXmlEncodingSniffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TestXmlEncodingSniffer.m; path = Sources/TestXmlEncodingSniffer.m; sourceTree = "<group>"; };
 		1BA5F7D60F3E4E0200D70A22 /* Test_XmlEncodingSniffer.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Test_XmlEncodingSniffer.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BA5F7D70F3E4E0200D70A22 /* Test_XmlEncodingSniffer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Test_XmlEncodingSniffer-Info.plist"; sourceTree = "<group>"; };
-		1BA5F92F0F3EEF8300D70A22 /* XmlDataFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XmlDataFormatter.h; path = Sources/XmlDataFormatter.h; sourceTree = "<group>"; };
-		1BA5F9300F3EEF8300D70A22 /* XmlDataFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XmlDataFormatter.m; path = Sources/XmlDataFormatter.m; sourceTree = "<group>"; };
+		1BA5F92F0F3EEF8300D70A22 /* XmlDataFormatterTidy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XmlDataFormatterTidy.h; path = Sources/XmlDataFormatterTidy.h; sourceTree = "<group>"; };
+		1BA5F9300F3EEF8300D70A22 /* XmlDataFormatterTidy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XmlDataFormatterTidy.m; path = Sources/XmlDataFormatterTidy.m; sourceTree = "<group>"; };
 		1BA5F93D0F3EF00100D70A22 /* TestXmlDataFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestXmlDataFormatter.h; path = Sources/TestXmlDataFormatter.h; sourceTree = "<group>"; };
 		1BA5F93E0F3EF00100D70A22 /* TestXmlDataFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TestXmlDataFormatter.m; path = Sources/TestXmlDataFormatter.m; sourceTree = "<group>"; };
 		1BA5F95C0F3EF0A400D70A22 /* Test_XmlDataFormatter.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Test_XmlDataFormatter.octest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -235,8 +235,8 @@
 				0259C576FE90428111CA0C5A /* XMLWebKitPluginView.m */,
 				1BA5F7AA0F3E4B2A00D70A22 /* XmlEncodingSniffer.h */,
 				1BA5F7AB0F3E4B2A00D70A22 /* XmlEncodingSniffer.m */,
-				1BA5F92F0F3EEF8300D70A22 /* XmlDataFormatter.h */,
-				1BA5F9300F3EEF8300D70A22 /* XmlDataFormatter.m */,
+				1BA5F92F0F3EEF8300D70A22 /* XmlDataFormatterTidy.h */,
+				1BA5F9300F3EEF8300D70A22 /* XmlDataFormatterTidy.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -432,7 +432,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BA5F9E90F3F010D00D70A22 /* XmlEncodingSniffer.m in Sources */,
-				1BA5F9640F3EF0D100D70A22 /* XmlDataFormatter.m in Sources */,
+				1BA5F9640F3EF0D100D70A22 /* XmlDataFormatterTidy.m in Sources */,
 				1BA5F9630F3EF0B900D70A22 /* TestXmlDataFormatter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -444,7 +444,7 @@
 				8D1AC96B0486D14A00FE50C9 /* XMLWebKitPluginView.m in Sources */,
 				1B39A2AE0F3C8F5100A3E427 /* XMLWebKitPluginContentView.m in Sources */,
 				1BA5F7AC0F3E4B2A00D70A22 /* XmlEncodingSniffer.m in Sources */,
-				1BA5F9310F3EEF8300D70A22 /* XmlDataFormatter.m in Sources */,
+				1BA5F9310F3EEF8300D70A22 /* XmlDataFormatterTidy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -680,7 +680,7 @@
 				PRODUCT_NAME = "XML View Plugin";
 				PRODUCT_SHORTNAME = xmlviewplugin;
 				PRODUCT_VERSION = "$(PRODUCT_VERSION_BASE)-dev";
-				PRODUCT_VERSION_BASE = 1.4;
+				PRODUCT_VERSION_BASE = 1.5;
 				SDKROOT = macosx10.5;
 				WARNING_CFLAGS = "-Wall";
 				WRAPPER_EXTENSION = webplugin;
@@ -703,7 +703,7 @@
 				PRODUCT_NAME = "XML View Plugin";
 				PRODUCT_SHORTNAME = xmlviewplugin;
 				PRODUCT_VERSION = "$(PRODUCT_VERSION_BASE)";
-				PRODUCT_VERSION_BASE = 1.4;
+				PRODUCT_VERSION_BASE = 1.5;
 				SDKROOT = macosx10.5;
 				WARNING_CFLAGS = "-Wall";
 				WRAPPER_EXTENSION = webplugin;

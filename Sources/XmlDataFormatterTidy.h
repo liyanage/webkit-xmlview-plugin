@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface XmlDataFormatter : NSObject {
+@interface XmlDataFormatterTidy : NSObject {
 	NSData *data;
 	NSString *errorMessage;
 	NSString *errorMessageDetail;
