@@ -53,7 +53,7 @@ echo scp "'$HOME/git/entropy/$PRODUCT_SHORTNAME/build/Release/$ARCHIVE_FILENAME'
 echo scp "'$HOME/git/entropy/$PRODUCT_SHORTNAME/Resources/release-notes.html'" www.entropy.ch:web/software/macosx/$PRODUCT_SHORTNAME/release-notes.html
 echo scp "'$HOME/git/entropy/$PRODUCT_SHORTNAME/Resources/appcast.xml'" www.entropy.ch:web/software/macosx/$PRODUCT_SHORTNAME/appcast.xml
 
-echo git commit -a "'version $VERSION'"
+echo git commit -a -m "'version $VERSION'"
 echo git tag -a "'v$VERSION'"
 echo git push
 echo git push github
