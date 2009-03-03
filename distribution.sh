@@ -7,6 +7,7 @@ set -o errexit
 [ $BUILD_STYLE = Release ] || { echo Distribution target requires "'Release'" build style; false; }
 
 VERSION=$(defaults read "$BUILT_PRODUCTS_DIR/$PRODUCT_NAME.$WRAPPER_EXTENSION/Contents/Info" CFBundleVersion)
+echo version: $VERSION from: "$BUILT_PRODUCTS_DIR/$PRODUCT_NAME.$WRAPPER_EXTENSION/Contents/Info"
 DOWNLOAD_BASE_URL="http://www2.entropy.ch/download"
 RELEASENOTES_URL="http://www.entropy.ch/software/macosx/$PRODUCT_SHORTNAME/release-notes.html#version-$VERSION"
 
@@ -19,7 +20,7 @@ cd "$BUILT_PRODUCTS_DIR"
 rm -f "$PRODUCT_SHORTNAME"*.zip
 zip -qr "$ARCHIVE_FILENAME" "$PRODUCT_NAME.$WRAPPER_EXTENSION"
 
-echo $ARCHIVE_FILENAME "'$KEYCHAIN_PRIVKEY_NAME'"
+#echo $ARCHIVE_FILENAME "'$KEYCHAIN_PRIVKEY_NAME'"
 
 SIZE=$(stat -f %z "$ARCHIVE_FILENAME")
 PUBDATE=$(date +"%a, %d %b %G %T %z")
