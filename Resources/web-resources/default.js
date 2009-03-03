@@ -10,4 +10,5 @@ function clickElement(event) {
 	if (!e.hasClassName('mixed')) return;
 	if (e.nodeName == 'SPAN') e = e.parentNode;
 	e.down('.mixedcontent').toggle();
+	e.select('span.tag').invoke('toggleClassName', 'collapsed');
 }

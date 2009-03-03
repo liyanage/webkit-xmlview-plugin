@@ -2,44 +2,52 @@ body {
 	font-family: monospace;
 }
 
+/* XML comments */
 div.comment {
 	color: #555;
 	white-space: pre;
 }
 
+/* XML processing instructions */
 div.xmlpi {
 	color: red;
 }
 
+/* This is a div around the markup for the child elements */
 div.mixedcontent {
 	margin-left: 10px;
 }
 
+/* The start and end tags get this class */
 span.tag {
 	color: #11a;
+	padding: 1px;
 }
 
+/* attribute names */
 span.attribute.name {
 	color: #080;
 }
 
+/* ... and the values */
 span.attribute.value {
 	color: #77e;
 }
 
+/* namespace declarations */
 span.namespace {
 	color: #c55;
 }
 
-/*
-div.name_style span.text {
-	white-space: pre;
+/* tag span elements whose content is collapsed */
+span.tag.collapsed {
+	background-color: #11a;
+	color: white !important;
+	-webkit-border-radius: 6px;
 }
-*/
 
-
-/*
-span.text {
-	white-space: pre;
+/* hide attributes and namespace declaration for collapsed elements */
+span.tag.collapsed * {
+	display: none;
 }
-*/
+

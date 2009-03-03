@@ -56,7 +56,7 @@
 <xsl:template match="*[*|comment()|processing-instruction()]">
 	<xsl:variable name="lname" select="concat('name_', local-name())" />
 	<div class='element mixed {$lname}'>
-	<span class='tag open mixed {$lname}'>&lt;<xsl:value-of select="name()"/><xsl:call-template name='namespaces'/><xsl:apply-templates select="@*"/>></span>
+	<span class='tag open mixed {$lname}'>&lt;<xsl:value-of select="name()"/><span class='attributes_and_namespaces'><xsl:call-template name='namespaces'/><xsl:apply-templates select="@*"/></span>></span>
 	<div class='mixedcontent'>
 		<xsl:apply-templates/>
 	</div>
@@ -69,7 +69,7 @@
 <xsl:template match="*">
 	<xsl:variable name="lname" select="concat('name_', local-name())" />
 	<div class='element nomixed {$lname}'>
-	<span class='tag open nomixed {$lname}'>&lt;<xsl:value-of select="name()"/><xsl:call-template name='namespaces'/><xsl:apply-templates select="@*"/>></span><xsl:apply-templates/><span class='tag close nomixed {$lname}'>&lt;/<xsl:value-of select="name()"/>></span>
+	<span class='tag open nomixed {$lname}'>&lt;<xsl:value-of select="name()"/><span class='attributes_and_namespaces'><xsl:call-template name='namespaces'/><xsl:apply-templates select="@*"/></span>></span><xsl:apply-templates/><span class='tag close nomixed {$lname}'>&lt;/<xsl:value-of select="name()"/>></span>
 	</div>
 </xsl:template>
 
@@ -78,7 +78,7 @@
 <xsl:template match="*[not(node())]">
 	<xsl:variable name="lname" select="concat('name_', local-name())" />
 	<div class='element selfclosed {$lname}'>
-	<span class='tag selfclosed {$lname}'>&lt;<xsl:value-of select="name()"/><xsl:call-template name='namespaces'/><xsl:apply-templates select="@*"/>/></span>
+	<span class='tag selfclosed {$lname}'>&lt;<xsl:value-of select="name()"/><span class='attributes_and_namespaces'><xsl:call-template name='namespaces'/><xsl:apply-templates select="@*"/></span>/></span>
 	</div>
 </xsl:template>
 
