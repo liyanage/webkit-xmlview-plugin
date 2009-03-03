@@ -21,6 +21,8 @@
 @synthesize webView;
 @synthesize tabView;
 @synthesize aboutPanel;
+@synthesize findPanel;
+@synthesize prefsPanel;
 @synthesize aboutPanelVersionLabel;
 @synthesize documentURL;
 @synthesize documentData;
@@ -101,6 +103,8 @@ typedef enum {
 	// NIB toplevel objects
 	self.xmlContentView = nil;
 	self.aboutPanel = nil;
+	self.findPanel = nil;
+	self.prefsPanel = nil;
 
 	self.softwareUpdater = nil;
 	self.notificationMessage = nil;
@@ -122,13 +126,30 @@ typedef enum {
 # pragma mark setup methods
 
 - (void)setupDefaults {
+
+	NSString *defaultUserCss = [self stringForWebResource:@"default" ofType:@"css"];
+	NSString *defaultUserJs = [self stringForWebResource:@"default" ofType:@"js"];
+
 	NSDictionary *defaults = [NSDictionary dictionaryWithObjectsAndKeys:
 		[NSNumber numberWithBool:YES], @"ch_entropy_xmlViewPlugin_WrapLines",
 		[NSNumber numberWithBool:YES], @"ch_entropy_xmlViewPlugin_PrettyPrintXml",
 		[NSNumber numberWithInt:PRETTY_PRINT_OPTION_FANCY], @"ch_entropy_xmlViewPlugin_PrettyPrintOptionTag",
+		defaultUserCss, @"ch_entropy_xmlViewPlugin_UserCss",
+		defaultUserJs, @"ch_entropy_xmlViewPlugin_UserJs",
 		nil];
 	[[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
 }
+
+
+- (NSURL *)fileUrlForWebResource:(NSString *)resource ofType:(NSString *)type {
+	NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+	return [NSURL fileURLWithPath:[bundle pathForResource:resource ofType:type inDirectory:@"web-resources"]];
+}
+
+- (NSString *)stringForWebResource:(NSString *)resource ofType:(NSString *)type {
+	return [NSString stringWithContentsOfURL:[self fileUrlForWebResource:resource ofType:type]];
+}
+
 
 
 - (void)setupSubviews {
@@ -138,18 +159,27 @@ typedef enum {
 
 	// TODO: crashes if we do the release on this one, check for leaks here
 	// [aboutPanel release];
-
+	[findPanel release];
+	[prefsPanel release];
 }
 
 
 - (void)drawRect:(NSRect)aRect {
 	if (!hasAcquiredFirstResponder) {
 		// FIXME: there should be a better way/time/place to get first reponder status
-		[[self window] makeFirstResponder:textView];
+		[[self window] makeFirstResponder:[self currentFindPanelTarget]];
 		hasAcquiredFirstResponder = YES;
 	}
 	[super drawRect:aRect];
 }
+
+
+// Return the web or text view, whatever is currently displayed
+- (id)currentFindPanelTarget {
+	if ([[self currentDataViewIdentifier] isEqualToString:@"textview"]) return textView;
+	return webView;
+}
+
 
 
 
@@ -250,6 +280,23 @@ typedef enum {
 }
 
 
+
+- (IBAction)resetUserCss:(id)sender {
+	NSString *defaultUserCss = [self stringForWebResource:@"default" ofType:@"css"];
+	[[NSUserDefaults standardUserDefaults] setValue:defaultUserCss forKey:@"ch_entropy_xmlViewPlugin_UserCss"];
+}
+
+- (IBAction)resetUserJs:(id)sender {
+	NSString *defaultUserJs = [self stringForWebResource:@"default" ofType:@"js"];
+	[[NSUserDefaults standardUserDefaults] setValue:defaultUserJs forKey:@"ch_entropy_xmlViewPlugin_UserJs"];
+}
+
+
+- (IBAction)showUserSettingsDocumentation:(id)sender {
+	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.entropy.ch/software/macosx/xmlviewplugin/#customization"]];
+}
+
+
 #pragma mark find panel actions
 
 // This one doesn't work, somehow we never see this on the responder chain
@@ -261,34 +308,91 @@ typedef enum {
 }
 */
 
-// Instead we do this. Because we invoke the superclass version in any case, the
-// selection string is used both for Safari's custom search bear as well as in 
-// our text view's find panel.
+// Instead we do this. Because we always invoke the superclass implementation,
+// the selection string is used both by Safari's custom search bar as well as
+// in our text view's find panel.
 - (BOOL)performKeyEquivalent:(NSEvent *)theEvent {
 	if ([[theEvent charactersIgnoringModifiers] isEqualToString:@"e"]) {
 		tag = NSFindPanelActionSetFindString;
-		[textView performFindPanelAction:self];
+		if ([[self currentDataViewIdentifier] isEqualToString:@"textview"]) {
+			[textView performFindPanelAction:self];
+		}
+		// Unfortunately the text view doesn't pick up the find pasteboard find string
+		// if the user runs Cmd-E in the web view. It seems to maintain its own find string.
 	}
-	return [super performKeyEquivalent:theEvent];
+	BOOL result = [super performKeyEquivalent:theEvent];
+	return result;
 }
 
+
+// Safari 3 invokes this
 - (IBAction)showFindPanel:(id)sender {
 	tag = NSFindPanelActionShowFindPanel;
-	[textView performFindPanelAction:self];
+	if ([[self currentDataViewIdentifier] isEqualToString:@"textview"]) {
+		[textView performFindPanelAction:self];
+	} else {
+		[[NSApplication sharedApplication] beginSheet:findPanel modalForWindow:[self window] modalDelegate:nil didEndSelector:nil contextInfo:nil];
+		[[findPanel.contentView viewWithTag:FIND_PANEL_TAG_TEXTFIELD] setStringValue:[self findString]];
+		[findPanel.contentView viewWithTag:FIND_PANEL_TAG_TEXTFIELD];
+	}
 }
+
+
+- (IBAction)closeFindPanel:(id)sender {
+	[[NSApplication sharedApplication] endSheet:findPanel];
+	[findPanel orderOut:self];
+
+	if ([sender tag] != FIND_PANEL_TAG_FIND) return;
+
+	NSTextField *findField = [findPanel.contentView viewWithTag:FIND_PANEL_TAG_TEXTFIELD];
+	NSString *findString = [findField stringValue];
+
+	NSPasteboard *findPboard = [NSPasteboard pasteboardWithName:NSFindPboard];
+	[findPboard declareTypes:[NSArray arrayWithObject:NSStringPboardType] owner:nil];
+	[findPboard setString:findString forType:NSStringPboardType];
+	[self findNext:self];
+}
+
+
+// Safari 4 invokes this
+- (IBAction)focusWebViewSearchField:(id)sender {
+	[self showFindPanel:sender];
+}
+
 
 - (IBAction)findNext:(id)sender {
 	tag = NSFindPanelActionNext;
-	[textView performFindPanelAction:self];
+	if ([[self currentDataViewIdentifier] isEqualToString:@"textview"]) {
+		[textView performFindPanelAction:self];
+	} else {
+		[webView searchFor:[self findString] direction:YES caseSensitive:NO wrap:YES];
+	}
 }
+
 
 - (IBAction)findPrevious:(id)sender {
 	tag = NSFindPanelActionPrevious;
-	[textView performFindPanelAction:self];
+	if ([[self currentDataViewIdentifier] isEqualToString:@"textview"]) {
+		[textView performFindPanelAction:self];
+	} else {
+		[webView searchFor:[self findString] direction:NO caseSensitive:NO wrap:YES];
+	}
 }
+
 
 - (NSInteger)tag {
 	return tag;
+}
+
+
+- (NSString *)currentDataViewIdentifier {
+	return [[tabView selectedTabViewItem] identifier];
+}
+
+- (NSString *)findString {
+	NSPasteboard *findPboard = [NSPasteboard pasteboardWithName:NSFindPboard];
+	[findPboard types];
+	return [findPboard stringForType:NSStringPboardType];
 }
 
 
@@ -480,6 +584,15 @@ typedef enum {
     return self;
 }
 */
+
+
+#pragma mark WebKit WebUIDelegate protocol methods
+
+- (void)webView:(WebView *)sender runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WebFrame *)frame {
+	NSLog(@"User JavaScript alert message: %@", message);
+}
+
+
 
 @end
 

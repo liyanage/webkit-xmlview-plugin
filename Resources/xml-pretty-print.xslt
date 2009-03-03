@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:stylesheet version="1.0" xmlns="http://www.w3.org/1999/xhtml" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 <xsl:output
 	method="xml"
@@ -11,62 +11,29 @@
 	doctype-public="-//W3C//DTD XHTML 1.1//EN"
 />
 
-<xsl:param name="resource_base"/>
+<xsl:param name="web_resource_base"/>
+<xsl:param name="user_css"/>
+<xsl:param name="user_js"/>
 
 <xsl:template match="/">
-<html xmlns="http://www.w3.org/1999/xhtml" version="XHTML 1.1">
+<html version="XHTML 1.1">
 	<head>
 		
 		<style type='text/css'>
-			body {
-				font-family: monospace;
-			}
-			
-			div.comment {
-				color: #555;
-				white-space: pre;
-			}
-			
-			div.xmlpi {
-				color: red;
-			}
-			
-			div.mixedcontent {
-				margin-left: 10px;
-			}
-			
-			span.tag {
-				color: #11a;
-			}
-			
-			span.attribute.name {
-				color: #080;
-			}
-
-			span.attribute.value {
-				color: #77e;
-			}
-			
-			span.namespace {
-				color: #c55;
-			}
-			
-			/*
-			div.name_style span.text {
-				white-space: pre;
-			}
-			*/
-			
-			
-			/*
-			span.text {
-				white-space: pre;
-			}
-			*/
+			<xsl:copy-of select="$user_css"/>
 		</style>
-		
+		<script type='text/javascript' src='{$web_resource_base}/prototype.js'/>
+		<script type='text/javascript'>
+			function xmlViewPluginSetup() {
+				document.fire("xmlviewplugin:loaded");
+			}
+			document.observe("dom:loaded", xmlViewPluginSetup);
+		</script>
+		<script type='text/javascript'>
+			<xsl:copy-of select="$user_js"/>
+		</script>
 	</head>
-	<body><xsl:apply-templates/></body>
+	<body id='body'><xsl:apply-templates/></body>
 	
 </html>
 </xsl:template>
@@ -88,12 +55,12 @@
 <!-- elements with mixed content -->
 <xsl:template match="*[*|comment()|processing-instruction()]">
 	<xsl:variable name="lname" select="concat('name_', local-name())" />
-	<div class='element {$lname}'>
-	<span class='tag open {$lname}'>&lt;<xsl:value-of select="name()"/><xsl:call-template name='namespaces'/><xsl:apply-templates select="@*"/>></span>
+	<div class='element mixed {$lname}'>
+	<span class='tag open mixed {$lname}'>&lt;<xsl:value-of select="name()"/><xsl:call-template name='namespaces'/><xsl:apply-templates select="@*"/>></span>
 	<div class='mixedcontent'>
 		<xsl:apply-templates/>
 	</div>
-	<span class='tag close {$lname}'>&lt;/<xsl:value-of select="name()"/>></span>
+	<span class='tag close mixed {$lname}'>&lt;/<xsl:value-of select="name()"/>></span>
 	</div>
 </xsl:template>
 
@@ -101,8 +68,8 @@
 <!-- elements without mixed content -->
 <xsl:template match="*">
 	<xsl:variable name="lname" select="concat('name_', local-name())" />
-	<div class='element {$lname}'>
-	<span class='tag open {$lname}'>&lt;<xsl:value-of select="name()"/><xsl:call-template name='namespaces'/><xsl:apply-templates select="@*"/>></span><xsl:apply-templates/><span class='tag close {$lname}'>&lt;/<xsl:value-of select="name()"/>></span>
+	<div class='element nomixed {$lname}'>
+	<span class='tag open nomixed {$lname}'>&lt;<xsl:value-of select="name()"/><xsl:call-template name='namespaces'/><xsl:apply-templates select="@*"/>></span><xsl:apply-templates/><span class='tag close nomixed {$lname}'>&lt;/<xsl:value-of select="name()"/>></span>
 	</div>
 </xsl:template>
 
@@ -110,7 +77,7 @@
 <!-- empty elements -->
 <xsl:template match="*[not(node())]">
 	<xsl:variable name="lname" select="concat('name_', local-name())" />
-	<div class='element {$lname}'>
+	<div class='element selfclosed {$lname}'>
 	<span class='tag selfclosed {$lname}'>&lt;<xsl:value-of select="name()"/><xsl:call-template name='namespaces'/><xsl:apply-templates select="@*"/>/></span>
 	</div>
 </xsl:template>

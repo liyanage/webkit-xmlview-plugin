@@ -1,0 +1,45 @@
+body {
+	font-family: monospace;
+}
+
+div.comment {
+	color: #555;
+	white-space: pre;
+}
+
+div.xmlpi {
+	color: red;
+}
+
+div.mixedcontent {
+	margin-left: 10px;
+}
+
+span.tag {
+	color: #11a;
+}
+
+span.attribute.name {
+	color: #080;
+}
+
+span.attribute.value {
+	color: #77e;
+}
+
+span.namespace {
+	color: #c55;
+}
+
+/*
+div.name_style span.text {
+	white-space: pre;
+}
+*/
+
+
+/*
+span.text {
+	white-space: pre;
+}
+*/

@@ -15,5 +15,6 @@
 
 - (NSString *)storeError:(NSError *)error forStage:(NSString *)stage;
 - (NSData *)prettyPrintedData;
+- (NSString *)xpathEscapeString:(NSString *)string;
 
 @end

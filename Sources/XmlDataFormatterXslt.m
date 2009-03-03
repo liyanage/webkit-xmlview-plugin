@@ -22,10 +22,23 @@
 		return nil;
 	}
 
-	NSString *xsltPath = [[NSBundle bundleForClass:[self class]] pathForResource:@"xml-pretty-print" ofType:@"xslt"];
+	NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+	NSString *xsltPath = [bundle pathForResource:@"xml-pretty-print" ofType:@"xslt"];
+	NSString *webResourcePath = [bundle pathForResource:@"web-resources" ofType:@""];
+	NSURL *webResourceUrl = [NSURL fileURLWithPath:webResourcePath];
 //	NSLog(@"xsltUrl: %@", [NSURL fileURLWithPath:xsltPath]);
+
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	NSDictionary *xsltParameters = [NSDictionary dictionaryWithObjectsAndKeys:
+//		[defaults stringForKey:@"ch_entropy_xmlViewPlugin_UserCss"], @"user_css",
+		[self xpathEscapeString:[defaults stringForKey:@"ch_entropy_xmlViewPlugin_UserCss"]], @"user_css",
+		[self xpathEscapeString:[defaults stringForKey:@"ch_entropy_xmlViewPlugin_UserJs"]], @"user_js",
+		[self xpathEscapeString:[webResourceUrl absoluteString]], @"web_resource_base",
+		nil
+	];
+
 	
-	NSXMLDocument *xsltResult = [xmlDoc objectByApplyingXSLTAtURL:[NSURL fileURLWithPath:xsltPath] arguments:nil error:&error];
+	NSXMLDocument *xsltResult = [xmlDoc objectByApplyingXSLTAtURL:[NSURL fileURLWithPath:xsltPath] arguments:xsltParameters error:&error];
 	if (error) {
 		[self storeError:error forStage:@"xslt transform"];
 		return nil;
@@ -46,6 +59,24 @@
 	if (!resultData) return nil;
 	return [[[NSString alloc] initWithData:resultData encoding:NSUTF8StringEncoding] autorelease];
 }
+
+
+
+- (NSString *)xpathEscapeString:(NSString *)string {
+	NSArray *components = [string componentsSeparatedByString:@"'"];
+	if ([components count] < 2) return [NSString stringWithFormat:@"'%@'", string];
+	
+	NSMutableString *escaped = [NSMutableString string];
+	[escaped appendString:@"concat("];
+	for (int i = 0; i < [components count]; i++) {
+		NSString *component = [components objectAtIndex:i];
+		[escaped appendString:[NSString stringWithFormat:@"'%@'", component]];
+		if (i + 1 < [components count]) [escaped appendString:@", \"'\", "];
+	}
+	[escaped appendString:@")"];
+	return escaped;
+}
+
 
 
 

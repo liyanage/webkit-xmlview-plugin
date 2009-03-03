@@ -14,11 +14,16 @@
 #define PRETTY_PRINT_OPTION_SIMPLE 2
 #define PRETTY_PRINT_OPTION_FANCY 3
 
+#define FIND_PANEL_TAG_CANCEL 2
+#define FIND_PANEL_TAG_FIND 3
+#define FIND_PANEL_TAG_TEXTFIELD 1
 
 @interface XMLWebKitPluginView : NSView <WebPlugInViewFactory> {
 	IBOutlet XMLWebKitPluginContentView *xmlContentView;
 	IBOutlet NSTextView *textView;
 	IBOutlet NSWindow *aboutPanel;
+	IBOutlet NSWindow *findPanel;
+	IBOutlet NSWindow *prefsPanel;
 	IBOutlet NSTextField *aboutPanelVersionLabel;
 	IBOutlet WebView *webView;
 	IBOutlet NSTabView *tabView;
@@ -45,6 +50,8 @@
 @property(retain) IBOutlet NSView *tabView;
 @property(retain) IBOutlet NSMenu *actionMenu;
 @property(retain) IBOutlet NSWindow *aboutPanel;
+@property(retain) IBOutlet NSWindow *findPanel;
+@property(retain) IBOutlet NSWindow *prefsPanel;
 @property(retain) IBOutlet NSTextField *aboutPanelVersionLabel;
 @property(retain) NSURL *documentURL;
 @property(retain) NSMutableData *documentData;
@@ -66,5 +73,16 @@
 - (void)setupUpdateCheck;
 - (void)setupTextViewFont:(NSTextView *)tv;
 - (void)setupActionMenu;
+- (id)currentFindPanelTarget;
+- (NSString *)currentDataViewIdentifier;
+- (NSString *)findString;
+- (IBAction)findNext:(id)sender;
+- (IBAction)closeFindPanel:(id)sender;
+- (IBAction)resetUserCss:(id)sender;
+- (IBAction)resetUserJs:(id)sender;
+- (IBAction)showUserSettingsDocumentation:(id)sender;
+- (NSURL *)fileUrlForWebResource:(NSString *)resource ofType:(NSString *)type;
+- (NSString *)stringForWebResource:(NSString *)resource ofType:(NSString *)type;
+
 
 @end
