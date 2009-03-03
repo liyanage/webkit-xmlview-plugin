@@ -312,6 +312,7 @@
 				1B2183480F3F966800D8940E /* CopyFiles */,
 				8D1AC96A0486D14A00FE50C9 /* Sources */,
 				8D1AC96E0486D14A00FE50C9 /* Frameworks */,
+				1B3DA3F20F5D9F04009F2BD8 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -379,6 +380,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1B3DA3F20F5D9F04009F2BD8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "VERSION=$(defaults read \"$BUILT_PRODUCTS_DIR/$PRODUCT_NAME.$WRAPPER_EXTENSION/Contents/Info\" CFBundleVersion)\nARCHIVE_FILENAME=\"$PRODUCT_SHORTNAME-$BUILD_STYLE-$VERSION.zip\"\ncd \"$BUILT_PRODUCTS_DIR\"\nzip -qr \"$ARCHIVE_FILENAME\" \"$PRODUCT_NAME.$WRAPPER_EXTENSION\"\n";
+		};
 		1B5F69450F4374810083FB97 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

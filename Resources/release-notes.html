@@ -56,6 +56,12 @@
 			margin: 0 0 10px 0;
 		}
 	
+		img {
+			border: 1px solid #aaa;
+			display: block;
+			margin: 5px 0 5px 0;
+		}
+	
 	</style>
 </head>
 <body>
@@ -65,10 +71,19 @@
 <h1>Version 1.5</h1>
 
 <ul>
-	<li>There is a new formatting option that colorizes the XML. It’s also interactive and lets you click on the names of elements with mixed content to hide or show the content. Because this option presents a logical view of the document that does not always match the exact XML data sent by the server, the two old formatting options, which are closer to the original data, are still there. They have been renamed in the action menu, the three options are now called “View Raw”, “View Formatted” and “View Formatted and Styled”.</li>
-	<li>The new formatting option is based on HTML/CSS/JavaScript. You get access to the the CSS and JavaScript code in the new Preferences dialog so you can tweak it according to your needs. Prototype JS version 1.6.0.3 gets loaded into the page. If you come up with something interesting, make sure to share your code, e.g. on <a href="http://gist.github.com/">Gist</a>. I will collect useful information
-	for CSS/JavaScript customization on the plugin’s <a href="http://www.entropy.ch/software/macosx/xmlviewplugin/#customization">web site</a>.</li>
-	<li>Safari 4 Beta compatibility fix: the Find panel works now.</li>
+	<li>
+		<p>There is a new formatting view option that colorizes the XML:</p>
+
+		<p><img src='http://www.entropy.ch/software/macosx/xmlviewplugin/view-formatted-styled.png'/></p>
+
+		<p>This view is interactive and lets you click on the names of elements with mixed content to hide or show the content.</p>
+
+		<p>Because this option presents a logical view of the document that does not match the XML data sent by the server byte-for-byte, the two old formatting options, which present the original data more faithfully, are still there. They have been renamed in the action menu, the three options are now called “View Raw”, “View Formatted” and “View Formatted and Styled”.</p>
+	</li>
+
+	<li>The new formatting option is based on HTML/CSS/JavaScript. You get access to the the CSS and JavaScript code in the new Preferences dialog so you can tweak it according to your needs. This customization can range from simple syntax coloring color changes to highly interactive mini applications customized for your particular XML format. I will collect useful information
+	for CSS/JavaScript customization on the plugin’s <a href="http://www.entropy.ch/software/macosx/xmlviewplugin/#customization">web page</a>.</li>
+	<li>The Find panel now works in Safari 4 Beta.</li>
 </ul>
 
 
