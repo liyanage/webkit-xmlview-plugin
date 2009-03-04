@@ -1,25 +1,17 @@
 
-setup git-svn configuration, cleanup svn sandbox, setup separate git sandbox,
-- fix large data load issue SF example
-- branch experimental webview / xslt
-
 Known Issues:
-
-- "Use Selection For Find" doesn't work. The takeFindStringFromSelection method never reaches the main view on the responder chain. The text view seems to handle it, but in a way that doesn't actually set the find clipboard.
-- gzipped content? 
+------------
   http://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?pageNumber=0&type=Purple+Software&id=289985022&userReviewId=6081223
-
-
-Todo:
-
+- XSLT view: < and & in text nodes and attribute values should be converted to &lt; and &amp;, but not on existing entities.
 - Fallback to Safari in some cases, e.g. Google Calendar
   - blacklist?
   - http://lists.apple.com/archives/webkitsdk-dev//2009/Feb/msg00005.html
 
 
-Maybe look at:
+Todo:
+----
+- check if gzipped content is handled correctly.
 
-- http://www.stiefels.net/2008/01/22/syntax-highlighting-for-nstextview-with-flex/
 
 
 
