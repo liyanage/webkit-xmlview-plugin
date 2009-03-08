@@ -610,7 +610,7 @@ typedef enum {
 - (void)webView:(WebView *)webView addMessageToConsole:(NSDictionary *)message {
 	NSLog(@"js console message: %@", message);
 	int line = [[message valueForKey:@"lineNumber"] intValue];
-	int userJsLine = line - GENERATED_HTML_USER_JS_START_LINE_OFFSET;
+	int userJsLine = line - XML_VIEW_PLUGIN_USER_JS_START_LINE - 1;
 	int userJsDisplayLine = userJsLine + 1;
 	[prefsPanel makeKeyAndOrderFront:self];
 	NSTabView *prefsTabView = [[[prefsPanel contentView] subviews] objectAtIndex:0];

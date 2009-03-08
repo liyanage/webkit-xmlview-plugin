@@ -50,7 +50,6 @@
 		return nil;
 	}
 
-//	NSLog(@"result %@", [xsltResult stringValue]);
 	return [xsltResult XMLData];
 }
 

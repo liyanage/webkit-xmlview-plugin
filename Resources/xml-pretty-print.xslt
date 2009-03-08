@@ -1,36 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-
-<!-- xmlns="http://www.w3.org/1999/xhtml" -->
+<xsl:stylesheet version="1.0" xmlns="http://www.w3.org/1999/xhtml" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 <xsl:output
-	method="html"
+	method="xml"
 	version="1.0"
 	encoding="utf-8"
 	indent="no"
+	doctype-system="http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"
+	doctype-public="-//W3C//DTD XHTML 1.1//EN"
+	cdata-section-elements="script"
+/>
+<!--
 	doctype-system="-//W3C//DTD HTML 4.01//EN"
 	doctype-public="http://www.w3.org/TR/html4/strict.dtd"
-/>
-
-<!-- had to fall back to HTML 4.01 strict instead of XHTML 1.1 in order to
-	 switch to XSLT output mode HTML, because otherwise, with mode XML, javascript
-	 operators such as && were emitted as &amp;&amp, breaking the JS syntax.
-
-	 doctype-system="http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"
-	 doctype-public="-//W3C//DTD XHTML 1.1//EN"
 -->
 <xsl:param name="web_resource_base"/>
 <xsl:param name="user_css"/>
 <xsl:param name="user_js"/>
 
 <xsl:template match="/">
-<html> <!-- version="XHTML 1.1" -->
+<html version="XHTML 1.1">
 	<head>
-		
-		<style type='text/css'>
-			<xsl:copy-of select="$user_css"/>
-		</style>
+		<xsl:comment>
+			<xsl:value-of select="concat(system-property('xsl:version'), '/', system-property('xsl:vendor'), '/', system-property('xsl:vendor-url'))"/>
+		</xsl:comment>
 		<script type='text/javascript' src='{$web_resource_base}/prototype.js'/>
 		<script type='text/javascript'>
 			function xmlViewPluginSetup() {
@@ -38,9 +32,11 @@
 			}
 			document.observe("dom:loaded", xmlViewPluginSetup);
 		</script>
-		<script type='text/javascript'>
-			<xsl:copy-of select="$user_js"/>
-		</script>
+		<script type='text/javascript'>//__XML_VIEW_PLUGIN_USER_JS_START_LINE__
+<xsl:copy-of select="$user_js"/></script>
+		<style type='text/css'>
+			<xsl:copy-of select="$user_css"/>
+		</style>
 	</head>
 	<body id='body'><xsl:apply-templates/></body>
 	

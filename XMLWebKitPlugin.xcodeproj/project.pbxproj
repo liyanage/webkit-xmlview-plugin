@@ -112,6 +112,7 @@
 		1B6772810F5BE5C400F90C87 /* XmlDataFormatterXslt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XmlDataFormatterXslt.m; path = Sources/XmlDataFormatterXslt.m; sourceTree = "<group>"; };
 		1B6772830F5BE66B00F90C87 /* XmlDataFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XmlDataFormatter.h; path = Sources/XmlDataFormatter.h; sourceTree = "<group>"; };
 		1B6772840F5BE66B00F90C87 /* XmlDataFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XmlDataFormatter.m; path = Sources/XmlDataFormatter.m; sourceTree = "<group>"; };
+		1B711F5D0F64668100B1A9CA /* XML_VIEW_PLUGIN_USER_JS_START_LINE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XML_VIEW_PLUGIN_USER_JS_START_LINE.h; path = build/Debug/include/XML_VIEW_PLUGIN_USER_JS_START_LINE.h; sourceTree = "<group>"; };
 		1BA5F6CF0F3DF05C00D70A22 /* libtidy.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtidy.a; path = "src-external/tidy/libtidy.a"; sourceTree = "<group>"; };
 		1BA5F7810F3E376200D70A22 /* libtidy.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libtidy.dylib; path = usr/lib/libtidy.dylib; sourceTree = SDKROOT; };
 		1BA5F7AA0F3E4B2A00D70A22 /* XmlEncodingSniffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XmlEncodingSniffer.h; path = Sources/XmlEncodingSniffer.h; sourceTree = "<group>"; };
@@ -260,6 +261,7 @@
 		32DBCF9F0370C38200C91783 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				1B711F5D0F64668100B1A9CA /* XML_VIEW_PLUGIN_USER_JS_START_LINE.h */,
 				32DBCF980370C29C00C91783 /* XMLWebKitPlugin_Prefix.pch */,
 			);
 			name = "Other Sources";
@@ -308,6 +310,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C027D11908A954E7001699E2 /* Build configuration list for PBXNativeTarget "XMLWebKitPlugin" */;
 			buildPhases = (
+				1B711F270F6463B600B1A9CA /* ShellScript */,
 				8D1AC9660486D14A00FE50C9 /* Resources */,
 				1B2183480F3F966800D8940E /* CopyFiles */,
 				8D1AC96A0486D14A00FE50C9 /* Sources */,
@@ -419,6 +422,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
 			shellScript = "\nset -o errexit\n\nbash distribution.sh\n\n";
+			showEnvVarsInLog = 0;
+		};
+		1B711F270F6463B600B1A9CA /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Resources/xml-pretty-print.xslt",
+			);
+			outputPaths = (
+				"$(CONFIGURATION_BUILD_DIR)/include/XML_VIEW_PLUGIN_USER_JS_START_LINE.h",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# this script figures out the effective start line of the user-supplied JS\n# in the XSLT-generated HTML page. This line number is used to fix up\n# JS error line numbers for the user\n#\nmkdir -p \"$CONFIGURATION_BUILD_DIR/include\"\nSTARTLINE=$(echo '<root/>' | xsltproc Resources/xml-pretty-print.xslt - | cat -n | grep __XML_VIEW_PLUGIN_USER_JS_START_LINE__ | cut -f 1)\necho JS start line: $STARTLINE\necho \"#define XML_VIEW_PLUGIN_USER_JS_START_LINE $STARTLINE\" > \"$CONFIGURATION_BUILD_DIR/include\"/XML_VIEW_PLUGIN_USER_JS_START_LINE.h\n";
 			showEnvVarsInLog = 0;
 		};
 		1BA5F7D40F3E4E0200D70A22 /* ShellScript */ = {

@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "XMLWebKitPluginContentView.h"
 #import "Sparkle/Sparkle.h"
+#import "XML_VIEW_PLUGIN_USER_JS_START_LINE.h"
 
 #define PRETTY_PRINT_OPTION_RAW 1
 #define PRETTY_PRINT_OPTION_SIMPLE 2
@@ -17,8 +18,6 @@
 #define FIND_PANEL_TAG_CANCEL 2
 #define FIND_PANEL_TAG_FIND 3
 #define FIND_PANEL_TAG_TEXTFIELD 1
-
-#define GENERATED_HTML_USER_JS_START_LINE_OFFSET 63
 
 @interface XMLWebKitPluginView : NSView <WebPlugInViewFactory> {
 	IBOutlet XMLWebKitPluginContentView *xmlContentView;
