@@ -13,13 +13,13 @@
 		<item>
 			<title>Version 1.6</title>
 			<sparkle:releaseNotesLink>http://www.entropy.ch/software/macosx/xmlviewplugin/release-notes.html#version-1.6</sparkle:releaseNotesLink>
-			<pubDate>Sun, 08 Mar 2009 14:57:51 +0100</pubDate>
+			<pubDate>Sun, 08 Mar 2009 15:17:12 +0100</pubDate>
 			<enclosure
 				url="http://www2.entropy.ch/download/xmlviewplugin-1.6.zip"
 				sparkle:version="1.6"
 				type="application/octet-stream"
-				length="1546334"
-				sparkle:dsaSignature="MCwCFE+DjLl0zA4Z31fqYSvI9YsbLXCWAhRYonQSQOHe4d8rQwB3CmfUSWcdSQ=="
+				length="1546350"
+				sparkle:dsaSignature="MCwCFG5TtIVFbAvPvYUzSO/sudtkdxGUAhQkKGWUcF+CK5VG9BG1R6NZYrBtlQ=="
 			/>
 		</item>
 

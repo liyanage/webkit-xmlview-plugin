@@ -55,8 +55,8 @@ echo scp "'$HOME/git/entropy/$PRODUCT_SHORTNAME/Resources/appcast.xml'" www.entr
 
 echo git commit -a -m "'version $VERSION'"
 echo git tag -a "'v$VERSION'"
-echo git push --all
-echo git push --all github
+echo git push --tags --all
+echo git push --tags --all github
 
 echo git archive --format=zip --prefix="'$PRODUCT_SHORTNAME-src/'" HEAD \> "'$BUILT_PRODUCTS_DIR/$PRODUCT_SHORTNAME-src.zip'"
 

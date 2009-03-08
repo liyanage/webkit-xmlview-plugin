@@ -18,7 +18,7 @@
 #define FIND_PANEL_TAG_FIND 3
 #define FIND_PANEL_TAG_TEXTFIELD 1
 
-#define GENERATED_HTML_USER_JS_START_LINE_OFFSET 62
+#define GENERATED_HTML_USER_JS_START_LINE_OFFSET 61
 
 @interface XMLWebKitPluginView : NSView <WebPlugInViewFactory> {
 	IBOutlet XMLWebKitPluginContentView *xmlContentView;
