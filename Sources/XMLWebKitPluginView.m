@@ -214,6 +214,13 @@ typedef enum {
 	[self refreshLayout];
 }
 
+/*
+- (void)mouseMoved:(NSEvent *)theEvent {
+	NSLog(@"mouse moved: %@", theEvent);
+	[webView mouseMoved:theEvent];
+//	[super mouseMoved:theEvent];
+}
+*/
 
 - (IBAction)updateDataDisplay:(id)sender {
 
@@ -245,6 +252,9 @@ typedef enum {
 	
 	if (result) {
 		[[webView mainFrame] loadData:result MIMEType:@"text/html" textEncodingName:@"utf-8" baseURL:nil];
+//		NSLog(@"window accepts mouse moved: %d", [[self window] acceptsMouseMovedEvents]);
+//		[[webView mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.sun.com"]]];
+
 		[tabView selectTabViewItemAtIndex:1];
 #ifdef CONFIGURATION_DEBUG
 		[result writeToFile:@"/tmp/xmlviewplugin-debug.html" atomically:YES];
@@ -563,13 +573,6 @@ typedef enum {
 	NSLog(@"XML View Plugin: webPlugInStop");
 }
 
-- (void)webPlugInDestroy
-{
-    // Perform cleanup and prepare to be deallocated.
-    // You are not required to implement this method.  It may safely be removed.
-	NSLog(@"XML View Plugin: webPlugInDestroy");
-}
-
 - (void)webPlugInSetIsSelected:(BOOL)isSelected
 {
     // This is typically used to allow the plug-in to alter its appearance when selected.
@@ -585,11 +588,46 @@ typedef enum {
 }
 */
 
+- (void)webPlugInDestroy {
+	[prefsPanel close];
+	[aboutPanel close];
+}
+
+
 
 #pragma mark WebKit WebUIDelegate protocol methods
 
 - (void)webView:(WebView *)sender runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WebFrame *)frame {
 	NSLog(@"User JavaScript alert message: %@", message);
+	NSBeginAlertSheet(@"JavaScript Alert", nil, nil, nil, [self window], nil, nil, nil, nil, message);
+}
+
+
+// This one is undocumented, might break in the future
+//
+// http://www.archivesat.com/A_discussion_list_for_developers_using_the_WebKit_SDK/thread371974.htm
+//
+- (void)webView:(WebView *)webView addMessageToConsole:(NSDictionary *)message {
+	NSLog(@"js console message: %@", message);
+	int line = [[message valueForKey:@"lineNumber"] intValue];
+	int userJsLine = line - GENERATED_HTML_USER_JS_START_LINE_OFFSET;
+	int userJsDisplayLine = userJsLine + 1;
+	[prefsPanel makeKeyAndOrderFront:self];
+	NSTabView *prefsTabView = [[[prefsPanel contentView] subviews] objectAtIndex:0];
+	NSTabViewItem *jsTab = [prefsTabView tabViewItemAtIndex:1];
+	[prefsTabView selectTabViewItem:jsTab];
+	//we don't seem to get line numbers for JS exceptions
+	NSArray *paras = [[prefsJsTextView textStorage] paragraphs];
+	BOOL errorInUserJs = userJsLine >= 0 && userJsLine < [paras count];
+	NSString *msg = [NSString stringWithFormat:@"JavaScript error on line %@: %@", errorInUserJs ? [NSNumber numberWithInt:userJsDisplayLine] : @"(unknown)", [message valueForKey:@"message"]];
+	NSLog(msg);
+	if (errorInUserJs) {
+		unsigned int i, rangeStart = 0;
+		for (i = 0; i < userJsLine; i++) rangeStart += [[paras objectAtIndex:i] length];
+		[prefsJsTextView setSelectedRange:NSMakeRange(rangeStart, [[paras objectAtIndex:i] length])];
+	}
+	[prefsPanel makeFirstResponder:prefsJsTextView];
+	NSBeginAlertSheet(@"JavaScript Error", nil, nil, nil, prefsPanel, nil, nil, nil, nil, msg);
 }
 
 

@@ -1,22 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<xsl:stylesheet version="1.0" xmlns="http://www.w3.org/1999/xhtml" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+<!-- xmlns="http://www.w3.org/1999/xhtml" -->
 
 <xsl:output
-	method="xml"
+	method="html"
 	version="1.0"
 	encoding="utf-8"
 	indent="no"
-	doctype-system="http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"
-	doctype-public="-//W3C//DTD XHTML 1.1//EN"
+	doctype-system="-//W3C//DTD HTML 4.01//EN"
+	doctype-public="http://www.w3.org/TR/html4/strict.dtd"
 />
 
+<!-- had to fall back to HTML 4.01 strict instead of XHTML 1.1 in order to
+	 switch to XSLT output mode HTML, because otherwise, with mode XML, javascript
+	 operators such as && were emitted as &amp;&amp, breaking the JS syntax.
+
+	 doctype-system="http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"
+	 doctype-public="-//W3C//DTD XHTML 1.1//EN"
+-->
 <xsl:param name="web_resource_base"/>
 <xsl:param name="user_css"/>
 <xsl:param name="user_js"/>
 
 <xsl:template match="/">
-<html version="XHTML 1.1">
+<html> <!-- version="XHTML 1.1" -->
 	<head>
 		
 		<style type='text/css'>

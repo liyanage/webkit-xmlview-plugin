@@ -46,6 +46,7 @@ span.tag.collapsed {
 	-webkit-border-radius: 6px;
 }
 
+
 /* hide attributes and namespace declaration for collapsed elements */
 span.tag.collapsed * {
 	display: none;

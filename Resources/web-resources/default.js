@@ -9,6 +9,15 @@ function clickElement(event) {
 	var e = event.element();
 	if (!e.hasClassName('mixed')) return;
 	if (e.nodeName == 'SPAN') e = e.parentNode;
-	e.down('.mixedcontent').toggle();
-	e.select('span.tag').invoke('toggleClassName', 'collapsed');
+	toggleElementCollapse(e, event.altKey);
+	event.stop();
+}
+
+function toggleElementCollapse(e, deep) {
+	a = [e];
+	if (deep) a = a.concat(e.select('div.element.mixed'));
+	a.each(function (e) {
+		e.childElements().find(function (x) {return x.match('.mixedcontent')}).toggle();
+		e.childElements().findAll(function (x) {return x.match('span.tag')}).invoke('toggleClassName', 'collapsed');
+	});
 }
