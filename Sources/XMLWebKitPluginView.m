@@ -608,22 +608,20 @@ typedef enum {
 // http://www.archivesat.com/A_discussion_list_for_developers_using_the_WebKit_SDK/thread371974.htm
 //
 - (void)webView:(WebView *)webView addMessageToConsole:(NSDictionary *)message {
-	NSLog(@"js console message: %@", message);
-	int line = [[message valueForKey:@"lineNumber"] intValue];
-	int userJsLine = line - XML_VIEW_PLUGIN_USER_JS_START_LINE - 1;
-	int userJsDisplayLine = userJsLine + 1;
+	NSLog(@"XML View Plugin: js console message: %@", message);
+	int line = [[message valueForKey:@"lineNumber"] intValue] - 1;
+	int userJsDisplayLine = line + 1;
 	[prefsPanel makeKeyAndOrderFront:self];
 	NSTabView *prefsTabView = [[[prefsPanel contentView] subviews] objectAtIndex:0];
 	NSTabViewItem *jsTab = [prefsTabView tabViewItemAtIndex:1];
 	[prefsTabView selectTabViewItem:jsTab];
 	//we don't seem to get line numbers for JS exceptions
 	NSArray *paras = [[prefsJsTextView textStorage] paragraphs];
-	BOOL errorInUserJs = userJsLine >= 0 && userJsLine < [paras count];
+	BOOL errorInUserJs = line >= 0 && line < [paras count];
 	NSString *msg = [NSString stringWithFormat:@"JavaScript error on line %@: %@", errorInUserJs ? [NSNumber numberWithInt:userJsDisplayLine] : @"(unknown)", [message valueForKey:@"message"]];
-	NSLog(msg);
 	if (errorInUserJs) {
 		unsigned int i, rangeStart = 0;
-		for (i = 0; i < userJsLine; i++) rangeStart += [[paras objectAtIndex:i] length];
+		for (i = 0; i < line; i++) rangeStart += [[paras objectAtIndex:i] length];
 		[prefsJsTextView setSelectedRange:NSMakeRange(rangeStart, [[paras objectAtIndex:i] length])];
 	}
 	[prefsPanel makeFirstResponder:prefsJsTextView];

@@ -18,6 +18,7 @@
 <xsl:param name="web_resource_base"/>
 <xsl:param name="user_css"/>
 <xsl:param name="user_js"/>
+<xsl:param name="user_js_base64"/>
 
 <xsl:template match="/">
 <html version="XHTML 1.1">
@@ -32,11 +33,8 @@
 			}
 			document.observe("dom:loaded", xmlViewPluginSetup);
 		</script>
-		<script type='text/javascript'>//__XML_VIEW_PLUGIN_USER_JS_START_LINE__
-<xsl:copy-of select="$user_js"/></script>
-		<style type='text/css'>
-			<xsl:copy-of select="$user_css"/>
-		</style>
+		<script type='text/javascript' src="data:text/javascript;base64,{$user_js_base64}"/>
+		<style type='text/css'><xsl:copy-of select="$user_css"/></style>
 	</head>
 	<body id='body'><xsl:apply-templates/></body>
 	

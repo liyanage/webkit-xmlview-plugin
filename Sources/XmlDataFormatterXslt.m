@@ -7,7 +7,7 @@
 //
 
 #import "XmlDataFormatterXslt.h"
-
+#import "GTMBase64.h"
 
 @implementation XmlDataFormatterXslt
 
@@ -29,14 +29,19 @@
 //	NSLog(@"xsltUrl: %@", [NSURL fileURLWithPath:xsltPath]);
 
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	NSData *userJsBase64Data = [GTMBase64 encodeData:[[defaults stringForKey:@"ch_entropy_xmlViewPlugin_UserJs"] dataUsingEncoding:NSUTF8StringEncoding]];
+	NSString *userJsBase64String = [[[NSString alloc] initWithData:userJsBase64Data encoding:NSASCIIStringEncoding] autorelease];
 	NSDictionary *xsltParameters = [NSDictionary dictionaryWithObjectsAndKeys:
 //		[defaults stringForKey:@"ch_entropy_xmlViewPlugin_UserCss"], @"user_css",
 		[self xpathEscapeString:[defaults stringForKey:@"ch_entropy_xmlViewPlugin_UserCss"]], @"user_css",
 		[self xpathEscapeString:[defaults stringForKey:@"ch_entropy_xmlViewPlugin_UserJs"]], @"user_js",
+		[NSString stringWithFormat:@"'%@'", userJsBase64String], @"user_js_base64",
 		[self xpathEscapeString:[webResourceUrl absoluteString]], @"web_resource_base",
 		nil
 	];
 
+	
+	  
 	
 	NSXMLDocument *xsltResult = [xmlDoc objectByApplyingXSLTAtURL:[NSURL fileURLWithPath:xsltPath] arguments:xsltParameters error:&error];
 	if (error) {

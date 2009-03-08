@@ -46,6 +46,7 @@
 		1B3DA2250F5D6577009F2BD8 /* web-resources in Resources */ = {isa = PBXBuildFile; fileRef = 1B3DA2220F5D6577009F2BD8 /* web-resources */; };
 		1B6772820F5BE5C400F90C87 /* XmlDataFormatterXslt.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B6772810F5BE5C400F90C87 /* XmlDataFormatterXslt.m */; };
 		1B6772850F5BE66B00F90C87 /* XmlDataFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B6772840F5BE66B00F90C87 /* XmlDataFormatter.m */; };
+		1B7120200F64751600B1A9CA /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B71201F0F64751600B1A9CA /* GTMBase64.m */; };
 		1BA5F7820F3E376200D70A22 /* libtidy.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BA5F7810F3E376200D70A22 /* libtidy.dylib */; };
 		1BA5F7AC0F3E4B2A00D70A22 /* XmlEncodingSniffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BA5F7AB0F3E4B2A00D70A22 /* XmlEncodingSniffer.m */; };
 		1BA5F7E10F3E4EA500D70A22 /* TestXmlEncodingSniffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BA5F7C50F3E4DAB00D70A22 /* TestXmlEncodingSniffer.m */; };
@@ -112,7 +113,10 @@
 		1B6772810F5BE5C400F90C87 /* XmlDataFormatterXslt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XmlDataFormatterXslt.m; path = Sources/XmlDataFormatterXslt.m; sourceTree = "<group>"; };
 		1B6772830F5BE66B00F90C87 /* XmlDataFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XmlDataFormatter.h; path = Sources/XmlDataFormatter.h; sourceTree = "<group>"; };
 		1B6772840F5BE66B00F90C87 /* XmlDataFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XmlDataFormatter.m; path = Sources/XmlDataFormatter.m; sourceTree = "<group>"; };
-		1B711F5D0F64668100B1A9CA /* XML_VIEW_PLUGIN_USER_JS_START_LINE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XML_VIEW_PLUGIN_USER_JS_START_LINE.h; path = build/Debug/include/XML_VIEW_PLUGIN_USER_JS_START_LINE.h; sourceTree = "<group>"; };
+		1B7120170F64735A00B1A9CA /* libcrypto.0.9.7.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.0.9.7.dylib; path = usr/lib/libcrypto.0.9.7.dylib; sourceTree = SDKROOT; };
+		1B71201E0F64751600B1A9CA /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTMBase64.h; path = Sources/GTMBase64.h; sourceTree = "<group>"; };
+		1B71201F0F64751600B1A9CA /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTMBase64.m; path = Sources/GTMBase64.m; sourceTree = "<group>"; };
+		1B7120220F64754800B1A9CA /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTMDefines.h; path = Sources/GTMDefines.h; sourceTree = "<group>"; };
 		1BA5F6CF0F3DF05C00D70A22 /* libtidy.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtidy.a; path = "src-external/tidy/libtidy.a"; sourceTree = "<group>"; };
 		1BA5F7810F3E376200D70A22 /* libtidy.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libtidy.dylib; path = usr/lib/libtidy.dylib; sourceTree = SDKROOT; };
 		1BA5F7AA0F3E4B2A00D70A22 /* XmlEncodingSniffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XmlEncodingSniffer.h; path = Sources/XmlEncodingSniffer.h; sourceTree = "<group>"; };
@@ -184,6 +188,7 @@
 				1BA5F7D70F3E4E0200D70A22 /* Test_XmlEncodingSniffer-Info.plist */,
 				1BA5F95D0F3EF0A400D70A22 /* Test_XmlDataFormatter-Info.plist */,
 				1BAAD1780F52CD3200E77991 /* distribution.sh */,
+				1B7120170F64735A00B1A9CA /* libcrypto.0.9.7.dylib */,
 			);
 			name = XMLWebKitPlugin;
 			sourceTree = "<group>";
@@ -254,6 +259,9 @@
 				1BA5F9300F3EEF8300D70A22 /* XmlDataFormatterTidy.m */,
 				1B6772830F5BE66B00F90C87 /* XmlDataFormatter.h */,
 				1B6772840F5BE66B00F90C87 /* XmlDataFormatter.m */,
+				1B7120220F64754800B1A9CA /* GTMDefines.h */,
+				1B71201E0F64751600B1A9CA /* GTMBase64.h */,
+				1B71201F0F64751600B1A9CA /* GTMBase64.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -261,7 +269,6 @@
 		32DBCF9F0370C38200C91783 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
-				1B711F5D0F64668100B1A9CA /* XML_VIEW_PLUGIN_USER_JS_START_LINE.h */,
 				32DBCF980370C29C00C91783 /* XMLWebKitPlugin_Prefix.pch */,
 			);
 			name = "Other Sources";
@@ -310,7 +317,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C027D11908A954E7001699E2 /* Build configuration list for PBXNativeTarget "XMLWebKitPlugin" */;
 			buildPhases = (
-				1B711F270F6463B600B1A9CA /* ShellScript */,
 				8D1AC9660486D14A00FE50C9 /* Resources */,
 				1B2183480F3F966800D8940E /* CopyFiles */,
 				8D1AC96A0486D14A00FE50C9 /* Sources */,
@@ -424,22 +430,6 @@
 			shellScript = "\nset -o errexit\n\nbash distribution.sh\n\n";
 			showEnvVarsInLog = 0;
 		};
-		1B711F270F6463B600B1A9CA /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 12;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Resources/xml-pretty-print.xslt",
-			);
-			outputPaths = (
-				"$(CONFIGURATION_BUILD_DIR)/include/XML_VIEW_PLUGIN_USER_JS_START_LINE.h",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# this script figures out the effective start line of the user-supplied JS\n# in the XSLT-generated HTML page. This line number is used to fix up\n# JS error line numbers for the user\n#\nmkdir -p \"$CONFIGURATION_BUILD_DIR/include\"\nSTARTLINE=$(echo '<root/>' | xsltproc Resources/xml-pretty-print.xslt - | cat -n | grep __XML_VIEW_PLUGIN_USER_JS_START_LINE__ | cut -f 1)\necho JS start line: $STARTLINE\necho \"#define XML_VIEW_PLUGIN_USER_JS_START_LINE $STARTLINE\" > \"$CONFIGURATION_BUILD_DIR/include\"/XML_VIEW_PLUGIN_USER_JS_START_LINE.h\n";
-			showEnvVarsInLog = 0;
-		};
 		1BA5F7D40F3E4E0200D70A22 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -498,6 +488,7 @@
 				1BA5F9310F3EEF8300D70A22 /* XmlDataFormatterTidy.m in Sources */,
 				1B6772820F5BE5C400F90C87 /* XmlDataFormatterXslt.m in Sources */,
 				1B6772850F5BE66B00F90C87 /* XmlDataFormatter.m in Sources */,
+				1B7120200F64751600B1A9CA /* GTMBase64.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -733,7 +724,7 @@
 				PRODUCT_NAME = "XML View Plugin";
 				PRODUCT_SHORTNAME = xmlviewplugin;
 				PRODUCT_VERSION = "$(PRODUCT_VERSION_BASE)-dev";
-				PRODUCT_VERSION_BASE = 1.6;
+				PRODUCT_VERSION_BASE = 1.7;
 				SDKROOT = macosx10.5;
 				WARNING_CFLAGS = "-Wall";
 				WRAPPER_EXTENSION = webplugin;
@@ -756,7 +747,7 @@
 				PRODUCT_NAME = "XML View Plugin";
 				PRODUCT_SHORTNAME = xmlviewplugin;
 				PRODUCT_VERSION = "$(PRODUCT_VERSION_BASE)";
-				PRODUCT_VERSION_BASE = 1.6;
+				PRODUCT_VERSION_BASE = 1.7;
 				SDKROOT = macosx10.5;
 				WARNING_CFLAGS = "-Wall";
 				WRAPPER_EXTENSION = webplugin;

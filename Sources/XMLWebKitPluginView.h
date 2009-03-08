@@ -9,7 +9,6 @@
 #import <Cocoa/Cocoa.h>
 #import "XMLWebKitPluginContentView.h"
 #import "Sparkle/Sparkle.h"
-#import "XML_VIEW_PLUGIN_USER_JS_START_LINE.h"
 
 #define PRETTY_PRINT_OPTION_RAW 1
 #define PRETTY_PRINT_OPTION_SIMPLE 2
