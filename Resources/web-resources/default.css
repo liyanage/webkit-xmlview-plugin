@@ -1,3 +1,5 @@
+
+
 body {
 	font-family: monospace;
 }
@@ -12,6 +14,7 @@ div.comment {
 div.xmlpi {
 	color: red;
 }
+
 
 /* This is a div around the markup for the child elements */
 div.mixedcontent {
@@ -41,11 +44,23 @@ span.namespace {
 
 /* tag span elements whose content is collapsed */
 span.tag.collapsed {
-	background-color: #11a;
+	background-color: #88e;
 	color: white !important;
-	-webkit-border-radius: 6px;
 }
 
+span.tag.open.collapsed {
+	-webkit-border-top-left-radius: 6px;
+	-webkit-border-bottom-left-radius: 6px;
+}
+
+span.tag.close.collapsed {
+	-webkit-border-top-right-radius: 6px;
+	-webkit-border-bottom-right-radius: 6px;
+}
+
+div.element {
+	margin: 0 0 2px 0;
+}
 
 /* hide attributes and namespace declaration for collapsed elements */
 span.tag.collapsed * {
