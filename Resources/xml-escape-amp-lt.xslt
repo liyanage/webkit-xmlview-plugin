@@ -4,6 +4,7 @@
 
 <xsl:output method="xml" version="1.0" encoding="utf-8" indent="no"/>
 
+
 <xsl:template match="@*|node()">
 	<xsl:copy>
 		<xsl:apply-templates select="@*|node()"/>
@@ -11,35 +12,34 @@
 </xsl:template>
 
 <xsl:template match="text()[contains(., '&amp;') or contains(., '&lt;')]">
-<xsl:variable name="amp_escaped">
-    <xsl:call-template name="replaceCharsInString">
-      <xsl:with-param name="stringIn" select="string(.)"/>
-      <xsl:with-param name="charsIn" select="'&amp;'"/>
-      <xsl:with-param name="charsOut" select="'&amp;amp;'"/>
-    </xsl:call-template>
-</xsl:variable>
-<xsl:call-template name="replaceCharsInString">
-  <xsl:with-param name="stringIn" select="$amp_escaped"/>
-  <xsl:with-param name="charsIn" select="'&lt;'"/>
-  <xsl:with-param name="charsOut" select="'&amp;lt;'"/>
+<xsl:call-template name="escape">
+	<xsl:with-param name="string" select="string(.)"/>
 </xsl:call-template>
 </xsl:template>
 
 <xsl:template match="@*[contains(string(.), '&amp;') or contains(string(.), '&lt;')]">
+<xsl:attribute name="{name()}" namespace="{namespace-uri()}">
+	<xsl:call-template name="escape">
+		<xsl:with-param name="string" select="string(.)"/>
+	</xsl:call-template>
+</xsl:attribute>
+</xsl:template>
+
+
+<xsl:template name="escape">
+<xsl:param name="string"/>
 <xsl:variable name="amp_escaped">
     <xsl:call-template name="replaceCharsInString">
-      <xsl:with-param name="stringIn" select="string(.)"/>
+      <xsl:with-param name="stringIn" select="$string"/>
       <xsl:with-param name="charsIn" select="'&amp;'"/>
       <xsl:with-param name="charsOut" select="'&amp;amp;'"/>
     </xsl:call-template>
 </xsl:variable>
-<xsl:attribute name="{name()}" namespace="{namespace-uri()}">
 <xsl:call-template name="replaceCharsInString">
   <xsl:with-param name="stringIn" select="$amp_escaped"/>
   <xsl:with-param name="charsIn" select="'&lt;'"/>
   <xsl:with-param name="charsOut" select="'&amp;lt;'"/>
 </xsl:call-template>
-</xsl:attribute>
 </xsl:template>
 
 
