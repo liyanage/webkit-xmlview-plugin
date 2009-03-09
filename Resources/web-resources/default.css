@@ -59,7 +59,7 @@ span.tag.close.collapsed {
 }
 
 div.element {
-	margin: 0 0 2px 0;
+	margin: 1px 0 2px 0;
 }
 
 /* hide attributes and namespace declaration for collapsed elements */
