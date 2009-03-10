@@ -52,16 +52,15 @@ echo scp "'$HOME/git/entropy/$PRODUCT_SHORTNAME/build/Release/$ARCHIVE_FILENAME'
 
 echo scp "'$HOME/git/entropy/$PRODUCT_SHORTNAME/Resources/release-notes.html'" www.entropy.ch:web/software/macosx/$PRODUCT_SHORTNAME/release-notes.html
 echo scp "'$HOME/git/entropy/$PRODUCT_SHORTNAME/Resources/appcast.xml'" www.entropy.ch:web/software/macosx/$PRODUCT_SHORTNAME/appcast.xml
-
+echo
 echo git commit -a -m "'version $VERSION'"
-echo git tag -a "'v$VERSION'"
+echo git tag -a "'v$VERSION'" -m "'version $VERSION'"
 echo git push --all
 echo git push --tags
 echo git push --all github
 echo git push --tags github
-
+echo
 echo git archive --format=zip --prefix="'$PRODUCT_SHORTNAME-src/'" HEAD \> "'$BUILT_PRODUCTS_DIR/$PRODUCT_SHORTNAME-src.zip'"
-
 echo scp "'$BUILT_PRODUCTS_DIR/$PRODUCT_SHORTNAME-src.zip'" www2.entropy.ch:download/
 
 
