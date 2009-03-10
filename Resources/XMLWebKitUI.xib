@@ -8,7 +8,7 @@
 		<string key="IBDocument.HIToolboxVersion">353.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="88"/>
+			<integer value="70"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -255,6 +255,7 @@
 											</object>
 											<string key="NSFrameSize">{609, 433}</string>
 											<reference key="NSSuperview" ref="222131742"/>
+											<reference key="NSNextKeyView"/>
 											<string key="FrameName"/>
 											<string key="GroupName"/>
 											<object class="WebPreferences" key="Preferences">
@@ -585,7 +586,7 @@
 										<object class="NSTextView" id="8863072">
 											<reference key="NSNextResponder" ref="216993652"/>
 											<int key="NSvFlags">2322</int>
-											<string key="NSFrameSize">{253, 190}</string>
+											<string key="NSFrameSize">{253, 186}</string>
 											<reference key="NSSuperview" ref="216993652"/>
 											<object class="NSTextContainer" key="NSTextContainer" id="534867599">
 												<object class="NSLayoutManager" key="NSLayoutManager">
@@ -796,11 +797,7 @@ bGJveCBmb3IgTWFjA</bytes>
 																</object>
 																<object class="NSMutableArray" key="dict.values">
 																	<bool key="EncodedWithXMLCoder">YES</bool>
-																	<object class="NSFont" id="210272190">
-																		<string key="NSName">Helvetica</string>
-																		<double key="NSSize">1.200000e+01</double>
-																		<int key="NSfFlags">16</int>
-																	</object>
+																	<reference ref="24"/>
 																	<object class="NSParagraphStyle">
 																		<int key="NSAlignment">2</int>
 																		<object class="NSArray" key="NSTabStops">
@@ -1035,7 +1032,45 @@ ZGdlX3NwYXJrbGUucG5nA</bytes>
 																</object>
 																<object class="NSMutableArray" key="dict.values">
 																	<bool key="EncodedWithXMLCoder">YES</bool>
-																	<reference ref="210272190"/>
+																	<object class="NSFont">
+																		<string key="NSName">LucidaGrande</string>
+																		<double key="NSSize">1.200000e+01</double>
+																		<int key="NSfFlags">16</int>
+																	</object>
+																	<object class="NSParagraphStyle">
+																		<int key="NSAlignment">2</int>
+																		<object class="NSArray" key="NSTabStops">
+																			<bool key="EncodedWithXMLCoder">YES</bool>
+																			<reference ref="915929760"/>
+																			<reference ref="752537043"/>
+																			<reference ref="323238322"/>
+																			<reference ref="436786242"/>
+																			<reference ref="671403439"/>
+																			<reference ref="126827497"/>
+																			<reference ref="241687266"/>
+																			<reference ref="51637669"/>
+																			<reference ref="361807817"/>
+																			<reference ref="226707852"/>
+																			<reference ref="599155003"/>
+																			<reference ref="199903267"/>
+																		</object>
+																	</object>
+																</object>
+															</object>
+															<object class="NSDictionary">
+																<bool key="EncodedWithXMLCoder">YES</bool>
+																<object class="NSMutableArray" key="dict.sortedKeys">
+																	<bool key="EncodedWithXMLCoder">YES</bool>
+																	<string>NSFont</string>
+																	<string>NSParagraphStyle</string>
+																</object>
+																<object class="NSMutableArray" key="dict.values">
+																	<bool key="EncodedWithXMLCoder">YES</bool>
+																	<object class="NSFont">
+																		<string key="NSName">Helvetica</string>
+																		<double key="NSSize">1.200000e+01</double>
+																		<int key="NSfFlags">16</int>
+																	</object>
 																	<reference ref="218000516"/>
 																</object>
 															</object>
@@ -1049,11 +1084,7 @@ ZGdlX3NwYXJrbGUucG5nA</bytes>
 																</object>
 																<object class="NSMutableArray" key="dict.values">
 																	<bool key="EncodedWithXMLCoder">YES</bool>
-																	<object class="NSFont">
-																		<string key="NSName">Helvetica</string>
-																		<double key="NSSize">1.000000e+01</double>
-																		<int key="NSfFlags">16</int>
-																	</object>
+																	<reference ref="24"/>
 																	<object class="NSURL">
 																		<nil key="NS.base"/>
 																		<string key="NS.relative">http://code.google.com/p/google-toolbox-for-mac/</string>
@@ -1080,7 +1111,7 @@ ZGdlX3NwYXJrbGUucG5nA</bytes>
 															</object>
 														</object>
 														<object class="NSMutableData" key="NSAttributeInfo">
-															<bytes key="NS.bytes">CwAQAREAFAEUAgEBAQMBBAIDEgABBRYGA</bytes>
+															<bytes key="NS.bytes">CwAQAREAFAEUAgEBAQMBBAEFAQMSAAEGFgc</bytes>
 														</object>
 														<nil key="NSDelegate"/>
 													</object>
@@ -1388,7 +1419,7 @@ ZGdlX3NwYXJrbGUucG5nA</bytes>
 																						</object>
 																					</object>
 																				</object>
-																				<object class="NSDictionary" id="224142361">
+																				<object class="NSDictionary" id="878591734">
 																					<bool key="EncodedWithXMLCoder">YES</bool>
 																					<object class="NSMutableArray" key="dict.sortedKeys">
 																						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1496,6 +1527,7 @@ ZGdlX3NwYXJrbGUucG5nA</bytes>
 														</object>
 														<string key="NSFrame">{{1, 1}, {473, 285}}</string>
 														<reference key="NSSuperview" ref="911914828"/>
+														<reference key="NSNextKeyView" ref="579999044"/>
 														<reference key="NSDocView" ref="579999044"/>
 														<reference key="NSBGColor" ref="319543074"/>
 														<reference key="NSCursor" ref="837515101"/>
@@ -1524,6 +1556,7 @@ ZGdlX3NwYXJrbGUucG5nA</bytes>
 												</object>
 												<string key="NSFrame">{{17, 57}, {475, 287}}</string>
 												<reference key="NSSuperview" ref="268681563"/>
+												<reference key="NSNextKeyView" ref="573021453"/>
 												<int key="NSsFlags">562</int>
 												<reference key="NSVScroller" ref="195725281"/>
 												<reference key="NSHScroller" ref="640441962"/>
@@ -1608,7 +1641,7 @@ ZGdlX3NwYXJrbGUucG5nA</bytes>
 																			<object class="NSMutableArray" key="NSAttributes">
 																				<bool key="EncodedWithXMLCoder">YES</bool>
 																				<reference ref="77106098"/>
-																				<reference ref="224142361"/>
+																				<reference ref="878591734"/>
 																			</object>
 																			<object class="NSMutableData" key="NSAttributeInfo">
 																				<bytes key="NS.bytes">GQAEAQgADAEiAAcBhAQAA</bytes>

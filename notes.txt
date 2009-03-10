@@ -1,22 +1,14 @@
 
-Known Issues:
+Known Issues
 ------------
-  http://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?pageNumber=0&type=Purple+Software&id=289985022&userReviewId=6081223
-- XSLT view: < and & in text nodes and attribute values should be converted to &lt; and &amp;, but not on existing entities.
 - Fallback to Safari in some cases, e.g. Google Calendar
   - blacklist?
   - http://lists.apple.com/archives/webkitsdk-dev//2009/Feb/msg00005.html
 
-
-Todo:
+Todo
 ----
-- check if gzipped content is handled correctly.
 
 
-
-
-
-
-
-
-
+Test URLs
+---------
+http://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?pageNumber=0&type=Purple+Software&id=289985022&userReviewId=6081223

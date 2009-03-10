@@ -603,7 +603,7 @@ typedef enum {
 }
 
 
-// This one is undocumented, might break in the future
+// This one is undocumented, and might break in the future
 //
 // http://www.archivesat.com/A_discussion_list_for_developers_using_the_WebKit_SDK/thread371974.htm
 //
@@ -615,8 +615,8 @@ typedef enum {
 	NSTabView *prefsTabView = [[[prefsPanel contentView] subviews] objectAtIndex:0];
 	NSTabViewItem *jsTab = [prefsTabView tabViewItemAtIndex:1];
 	[prefsTabView selectTabViewItem:jsTab];
-	//we don't seem to get line numbers for JS exceptions
 	NSArray *paras = [[prefsJsTextView textStorage] paragraphs];
+	//we don't seem to get line numbers for JS exceptions
 	BOOL errorInUserJs = line >= 0 && line < [paras count];
 	NSString *msg = [NSString stringWithFormat:@"JavaScript error on line %@: %@", errorInUserJs ? [NSNumber numberWithInt:userJsDisplayLine] : @"(unknown)", [message valueForKey:@"message"]];
 	if (errorInUserJs) {

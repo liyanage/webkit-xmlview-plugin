@@ -11,6 +11,19 @@
 		<language>en</language>
 
 		<item>
+			<title>Version 1.7</title>
+			<sparkle:releaseNotesLink>http://www.entropy.ch/software/macosx/xmlviewplugin/release-notes.html#version-1.7</sparkle:releaseNotesLink>
+			<pubDate>Tue, 10 Mar 2009 23:37:53 +0100</pubDate>
+			<enclosure
+				url="http://www2.entropy.ch/download/xmlviewplugin-1.7.zip"
+				sparkle:version="1.7"
+				type="application/octet-stream"
+				length="1561011"
+				sparkle:dsaSignature="MCwCFFK8UC/8NUBQDt/o/pA4pJBKjhvFAhRstmOZ+iNL8g7GJPXqMdEfJXXjEQ=="
+			/>
+		</item>
+
+		<item>
 			<title>Version 1.6</title>
 			<sparkle:releaseNotesLink>http://www.entropy.ch/software/macosx/xmlviewplugin/release-notes.html#version-1.6</sparkle:releaseNotesLink>
 			<pubDate>Sun, 08 Mar 2009 15:29:54 +0100</pubDate>

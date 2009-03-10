@@ -13,17 +13,30 @@
 
 
 - (NSData *)prettyPrintedData {
+	NSXMLDocument *xsltResult = [self transformData:self.data];
+	if (!xsltResult) return nil;
+	return [xsltResult XMLData];
+}
 
+
+- (NSXMLDocument *)transformData:(NSData *)inputData {
 	NSError *error = nil;
-	NSXMLDocument *xmlDoc;
-	xmlDoc = [[[NSXMLDocument alloc] initWithData:self.data options:0 error:&error] autorelease];
+	NSXMLDocument *xmlDoc = [[[NSXMLDocument alloc] initWithData:inputData options:0 error:&error] autorelease];
 	if (error) {
 		[self storeError:error forStage:@"xml parse"];
 		return nil;
 	}
 
 	NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-	NSString *xsltPath = [bundle pathForResource:@"xml-pretty-print" ofType:@"xslt"];
+
+	NSString *xsltPath = [bundle pathForResource:@"xml-escape-amp-lt" ofType:@"xslt"];
+	xmlDoc = [xmlDoc objectByApplyingXSLTAtURL:[NSURL fileURLWithPath:xsltPath] arguments:nil error:&error];
+	if (error) {
+		[self storeError:error forStage:@"xslt transform"];
+		return nil;
+	}
+
+	xsltPath = [bundle pathForResource:@"xml-pretty-print" ofType:@"xslt"];
 	NSString *webResourcePath = [bundle pathForResource:@"web-resources" ofType:@""];
 	NSURL *webResourceUrl = [NSURL fileURLWithPath:webResourcePath];
 //	NSLog(@"xsltUrl: %@", [NSURL fileURLWithPath:xsltPath]);
@@ -41,22 +54,23 @@
 	];
 
 	
-	  
-	
-	NSXMLDocument *xsltResult = [xmlDoc objectByApplyingXSLTAtURL:[NSURL fileURLWithPath:xsltPath] arguments:xsltParameters error:&error];
+	xmlDoc = [xmlDoc objectByApplyingXSLTAtURL:[NSURL fileURLWithPath:xsltPath] arguments:xsltParameters error:&error];
 	if (error) {
 		[self storeError:error forStage:@"xslt transform"];
 		return nil;
 	}
 	
-	if (!xsltResult) {
+	if (!xmlDoc) {
 		self.errorMessage = @"Unable to run XSLT transformation";
 		NSLog(@"failed to pretty-print (%@): %@", @"xslt", self.errorMessage);
 		return nil;
 	}
-
-	return [xsltResult XMLData];
+	
+	return xmlDoc;
 }
+
+
+
 
 - (NSString *)prettyPrintedString {
 	NSData *resultData = [self prettyPrintedData];
