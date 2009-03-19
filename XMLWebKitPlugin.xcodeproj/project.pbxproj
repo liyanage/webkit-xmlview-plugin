@@ -728,7 +728,7 @@
 				PRODUCT_NAME = "XML View Plugin";
 				PRODUCT_SHORTNAME = xmlviewplugin;
 				PRODUCT_VERSION = "$(PRODUCT_VERSION_BASE)-dev";
-				PRODUCT_VERSION_BASE = 1.7;
+				PRODUCT_VERSION_BASE = 1.8;
 				SDKROOT = macosx10.5;
 				WARNING_CFLAGS = "-Wall";
 				WRAPPER_EXTENSION = webplugin;
@@ -751,7 +751,7 @@
 				PRODUCT_NAME = "XML View Plugin";
 				PRODUCT_SHORTNAME = xmlviewplugin;
 				PRODUCT_VERSION = "$(PRODUCT_VERSION_BASE)";
-				PRODUCT_VERSION_BASE = 1.7;
+				PRODUCT_VERSION_BASE = 1.8;
 				SDKROOT = macosx10.5;
 				WARNING_CFLAGS = "-Wall";
 				WRAPPER_EXTENSION = webplugin;
