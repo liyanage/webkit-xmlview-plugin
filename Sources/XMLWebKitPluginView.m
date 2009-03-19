@@ -90,6 +90,7 @@ typedef enum {
 
 - (void)setupUpdateCheck {
 	self.softwareUpdater = [SUUpdater updaterForBundle:[NSBundle bundleForClass:[self class]]];
+	[softwareUpdater setDelegate:self];
 	[softwareUpdater resetUpdateCycle];
 }
 
@@ -628,6 +629,14 @@ typedef enum {
 	NSBeginAlertSheet(@"JavaScript Error", nil, nil, nil, prefsPanel, nil, nil, nil, nil, msg);
 }
 
+
+#pragma mark Sparkle delegate methods
+
+// http://github.com/0xced/clicktoflash/commit/2ae9b228aa1afad0c27b4c2c2445e4cf053200e1
+// http://github.com/0xced/clicktoflash/commit/d86d0f57cd4fc94d9dfa1aa6319e612cc0be1e01
+- (NSString *)pathToRelaunchForUpdater:(SUUpdater *)updater {
+    return [[NSBundle mainBundle] bundlePath];
+}
 
 
 @end

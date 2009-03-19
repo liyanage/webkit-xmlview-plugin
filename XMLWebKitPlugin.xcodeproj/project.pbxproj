@@ -418,7 +418,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -e\ncd \"$PROJECT_TEMP_DIR\"\n[ -d sparkle ] || /opt/local/bin/bzr branch -r 337 lp:sparkle\ncd sparkle\nxcodebuild -target Sparkle -configuration 'Release (GC dual-mode; 10.5-only)'\nrm -rf \"$BUILD_ROOT/Sparkle.framework\"\ncp -pR \"build/Release (GC dual-mode; 10.5-only)/Sparkle.framework\" \"$BUILD_ROOT/\"";
+			shellScript = "set -e\ncd \"$PROJECT_TEMP_DIR\"\n[ -d sparkle ] || /opt/local/bin/bzr branch -r 340 lp:sparkle\ncd sparkle\nxcodebuild -target Sparkle -configuration 'Release (GC dual-mode; 10.5-only)'\nrm -rf \"$BUILD_ROOT/Sparkle.framework\"\ncp -pR \"build/Release (GC dual-mode; 10.5-only)/Sparkle.framework\" \"$BUILD_ROOT/\"";
 		};
 		1B62459E0F40BAA900B3F002 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
