@@ -148,7 +148,8 @@ typedef enum {
 }
 
 - (NSString *)stringForWebResource:(NSString *)resource ofType:(NSString *)type {
-	return [NSString stringWithContentsOfURL:[self fileUrlForWebResource:resource ofType:type]];
+	NSStringEncoding enc;
+	return [NSString stringWithContentsOfURL:[self fileUrlForWebResource:resource ofType:type] usedEncoding:&enc error:nil];
 }
 
 
@@ -440,6 +441,10 @@ typedef enum {
 
 	self.documentURL = [NSURL URLWithString:[arguments valueForKeyPath:@"WebPlugInAttributesKey.src"]];
 
+#ifdef CONFIGURATION_DEBUG
+	NSLog(@"XML View Plugin: URL: %@", self.documentURL);
+#endif
+
 	id pluginShouldLoad = [arguments objectForKey:@"WebPlugInShouldLoadMainResourceKey"];
 	if (![pluginShouldLoad boolValue]) {
 		// if the key is present and tells us not to load the data, this
@@ -619,11 +624,11 @@ typedef enum {
 	NSArray *paras = [[prefsJsTextView textStorage] paragraphs];
 	//we don't seem to get line numbers for JS exceptions
 	BOOL errorInUserJs = line >= 0 && line < [paras count];
-	NSString *msg = [NSString stringWithFormat:@"JavaScript error on line %@: %@", errorInUserJs ? [NSNumber numberWithInt:userJsDisplayLine] : @"(unknown)", [message valueForKey:@"message"]];
+	NSString *msg = [NSString stringWithFormat:@"JavaScript error on line %@: %@", errorInUserJs ? (id)[NSNumber numberWithInt:userJsDisplayLine] : (id)@"(unknown)", [message valueForKey:@"message"]];
 	if (errorInUserJs) {
 		unsigned int i, rangeStart = 0;
-		for (i = 0; i < line; i++) rangeStart += [[paras objectAtIndex:i] length];
-		[prefsJsTextView setSelectedRange:NSMakeRange(rangeStart, [[paras objectAtIndex:i] length])];
+		for (i = 0; i < line; i++) rangeStart += [(NSString *)[paras objectAtIndex:i] length];
+		[prefsJsTextView setSelectedRange:NSMakeRange(rangeStart, [(NSString *)[paras objectAtIndex:i] length])];
 	}
 	[prefsPanel makeFirstResponder:prefsJsTextView];
 	NSBeginAlertSheet(@"JavaScript Error", nil, nil, nil, prefsPanel, nil, nil, nil, nil, msg);
