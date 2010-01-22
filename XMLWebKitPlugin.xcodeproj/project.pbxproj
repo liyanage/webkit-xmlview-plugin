@@ -193,7 +193,7 @@
 				1B21836C0F3F96CF00D8940E /* notes.txt */,
 				1B6246330F40F73000B3F002 /* release-notes.html */,
 				1B6246340F40F73000B3F002 /* appcast.xml */,
-				21A64DF9110A5B8F005B517F /* JSON */,
+				21A64DF9110A5B8F005B517F /* JSON-framework */,
 				32DBCF9E0370C38000C91783 /* Classes */,
 				1BA5F8040F3E502100D70A22 /* Test */,
 				32DBCF9F0370C38200C91783 /* Other Sources */,
@@ -250,7 +250,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		21A64DF9110A5B8F005B517F /* JSON */ = {
+		21A64DF9110A5B8F005B517F /* JSON-framework */ = {
 			isa = PBXGroup;
 			children = (
 				21A64DFA110A5B8F005B517F /* JSON.h */,
@@ -267,7 +267,15 @@
 				21A64E05110A5B8F005B517F /* SBJsonWriter.h */,
 				21A64E06110A5B8F005B517F /* SBJsonWriter.m */,
 			);
+			name = "JSON-framework";
 			path = JSON;
+			sourceTree = "<group>";
+		};
+		21A64E0A110A5BD5005B517F /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = JSON;
 			sourceTree = "<group>";
 		};
 		2E58F364FFB232C311CA0CBA /* Frameworks */ = {
@@ -284,6 +292,7 @@
 		32DBCF9E0370C38000C91783 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				21A64E0A110A5BD5005B517F /* JSON */,
 				1B39A2AD0F3C8F5100A3E427 /* XMLWebKitPluginContentView.h */,
 				1B39A2AC0F3C8F5100A3E427 /* XMLWebKitPluginContentView.m */,
 				0259C57AFE90428111CA0C5A /* XMLWebKitPluginView.h */,
