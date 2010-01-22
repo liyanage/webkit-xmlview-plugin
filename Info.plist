@@ -29,9 +29,18 @@
 	<key>WebPluginName</key>
 	<string>XML View Plugin ${PRODUCT_VERSION}</string>
 	<key>WebPluginDescription</key>
-	<string>Displays raw XML data in a useful way. For more information, visit the &lt;a href="http://www.entropy.ch/software/macosx/xmlviewplugin/">plugin’s website&lt;/a></string>
+	<string>Displays raw XML data in a useful way. For more information, visit the &lt;a href=&quot;http://www.entropy.ch/software/macosx/xmlviewplugin/&quot;&gt;plugin’s website&lt;/a&gt;</string>
 	<key>WebPluginMIMETypes</key>
 	<dict>
+		<key>application/json</key>
+		<dict>
+			<key>WebPluginExtensions</key>
+			<array>
+				<string>json</string>
+			</array>
+			<key>WebPluginTypeDescription</key>
+			<string>JSON data</string>
+		</dict>
 		<key>application/xml</key>
 		<dict>
 			<key>WebPluginExtensions</key>
