@@ -19,5 +19,10 @@ function toggleElementCollapse(e, deep) {
 	a.each(function (e) {
 		e.childElements().find(function (x) {return x.match('.mixedcontent')}).toggle();
 		e.childElements().findAll(function (x) {return x.match('span.tag')}).invoke('toggleClassName', 'collapsed');
+        if (e.nodeName == 'SPAN') {
+           e.parentNode.toggleClassName('clear');           
+           e.adjacent('.nomixed')[0].toggleClassName('block');
+           e.toggleClassName('block');
+        }
 	});
 }

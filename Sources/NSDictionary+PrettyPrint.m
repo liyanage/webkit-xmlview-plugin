@@ -23,6 +23,7 @@
     
     NSXMLElement *content = [NSXMLNode elementWithName:@"div"];
     [content addAttribute:[NSXMLNode attributeWithName:@"class" stringValue:@"mixedcontent"]];
+    [content addAttribute:[NSXMLNode attributeWithName:@"style" stringValue:@""]];
     
     for (id key in self) {
         NSXMLElement *element = [NSXMLNode elementWithName:@"div"];
@@ -33,7 +34,7 @@
         [tag addChild:[NSXMLNode textWithStringValue:[[NSString alloc] initWithFormat:@"%@: ", key]]];
          
         [element addChild: tag];
-        [tag addChild: [[self valueForKey:key] prettyPrintMe]];
+        [element addChild: [[self valueForKey:key] prettyPrintMe]];
          
         [content addChild: element];
     }

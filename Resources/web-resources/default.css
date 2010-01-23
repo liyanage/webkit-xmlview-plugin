@@ -42,6 +42,15 @@ span.namespace {
 	color: #c55;
 }
 
+span.block {
+    display: block;
+    float: left;
+}
+
+div.clear {
+    overflow: hidden;
+}
+
 /* tag span elements whose content is collapsed */
 span.tag.collapsed {
 	background-color: #88e;
