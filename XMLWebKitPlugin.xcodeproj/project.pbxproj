@@ -374,6 +374,7 @@
 				8D1AC96A0486D14A00FE50C9 /* Sources */,
 				8D1AC96E0486D14A00FE50C9 /* Frameworks */,
 				1B3DA3F20F5D9F04009F2BD8 /* ShellScript */,
+				21A64E2C110A6140005B517F /* Install */,
 			);
 			buildRules = (
 			);
@@ -508,6 +509,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+		21A64E2C110A6140005B517F /* Install */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Install;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# clean up any previous products/symbolic links in the Internet Plug-Ins folder\nif [ -a \"${USER_LIBRARY_DIR}/Internet Plug-Ins/${FULL_PRODUCT_NAME}\" ]; then\n  rm -Rf \"${USER_LIBRARY_DIR}/Internet Plug-Ins/${FULL_PRODUCT_NAME}\"\nfi\n\n# Depending on the build configuration, either copy or link to the most recent product\nif [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n  # if we're debugging, add a symbolic link to the plug-in\n  ln -sf \"${TARGET_BUILD_DIR}/${FULL_PRODUCT_NAME}\" \\\n    \"${USER_LIBRARY_DIR}/Internet Plug-Ins/${FULL_PRODUCT_NAME}\"\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -732,7 +747,7 @@
 					"$(inherited)",
 					"\"$(BUILD_ROOT)\"",
 				);
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				HEADER_SEARCH_PATHS = "";
 				LIBRARY_SEARCH_PATHS = (
