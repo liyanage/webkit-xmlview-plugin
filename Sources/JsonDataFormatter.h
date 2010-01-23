@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "XmlDataFormatter.h"
+#import "NSDictionary+PrettyPrint.h"
 
 
 @interface JsonDataFormatter : XmlDataFormatter {

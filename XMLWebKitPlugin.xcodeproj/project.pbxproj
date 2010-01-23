@@ -57,6 +57,14 @@
 		1BA5F9640F3EF0D100D70A22 /* XmlDataFormatterTidy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BA5F9300F3EEF8300D70A22 /* XmlDataFormatterTidy.m */; };
 		1BA5F9E90F3F010D00D70A22 /* XmlEncodingSniffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BA5F7AB0F3E4B2A00D70A22 /* XmlEncodingSniffer.m */; };
 		1BA5FB400F3F222700D70A22 /* libtidy.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BA5F7810F3E376200D70A22 /* libtidy.dylib */; };
+		21A64E69110A8AC1005B517F /* NSDictionary+PrettyPrint.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A64E68110A8AC1005B517F /* NSDictionary+PrettyPrint.m */; };
+		21A64E6A110A8AE9005B517F /* JsonDataFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A64E11110A5C49005B517F /* JsonDataFormatter.m */; };
+		21A64E73110A8B43005B517F /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A64DFC110A5B8F005B517F /* NSObject+SBJSON.m */; };
+		21A64E74110A8B46005B517F /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A64DFE110A5B8F005B517F /* NSString+SBJSON.m */; };
+		21A64E75110A8B49005B517F /* SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A64E00110A5B8F005B517F /* SBJSON.m */; };
+		21A64E76110A8B4E005B517F /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A64E02110A5B8F005B517F /* SBJsonBase.m */; };
+		21A64E77110A8B52005B517F /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A64E04110A5B8F005B517F /* SBJsonParser.m */; };
+		21A64E78110A8B56005B517F /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A64E06110A5B8F005B517F /* SBJsonWriter.m */; };
 		224339580A6F05F3000348D4 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 224339570A6F05F3000348D4 /* WebKit.framework */; };
 		8D1AC96B0486D14A00FE50C9 /* XMLWebKitPluginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0259C576FE90428111CA0C5A /* XMLWebKitPluginView.m */; settings = {ATTRIBUTES = (); }; };
 		8D1AC9700486D14A00FE50C9 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD92D38A0106425D02CA0E72 /* Cocoa.framework */; };
@@ -152,6 +160,8 @@
 		21A64E10110A5C49005B517F /* JsonDataFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JsonDataFormatter.h; path = Sources/JsonDataFormatter.h; sourceTree = "<group>"; };
 		21A64E11110A5C49005B517F /* JsonDataFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JsonDataFormatter.m; path = Sources/JsonDataFormatter.m; sourceTree = "<group>"; };
 		21A64E12110A5C73005B517F /* xml-to-html.xslt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "xml-to-html.xslt"; path = "Resources/xml-to-html.xslt"; sourceTree = "<group>"; };
+		21A64E67110A8AC1005B517F /* NSDictionary+PrettyPrint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+PrettyPrint.h"; path = "Sources/NSDictionary+PrettyPrint.h"; sourceTree = "<group>"; };
+		21A64E68110A8AC1005B517F /* NSDictionary+PrettyPrint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+PrettyPrint.m"; path = "Sources/NSDictionary+PrettyPrint.m"; sourceTree = "<group>"; };
 		224339570A6F05F3000348D4 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = /System/Library/Frameworks/WebKit.framework; sourceTree = "<absolute>"; };
 		32DBCF980370C29C00C91783 /* XMLWebKitPlugin_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLWebKitPlugin_Prefix.pch; sourceTree = "<group>"; };
 		8D1AC9730486D14A00FE50C9 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -278,6 +288,8 @@
 		21A64E0A110A5BD5005B517F /* JSON */ = {
 			isa = PBXGroup;
 			children = (
+				21A64E67110A8AC1005B517F /* NSDictionary+PrettyPrint.h */,
+				21A64E68110A8AC1005B517F /* NSDictionary+PrettyPrint.m */,
 				21A64E10110A5C49005B517F /* JsonDataFormatter.h */,
 				21A64E11110A5C49005B517F /* JsonDataFormatter.m */,
 			);
@@ -557,6 +569,14 @@
 				1B6772820F5BE5C400F90C87 /* XmlDataFormatterXslt.m in Sources */,
 				1B6772850F5BE66B00F90C87 /* XmlDataFormatter.m in Sources */,
 				1B7120200F64751600B1A9CA /* GTMBase64.m in Sources */,
+				21A64E69110A8AC1005B517F /* NSDictionary+PrettyPrint.m in Sources */,
+				21A64E6A110A8AE9005B517F /* JsonDataFormatter.m in Sources */,
+				21A64E73110A8B43005B517F /* NSObject+SBJSON.m in Sources */,
+				21A64E74110A8B46005B517F /* NSString+SBJSON.m in Sources */,
+				21A64E75110A8B49005B517F /* SBJSON.m in Sources */,
+				21A64E76110A8B4E005B517F /* SBJsonBase.m in Sources */,
+				21A64E77110A8B52005B517F /* SBJsonParser.m in Sources */,
+				21A64E78110A8B56005B517F /* SBJsonWriter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

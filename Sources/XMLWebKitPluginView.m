@@ -9,6 +9,7 @@
 #import "XMLWebKitPluginView.h"
 #import "XmlDataFormatterTidy.h";
 #import "XmlDataFormatterXslt.h";
+#import "JsonDataFormatter.h";
 
 @implementation XMLWebKitPluginView
 
@@ -25,6 +26,7 @@
 @synthesize prefsPanel;
 @synthesize aboutPanelVersionLabel;
 @synthesize documentURL;
+@synthesize documentType;
 @synthesize documentData;
 @synthesize parentFrame;
 @synthesize domElement;
@@ -241,15 +243,24 @@ typedef enum {
 
 	XmlDataFormatter *xdf;
 	NSData *result = nil;
-	if (prettyPrintOption == PRETTY_PRINT_OPTION_FANCY) {
-		xdf = [[[XmlDataFormatterXslt alloc] initWithData:documentData] autorelease];
-		xdf.prettyPrint = YES;
-		result = [(XmlDataFormatterXslt *)xdf prettyPrintedData];
-	} else {
-		xdf = [[[XmlDataFormatterTidy alloc] initWithData:documentData] autorelease];
-		xdf.prettyPrint = prettyPrintOption == PRETTY_PRINT_OPTION_SIMPLE;
-	}
-
+    if ([documentType isEqual:@"application/json"]) {
+        if (prettyPrintOption == PRETTY_PRINT_OPTION_FANCY) {
+            xdf = [[[JsonDataFormatter alloc] initWithData:documentData] autorelease];
+            result = [(JsonDataFormatter *)xdf prettyPrintedData];
+        } else {
+            xdf = [[[JsonDataFormatter alloc] initWithData:documentData] autorelease];
+            xdf.prettyPrint = prettyPrintOption == PRETTY_PRINT_OPTION_SIMPLE;
+        }
+    } else {
+        if (prettyPrintOption == PRETTY_PRINT_OPTION_FANCY) {
+            xdf = [[[XmlDataFormatterXslt alloc] initWithData:documentData] autorelease];
+            xdf.prettyPrint = YES;
+            result = [(XmlDataFormatterXslt *)xdf prettyPrintedData];
+        } else {
+            xdf = [[[XmlDataFormatterTidy alloc] initWithData:documentData] autorelease];
+            xdf.prettyPrint = prettyPrintOption == PRETTY_PRINT_OPTION_SIMPLE;
+        }
+    }    
 	
 	if (result) {
 		[[webView mainFrame] loadData:result MIMEType:@"text/html" textEncodingName:@"utf-8" baseURL:nil];
@@ -439,6 +450,7 @@ typedef enum {
 - (void)loadDataWithArguments:(NSDictionary *)arguments {
 
 	self.documentURL = [NSURL URLWithString:[arguments valueForKeyPath:@"WebPlugInAttributesKey.src"]];
+    self.documentType = [arguments valueForKeyPath:@"WebPlugInAttributesKey.type"];
 
 	id pluginShouldLoad = [arguments objectForKey:@"WebPlugInShouldLoadMainResourceKey"];
 	if (![pluginShouldLoad boolValue]) {

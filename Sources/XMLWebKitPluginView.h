@@ -30,6 +30,7 @@
 	IBOutlet NSMenu *actionMenu;
 	IBOutlet NSTextView *prefsJsTextView;
 	NSMutableData *documentData;
+  	NSString *documentType;
 	NSURL *documentURL;
 	NSSavePanel *savePanel;
 	NSXMLDocument *xmlDocument;
@@ -55,6 +56,7 @@
 @property(retain) IBOutlet NSWindow *prefsPanel;
 @property(retain) IBOutlet NSTextField *aboutPanelVersionLabel;
 @property(retain) NSURL *documentURL;
+@property(retain) NSString *documentType;
 @property(retain) NSMutableData *documentData;
 @property(retain) WebFrame *parentFrame;
 @property(retain) DOMHTMLElement *domElement;
