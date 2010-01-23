@@ -69,6 +69,8 @@
 		21A64EA2110A8F34005B517F /* NSDecimalNumber+PrettyPrint.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A64E9E110A8F34005B517F /* NSDecimalNumber+PrettyPrint.m */; };
 		21A64EA3110A8F34005B517F /* NSString+PrettyPrint.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A64EA0110A8F34005B517F /* NSString+PrettyPrint.m */; };
 		21A64ED7110A92FF005B517F /* xml-to-html.xslt in Resources */ = {isa = PBXBuildFile; fileRef = 21A64E12110A5C73005B517F /* xml-to-html.xslt */; };
+		21A64F5D110AB824005B517F /* NSNull+PrettyPrint.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A64F5C110AB824005B517F /* NSNull+PrettyPrint.m */; };
+		21A64F88110ABBCF005B517F /* NSNumber+PrettyPrint.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A64F87110ABBCF005B517F /* NSNumber+PrettyPrint.m */; };
 		224339580A6F05F3000348D4 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 224339570A6F05F3000348D4 /* WebKit.framework */; };
 		8D1AC96B0486D14A00FE50C9 /* XMLWebKitPluginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0259C576FE90428111CA0C5A /* XMLWebKitPluginView.m */; settings = {ATTRIBUTES = (); }; };
 		8D1AC9700486D14A00FE50C9 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD92D38A0106425D02CA0E72 /* Cocoa.framework */; };
@@ -172,6 +174,10 @@
 		21A64E9E110A8F34005B517F /* NSDecimalNumber+PrettyPrint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDecimalNumber+PrettyPrint.m"; path = "Sources/NSDecimalNumber+PrettyPrint.m"; sourceTree = "<group>"; };
 		21A64E9F110A8F34005B517F /* NSString+PrettyPrint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+PrettyPrint.h"; path = "Sources/NSString+PrettyPrint.h"; sourceTree = "<group>"; };
 		21A64EA0110A8F34005B517F /* NSString+PrettyPrint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+PrettyPrint.m"; path = "Sources/NSString+PrettyPrint.m"; sourceTree = "<group>"; };
+		21A64F5B110AB824005B517F /* NSNull+PrettyPrint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSNull+PrettyPrint.h"; path = "Sources/NSNull+PrettyPrint.h"; sourceTree = "<group>"; };
+		21A64F5C110AB824005B517F /* NSNull+PrettyPrint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSNull+PrettyPrint.m"; path = "Sources/NSNull+PrettyPrint.m"; sourceTree = "<group>"; };
+		21A64F86110ABBCF005B517F /* NSNumber+PrettyPrint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSNumber+PrettyPrint.h"; path = "Sources/NSNumber+PrettyPrint.h"; sourceTree = "<group>"; };
+		21A64F87110ABBCF005B517F /* NSNumber+PrettyPrint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSNumber+PrettyPrint.m"; path = "Sources/NSNumber+PrettyPrint.m"; sourceTree = "<group>"; };
 		224339570A6F05F3000348D4 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = /System/Library/Frameworks/WebKit.framework; sourceTree = "<absolute>"; };
 		32DBCF980370C29C00C91783 /* XMLWebKitPlugin_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLWebKitPlugin_Prefix.pch; sourceTree = "<group>"; };
 		8D1AC9730486D14A00FE50C9 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -308,6 +314,10 @@
 				21A64E68110A8AC1005B517F /* NSDictionary+PrettyPrint.m */,
 				21A64E10110A5C49005B517F /* JsonDataFormatter.h */,
 				21A64E11110A5C49005B517F /* JsonDataFormatter.m */,
+				21A64F5B110AB824005B517F /* NSNull+PrettyPrint.h */,
+				21A64F5C110AB824005B517F /* NSNull+PrettyPrint.m */,
+				21A64F86110ABBCF005B517F /* NSNumber+PrettyPrint.h */,
+				21A64F87110ABBCF005B517F /* NSNumber+PrettyPrint.m */,
 			);
 			name = JSON;
 			sourceTree = "<group>";
@@ -597,6 +607,8 @@
 				21A64EA1110A8F34005B517F /* NSArray+PrettyPrint.m in Sources */,
 				21A64EA2110A8F34005B517F /* NSDecimalNumber+PrettyPrint.m in Sources */,
 				21A64EA3110A8F34005B517F /* NSString+PrettyPrint.m in Sources */,
+				21A64F5D110AB824005B517F /* NSNull+PrettyPrint.m in Sources */,
+				21A64F88110ABBCF005B517F /* NSNumber+PrettyPrint.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
