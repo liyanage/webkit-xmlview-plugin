@@ -12,12 +12,16 @@
 @implementation NSNumber (PrettyPrint)
 
 - (NSXMLNode *) prettyPrintMe {
-    NSString *boolValue = [NSString stringWithString:@"false"];
+    NSString *boolValue = @"false";
     if ([self boolValue]) {
-        boolValue = [NSString stringWithString:@"true"];
+        boolValue = @"true";
     }
     
-    return [NSXMLNode textWithStringValue: boolValue];
+    NSXMLElement *root = [NSXMLNode elementWithName:@"span"];
+    [root addAttribute:[NSXMLNode attributeWithName:@"class" stringValue:@"boolean"]];
+    [root addChild:[NSXMLNode textWithStringValue: boolValue]];
+    
+    return root;
 }
 
 @end

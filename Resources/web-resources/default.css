@@ -42,15 +42,6 @@ span.namespace {
 	color: #c55;
 }
 
-span.block {
-    display: block;
-    float: left;
-}
-
-div.clear {
-    overflow: hidden;
-}
-
 /* tag span elements whose content is collapsed */
 span.tag.collapsed {
 	background-color: #88e;
@@ -76,3 +67,28 @@ span.tag.collapsed * {
 	display: none;
 }
 
+/* JSON Format tweaks */
+
+
+.nomixed > div.collapsed {
+    display: inline-block;
+}
+.nomixed > .mixed {
+    display: inline;
+}
+
+.append-comma:after {
+    content:",";
+}
+
+/* JSON data types */
+
+.key {
+    font-weight: bold;
+}
+.string {
+    color: #438512;
+}
+.boolean, .null, .number {
+    color: #BF1515;
+}
