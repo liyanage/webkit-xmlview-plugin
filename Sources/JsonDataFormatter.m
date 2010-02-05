@@ -35,6 +35,7 @@
     id json = [parser objectWithString:json_string error:nil];
     
     NSXMLElement *content = (NSXMLElement *)[json prettyPrintMe];
+    [content addAttribute:[NSXMLNode attributeWithName:@"id" stringValue:@"json"]];
      
     NSXMLDocument *xmlDoc = [NSXMLNode documentWithRootElement: content];
     
