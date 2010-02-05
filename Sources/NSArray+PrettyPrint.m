@@ -13,7 +13,7 @@
 
 
 - (NSXMLNode *) prettyPrintMe {
-    NSXMLElement *result = [NSXMLNode elementWithName:@"span"];
+    NSXMLElement *result = [NSXMLNode elementWithName:@"div"];
     [result addAttribute:[NSXMLNode attributeWithName:@"class" stringValue:@"element mixed"]];
     
     NSXMLElement *open = [NSXMLNode elementWithName:@"span"];
@@ -25,19 +25,19 @@
     NSXMLElement *content = [NSXMLNode elementWithName:@"div"];
     [content addAttribute:[NSXMLNode attributeWithName:@"class" stringValue:@"mixedcontent"]];
     
+    int i = 1;
     for (id jsonElement in self) {
-        NSXMLElement *element = [NSXMLNode elementWithName:@"div"];
-        [element addAttribute:[NSXMLNode attributeWithName:@"class" stringValue:@"element nomixed"]];
+        NSXMLElement *element = [jsonElement prettyPrintMe];
         
-//        NSXMLElement *tag = [NSXMLNode elementWithName:@"span"];
-//        [tag addAttribute:[NSXMLNode attributeWithName:@"class" stringValue:@"element nomixed"]];
-//        [tag addChild:[NSXMLNode textWithStringValue:[[NSString alloc] initWithFormat:@"%@: ", key]]];
-//        
-//        [element addChild: tag];
-//        [tag addChild: [[self valueForKey:key] prettyPrintMe]];
+        NSString *classes = [[element attributeForName:@"class"] stringValue];
+        if (i < [self count]) {
+            classes = [classes stringByAppendingString:@" append-comma"];
+        }
         
-        [element addChild: [jsonElement prettyPrintMe]];
+        [element addAttribute:[NSXMLNode attributeWithName:@"class" stringValue:classes]];
+        
         [content addChild: element];
+        i++;
     }
     
     [result addChild: content];

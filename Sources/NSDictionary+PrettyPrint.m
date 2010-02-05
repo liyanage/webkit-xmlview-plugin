@@ -12,7 +12,7 @@
 @implementation NSDictionary (PrettyPrint)
 
 - (NSXMLNode *) prettyPrintMe {
-    NSXMLElement *result = [NSXMLNode elementWithName:@"span"];
+    NSXMLElement *result = [NSXMLNode elementWithName:@"div"];
     [result addAttribute:[NSXMLNode attributeWithName:@"class" stringValue:@"element mixed"]];
     
     NSXMLElement *open = [NSXMLNode elementWithName:@"span"];
@@ -25,18 +25,32 @@
     [content addAttribute:[NSXMLNode attributeWithName:@"class" stringValue:@"mixedcontent"]];
     [content addAttribute:[NSXMLNode attributeWithName:@"style" stringValue:@""]];
     
+    int i = 1;
     for (id key in self) {
         NSXMLElement *element = [NSXMLNode elementWithName:@"div"];
-        [element addAttribute:[NSXMLNode attributeWithName:@"class" stringValue:@"element nomixed"]];
+        NSString *classes = @"element nomixed";
         
         NSXMLElement *tag = [NSXMLNode elementWithName:@"span"];
-        [tag addAttribute:[NSXMLNode attributeWithName:@"class" stringValue:@"element nomixed"]];
+        [tag addAttribute:[NSXMLNode attributeWithName:@"class" stringValue:@"element nomixed key"]];
         [tag addChild:[NSXMLNode textWithStringValue:[[NSString alloc] initWithFormat:@"%@: ", key]]];
-         
-        [element addChild: tag];
-        [element addChild: [[self valueForKey:key] prettyPrintMe]];
-         
+        NSXMLElement *value = [[self valueForKey:key] prettyPrintMe];
+        
+        [element addChild: tag]; // key
+        [element addChild: value]; // value
+        
+        if (i < [self count]) {
+            NSRange i = [[[value attributeForName:@"class"] stringValue] rangeOfString:@"mixed"];
+            if (i.location != NSNotFound) {
+                [value addAttribute:[NSXMLNode attributeWithName:@"class" 
+                                               stringValue:[[[value attributeForName:@"class"] stringValue] 
+                                                            stringByAppendingString:@" append-comma"]]];
+            } else {
+                classes = [classes stringByAppendingString:@" append-comma"];
+            }
+        }
+        [element addAttribute:[NSXMLNode attributeWithName:@"class" stringValue:classes]];
         [content addChild: element];
+        i++;
     }
     
     [result addChild: content];
