@@ -11,7 +11,7 @@
 
 @implementation NSString (PrettyPrint)
 
-- (NSXMLNode *) prettyPrintMe {
+- (NSXMLElement *) prettyPrintMe {
     NSXMLElement *root = [NSXMLNode elementWithName:@"span"];
     [root addAttribute:[NSXMLNode attributeWithName:@"class" stringValue:@"string"]];
     NSString *pretty = [NSString stringWithFormat:@"\"%@\"", self];

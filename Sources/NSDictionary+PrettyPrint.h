@@ -13,6 +13,6 @@
 
 @interface NSDictionary (PrettyPrint)
 
-- (NSXMLNode *) prettyPrintMe;
+- (NSXMLElement *) prettyPrintMe;
 
 @end

@@ -13,6 +13,6 @@
 
 @interface NSArray (PrettyPrint)
 
-- (NSXMLNode *) prettyPrintMe;
+- (NSXMLElement *) prettyPrintMe;
 
 @end

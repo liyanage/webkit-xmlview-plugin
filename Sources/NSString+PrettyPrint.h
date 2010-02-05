@@ -11,6 +11,6 @@
 
 @interface NSString (PrettyPrint)
 
-- (NSXMLNode *) prettyPrintMe;
+- (NSXMLElement *) prettyPrintMe;
 
 @end

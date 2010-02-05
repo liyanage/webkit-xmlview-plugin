@@ -11,7 +11,7 @@
 
 @implementation NSDictionary (PrettyPrint)
 
-- (NSXMLNode *) prettyPrintMe {
+- (NSXMLElement *) prettyPrintMe {
     NSXMLElement *result = [NSXMLNode elementWithName:@"div"];
     [result addAttribute:[NSXMLNode attributeWithName:@"class" stringValue:@"element mixed"]];
     

@@ -11,7 +11,7 @@
 
 @implementation NSNull (PrettyPrint)
 
-- (NSXMLNode *) prettyPrintMe {
+- (NSXMLElement *) prettyPrintMe {
     NSXMLElement *root = [NSXMLNode elementWithName:@"span"];
     [root addChild:[NSXMLNode textWithStringValue:@"null"]];
     [root addAttribute:[NSXMLNode attributeWithName:@"class" stringValue:@"null"]];

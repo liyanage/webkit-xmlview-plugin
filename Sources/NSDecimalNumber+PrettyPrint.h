@@ -11,6 +11,6 @@
 
 @interface NSDecimalNumber (PrettyPrint)
     
-- (NSXMLNode *) prettyPrintMe;
+- (NSXMLElement *) prettyPrintMe;
 
 @end

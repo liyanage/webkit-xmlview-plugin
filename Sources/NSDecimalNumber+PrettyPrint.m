@@ -11,7 +11,7 @@
 
 @implementation NSDecimalNumber (PrettyPrint)
 
-- (NSXMLNode *) prettyPrintMe {
+- (NSXMLElement *) prettyPrintMe {
     NSXMLElement *root = [NSXMLNode elementWithName:@"span"];
     [root addAttribute:[NSXMLNode attributeWithName:@"class" stringValue:@"number"]];
     [root addChild:[NSXMLNode textWithStringValue:[self stringValue]]];

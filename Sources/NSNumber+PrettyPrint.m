@@ -11,7 +11,7 @@
 
 @implementation NSNumber (PrettyPrint)
 
-- (NSXMLNode *) prettyPrintMe {
+- (NSXMLElement *) prettyPrintMe {
     NSString *boolValue = @"false";
     if ([self boolValue]) {
         boolValue = @"true";
