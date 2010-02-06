@@ -37,7 +37,7 @@
 	encoding = [XmlEncodingSniffer encodingForXmlData:data];
 	if (!encoding) {
 		self.errorMessage = @"Unable to determine encoding, falling back to ISO-8859-1";
-		NSLog(errorMessage);
+		NSLog(@"%@", errorMessage);
 		encoding = NSISOLatin1StringEncoding;
 	}
 }
@@ -56,11 +56,11 @@
 
 
 - (NSString *)plainString {
-	NSString *result = [[NSString alloc] initWithData:data encoding:encoding];
+	NSString *result = [[[NSString alloc] initWithData:data encoding:encoding] autorelease];
 	if (!result) {
 		self.errorMessage = @"Encoding mismatch, falling back to ISO-8859-1";
-		NSLog(self.errorMessage);
-		result = [[NSString alloc] initWithData:data encoding:NSISOLatin1StringEncoding];
+		NSLog(@"%@", errorMessage);
+		result = [[[NSString alloc] initWithData:data encoding:NSISOLatin1StringEncoding] autorelease];
 	}
 	return result;
 }

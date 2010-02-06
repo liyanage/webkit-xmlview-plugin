@@ -84,9 +84,8 @@
 	if (encoding == NSISO2022JPStringEncoding)         return "iso2022";
 	if (encoding == NSShiftJISStringEncoding)          return "shiftjis";
 	
-
 	self.errorMessage = [NSString stringWithFormat:@"unknown encoding (%d), falling back to ISO-8859-1", encoding];
-	NSLog(errorMessage);
+	NSLog(@"%@", errorMessage);
 	return "latin1";
 }
 
