@@ -21,7 +21,7 @@
 	<key>CFBundleVersion</key>
 	<string>${PRODUCT_VERSION}</string>
 	<key>CFBundleGetInfoString</key>
-	<string>${PRODUCT_VERSION}, © 2009 Marc Liyanage</string>
+	<string>${PRODUCT_VERSION}, © 2009-2010 Marc Liyanage</string>
 	<key>CFBundleShortVersionString</key>
 	<string>${PRODUCT_VERSION}</string>
 	<key>NSPrincipalClass</key>
