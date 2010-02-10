@@ -157,9 +157,9 @@ typedef enum {
 
 
 - (void)setupSubviews {
+	[self addSubview:xmlContentView];
 	// toplevel NIB objects start with retain count of 1 so we release them here
 	[xmlContentView release];
-	[self addSubview:xmlContentView];
 
 	// TODO: crashes if we do the release on this one, check for leaks here
 	// [aboutPanel release];
@@ -226,6 +226,21 @@ typedef enum {
 }
 */
 
+- (BOOL)validateMenuItem:(NSMenuItem *)menuItem
+{
+	if ([menuItem tag] == PRETTY_PRINT_OPTION_SIMPLE) {
+		return ![self documentTypeIsJSON];
+	}
+	return YES;
+}
+
+
+- (BOOL)documentTypeIsJSON
+{
+	return [documentType isEqual:@"application/json"];
+}
+
+
 - (IBAction)updateDataDisplay:(id)sender {
 
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -237,6 +252,8 @@ typedef enum {
 		[defaults setInteger:[item tag] forKey:@"ch_entropy_xmlViewPlugin_PrettyPrintOptionTag"];
 	}
 
+//	[[actionMenu itemWithTag:PRETTY_PRINT_OPTION_SIMPLE] setEnabled:!isJSON];
+	
 	NSInteger prettyPrintOption = [defaults integerForKey:@"ch_entropy_xmlViewPlugin_PrettyPrintOptionTag"];
 
 	if (!documentData) return;
@@ -244,7 +261,7 @@ typedef enum {
 
 	XmlDataFormatter *xdf;
 	NSData *result = nil;
-    if ([documentType isEqual:@"application/json"]) {
+    if ([self documentTypeIsJSON]) {
         if (prettyPrintOption == PRETTY_PRINT_OPTION_FANCY) {
             xdf = [[[JsonDataFormatter alloc] initWithData:documentData] autorelease];
             result = [(JsonDataFormatter *)xdf prettyPrintedData];

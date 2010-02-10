@@ -86,6 +86,6 @@
 - (IBAction)showUserSettingsDocumentation:(id)sender;
 - (NSURL *)fileUrlForWebResource:(NSString *)resource ofType:(NSString *)type;
 - (NSString *)stringForWebResource:(NSString *)resource ofType:(NSString *)type;
-
+- (BOOL)documentTypeIsJSON;
 
 @end
