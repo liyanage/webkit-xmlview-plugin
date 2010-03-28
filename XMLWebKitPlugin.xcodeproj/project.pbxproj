@@ -507,7 +507,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -e\ncd \"$PROJECT_TEMP_DIR\"\n[ -d sparkle ] || /opt/local/bin/bzr branch -r 340 lp:sparkle\ncd sparkle\nxcodebuild -target Sparkle -configuration 'Release (GC dual-mode; 10.5-only)'\nrm -rf \"$BUILD_ROOT/Sparkle.framework\"\ncp -pR \"$BUILD_ROOT/Release (GC dual-mode; 10.5-only)/Sparkle.framework\" \"$BUILD_ROOT/\"";
+			shellScript = "set -e\ncd \"$PROJECT_TEMP_DIR\"\n[ -d sparkle ] || /opt/local/bin/bzr branch -r 340 lp:sparkle\ncd sparkle\nxcodebuild -target Sparkle -configuration 'Release (GC dual-mode; 10.5-only)'\nrm -rf \"$BUILD_ROOT/Sparkle.framework\"\n\n# for global build dir\n# cp -pR \"$BUILD_ROOT/Release (GC dual-mode; 10.5-only)/Sparkle.framework\" \"$BUILD_ROOT/\"\n\n# for per-project build dir\ncp -pR \"$PROJECT_TEMP_DIR/sparkle/build/Release (GC dual-mode; 10.5-only)/Sparkle.framework\" \"$BUILD_ROOT/\"";
 			showEnvVarsInLog = 0;
 		};
 		1B62459E0F40BAA900B3F002 /* ShellScript */ = {

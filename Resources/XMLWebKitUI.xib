@@ -21,7 +21,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="39"/>
+			<integer value="144"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -489,6 +489,7 @@
 									</object>
 								</object>
 							</object>
+							<int key="NSSelectedIndex">3</int>
 							<bool key="NSPullDown">YES</bool>
 							<int key="NSPreferredEdge">3</int>
 							<bool key="NSUsesItemFromMenu">YES</bool>
@@ -1521,7 +1522,7 @@ AAAAtgEAAAIAAAABAAAAA</bytes>
 																						</object>
 																					</object>
 																				</object>
-																				<object class="NSDictionary" id="211198922">
+																				<object class="NSDictionary" id="925723443">
 																					<bool key="EncodedWithXMLCoder">YES</bool>
 																					<object class="NSArray" key="dict.sortedKeys">
 																						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1744,7 +1745,7 @@ AAAAtgEAAAIAAAABAAAAA</bytes>
 																			<object class="NSMutableArray" key="NSAttributes">
 																				<bool key="EncodedWithXMLCoder">YES</bool>
 																				<reference ref="926364872"/>
-																				<reference ref="211198922"/>
+																				<reference ref="925723443"/>
 																			</object>
 																			<object class="NSMutableData" key="NSAttributeInfo">
 																				<bytes key="NS.bytes">GQAEAQgADAEiAAcBhAQAA</bytes>
@@ -2951,7 +2952,7 @@ AAAAtgEAAAIAAAABAAAAA</bytes>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{297, 474}, {236, 193}}</string>
+					<string>{{167, 326}, {233, 193}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>

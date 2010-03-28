@@ -47,11 +47,11 @@ cat <<EOF
 		</item>
 EOF
 
-echo scp "'$HOME/git/entropy/$PRODUCT_SHORTNAME/build/Release/$ARCHIVE_FILENAME'" www2.entropy.ch:download/
-echo scp "'$HOME/git/entropy/$PRODUCT_SHORTNAME/build/Release/$ARCHIVE_FILENAME'" "\"www2.entropy.ch:'download/$ARCHIVE_FILENAME_UNVERSIONED'\""
+echo scp "'$HOME/git/$PRODUCT_SHORTNAME/build/Release/$ARCHIVE_FILENAME'" www2.entropy.ch:download/
+echo scp "'$HOME/git/$PRODUCT_SHORTNAME/build/Release/$ARCHIVE_FILENAME'" "\"www2.entropy.ch:'download/$ARCHIVE_FILENAME_UNVERSIONED'\""
 
-echo scp "'$HOME/git/entropy/$PRODUCT_SHORTNAME/Resources/release-notes.html'" www.entropy.ch:web/software/macosx/$PRODUCT_SHORTNAME/release-notes.html
-echo scp "'$HOME/git/entropy/$PRODUCT_SHORTNAME/Resources/appcast.xml'" www.entropy.ch:web/software/macosx/$PRODUCT_SHORTNAME/appcast.xml
+echo scp "'$HOME/git/$PRODUCT_SHORTNAME/Resources/release-notes.html'" www.entropy.ch:web/software/macosx/$PRODUCT_SHORTNAME/release-notes.html
+echo scp "'$HOME/git/$PRODUCT_SHORTNAME/Resources/appcast.xml'" www.entropy.ch:web/software/macosx/$PRODUCT_SHORTNAME/appcast.xml
 echo
 echo git commit -a -m "'version $VERSION'"
 echo git tag -a "'v$VERSION'" -m "'version $VERSION'"
