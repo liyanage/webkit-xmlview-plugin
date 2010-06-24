@@ -32,6 +32,7 @@
 
 	rc = tidyOptSetBool(tdoc, TidyXmlTags, yes);
 	rc = tidyOptSetValue(tdoc, TidyIndentContent, "auto");
+	rc = tidyOptSetInt(tdoc, TidyWrapLen, 120);
 
 	rc = tidySetInCharEncoding(tdoc, [self tidyEncodingString]);
 	rc = tidySetOutCharEncoding(tdoc, "utf8");
