@@ -7,9 +7,9 @@
 //
 
 #import "XMLWebKitPluginView.h"
-#import "XmlDataFormatterTidy.h";
-#import "XmlDataFormatterXslt.h";
-#import "JsonDataFormatter.h";
+#import "XmlDataFormatterTidy.h"
+#import "XmlDataFormatterXslt.h"
+#import "JsonDataFormatter.h"
 
 @implementation XMLWebKitPluginView
 

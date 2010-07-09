@@ -32,7 +32,7 @@
         
         NSXMLElement *tag = [NSXMLNode elementWithName:@"span"];
         [tag addAttribute:[NSXMLNode attributeWithName:@"class" stringValue:@"element nomixed key"]];
-        [tag addChild:[NSXMLNode textWithStringValue:[[NSString alloc] initWithFormat:@"%@: ", key]]];
+        [tag addChild:[NSXMLNode textWithStringValue:[NSString stringWithFormat:@"%@: ", key]]];
         NSXMLElement *value = [[self valueForKey:key] prettyPrintMe];
         
         [element addChild: tag]; // key

@@ -21,25 +21,24 @@
 	tidyBufInit(&output);
 	TidyBuffer errbuf;
 	tidyBufInit(&errbuf);
-	int rc = -1;
 
 	TidyBuffer input;
 	tidyBufInit(&input);
 	tidyBufAlloc(&input, [data length]);
 	tidyBufAppend(&input, (void *)[data bytes], [data length]);
 
-    rc = tidySetErrorBuffer(tdoc, &errbuf);      // Capture diagnostics
+    tidySetErrorBuffer(tdoc, &errbuf);      // Capture diagnostics
 
-	rc = tidyOptSetBool(tdoc, TidyXmlTags, yes);
-	rc = tidyOptSetValue(tdoc, TidyIndentContent, "auto");
-	rc = tidyOptSetInt(tdoc, TidyWrapLen, 120);
+	tidyOptSetBool(tdoc, TidyXmlTags, yes);
+	tidyOptSetValue(tdoc, TidyIndentContent, "auto");
+	tidyOptSetInt(tdoc, TidyWrapLen, 120);
 
-	rc = tidySetInCharEncoding(tdoc, [self tidyEncodingString]);
-	rc = tidySetOutCharEncoding(tdoc, "utf8");
-    rc = tidyParseBuffer(tdoc, &input);
+	tidySetInCharEncoding(tdoc, [self tidyEncodingString]);
+	tidySetOutCharEncoding(tdoc, "utf8");
+    tidyParseBuffer(tdoc, &input);
 
-    rc = tidyCleanAndRepair(tdoc);
-    rc = tidySaveBuffer(tdoc, &output);
+    tidyCleanAndRepair(tdoc);
+    tidySaveBuffer(tdoc, &output);
 
 	NSString *result = nil;
 	if (output.bp) {

@@ -29,8 +29,8 @@
     NSError *error = nil;
     NSBundle *bundle = [NSBundle bundleForClass:[self class]];
     
-    SBJSON *parser = [[SBJSON alloc] init];
-    NSString *json_string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    SBJSON *parser = [[[SBJSON alloc] init] autorelease];
+    NSString *json_string = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
 
     id json = [parser objectWithString:json_string error:nil];
     
