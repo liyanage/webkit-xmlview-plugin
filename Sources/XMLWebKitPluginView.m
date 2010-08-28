@@ -30,6 +30,7 @@
 @synthesize documentData;
 @synthesize parentFrame;
 @synthesize domElement;
+@synthesize baseURL;
 
 
 #pragma mark WebPlugInViewFactory protocol
@@ -54,7 +55,7 @@
     if (!(self = [super initWithFrame:NSZeroRect])) return nil;
 	[NSBundle loadNibNamed:@"XMLWebKitUI" owner:self];
 
-	DOMHTMLElement *element = [newArguments objectForKey:@"WebPlugInContainingElementKey"];
+	DOMHTMLElement *element = [newArguments objectForKey:WebPlugInContainingElementKey];
 	self.domElement = element;
 
 /*
@@ -258,8 +259,9 @@ typedef enum {
 
 	if (!documentData) return;
 
-
-	XmlDataFormatter *xdf;
+    BOOL allowPlugins = YES;
+    NSString *customMIMEType = nil; 
+	XmlDataFormatter *xdf = nil;
 	NSData *result = nil;
     if ([self documentTypeIsJSON]) {
         if (prettyPrintOption == PRETTY_PRINT_OPTION_FANCY) {
@@ -274,6 +276,10 @@ typedef enum {
             xdf = [[[XmlDataFormatterXslt alloc] initWithData:documentData] autorelease];
             xdf.prettyPrint = YES;
             result = [(XmlDataFormatterXslt *)xdf prettyPrintedData];
+        } else if (prettyPrintOption == PRETTY_PRINT_OPTION_UNTOUCHED) {
+            allowPlugins = NO;
+            customMIMEType = self.documentType;
+            result = self.documentData;
         } else {
             xdf = [[[XmlDataFormatterTidy alloc] initWithData:documentData] autorelease];
             xdf.prettyPrint = prettyPrintOption == PRETTY_PRINT_OPTION_SIMPLE;
@@ -281,7 +287,11 @@ typedef enum {
     }    
 	
 	if (result) {
-		[[webView mainFrame] loadData:result MIMEType:@"text/html" textEncodingName:@"utf-8" baseURL:nil];
+        [[webView preferences] setPlugInsEnabled:allowPlugins];
+		[[webView mainFrame] loadData:result
+                             MIMEType:(customMIMEType ?: @"text/html")
+                     textEncodingName:@"utf-8"
+                              baseURL:(xdf ? nil : self.baseURL)];
 //		NSLog(@"window accepts mouse moved: %d", [[self window] acceptsMouseMovedEvents]);
 //		[[webView mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.sun.com"]]];
 
@@ -470,6 +480,8 @@ typedef enum {
 	self.documentURL = [NSURL URLWithString:[arguments valueForKeyPath:@"WebPlugInAttributesKey.src"]];
     self.documentType = [arguments valueForKeyPath:@"WebPlugInAttributesKey.type"];
 
+	self.baseURL = [arguments valueForKey:WebPlugInBaseURLKey];
+    
 #ifdef CONFIGURATION_DEBUG
 	NSLog(@"XML View Plugin: URL: %@", self.documentURL);
 #endif
@@ -499,9 +511,7 @@ typedef enum {
 		NSLog(@"XML View Plugin: %@", notificationMessage);
 		return;
 	}
-
-/*
-	NSURL *baseUrl = [arguments valueForKey:@"WebPlugInBaseURLKey"];
+    /*
 	NSLog(@"XML View Plugin: baseurl: %@", baseUrl);
 	self.parentFrame = [[arguments valueForKey:@"WebPlugInContainerKey"] webFrame];
 	NSLog(@"XML View Plugin: parentframe: %@, %@", parentFrame, [parentFrame name]);
@@ -575,7 +585,7 @@ typedef enum {
 
 - (void)webPlugInMainResourceDidFinishLoading {
 #ifdef CONFIGURATION_DEBUG
-	NSLog(@"XML View Plugin: finish loading, data length %u", [self.documentData length]);
+	NSLog(@"XML View Plugin: finish loading, data length %lu", [self.documentData length]);
 #endif
 	[self updateDataDisplay:self];
 }

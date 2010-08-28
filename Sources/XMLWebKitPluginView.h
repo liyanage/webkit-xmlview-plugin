@@ -13,6 +13,7 @@
 #define PRETTY_PRINT_OPTION_RAW 1
 #define PRETTY_PRINT_OPTION_SIMPLE 2
 #define PRETTY_PRINT_OPTION_FANCY 3
+#define PRETTY_PRINT_OPTION_UNTOUCHED 4
 
 #define FIND_PANEL_TAG_CANCEL 2
 #define FIND_PANEL_TAG_FIND 3
@@ -41,6 +42,7 @@
 	NSInteger tag;
 	WebFrame *parentFrame;
 	DOMHTMLElement *domElement;
+    NSURL *baseURL;
 }
 
 @property(retain) SUUpdater *softwareUpdater;
@@ -60,6 +62,7 @@
 @property(retain) NSMutableData *documentData;
 @property(retain) WebFrame *parentFrame;
 @property(retain) DOMHTMLElement *domElement;
+@property(retain) NSURL *baseURL;
 
 
 - (id)initWithArguments:(NSDictionary *)arguments;
